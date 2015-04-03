@@ -1,0 +1,12 @@
+
+*.gz
+
+HW1/Report/HW-templateLateX.pdf
+
+HW1/Report/HW-templateLateX.log
+
+HW1/Report/HW-templateLateX.fls
+
+*.fdb_latexmk
+
+*.aux
