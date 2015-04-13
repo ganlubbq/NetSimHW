@@ -1,7 +1,7 @@
 % Script for ex 4 HW1 Network Simulation
 
 close all;
-clear all;
+%clear all;
 clc;
 
 %% Uniform random variables 
@@ -37,7 +37,7 @@ figure
 subplot(2, 1, 1)
 plot(step:step:N, data_matrix(:, 1))
 hold on
-plot(step:step:N, true_mean, 'r', 'LineWidth', 1.5)
+plot(step:step:N, true_mean*ones(1, length(step:step:N)), 'r', 'LineWidth', 1.5)
 hold off
 legend('Sample mean', 'True mean')
 xlabel('Dataset size')
@@ -45,25 +45,17 @@ ylabel('Mean')
 subplot(2, 1, 2)
 plot(step:step:N, data_matrix(:, 2))
 hold on
-plot(step:step:N, true_var, 'r', 'LineWidth', 1.5)
+plot(step:step:N, true_var*ones(1, length(step:step:N)), 'r', 'LineWidth', 1.5)
 hold off
 legend('Sample variance', 'True variance')
 xlabel('Dataset size n')
 ylabel('Variance')
-
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
 
 
 % bootstrap estimation of variance c.i. as a function of n
 % reset RNG to Mersenne Twister with seed 0. MT periodicity is higher than
 % the number of random variables needed in this experiment.
 rng('default');
-N = 10000;
 step = 10;
 gamma = 0.95;
 r0 = 50; %1000 cycles for each bootstrap estimate
@@ -81,18 +73,10 @@ plot(step:step:N, data_matrix_boot(:, 1), step:step:N, data_matrix_boot(:, 2), s
 legend('Lower value of c.i. for variance, bootstrap', 'Upper value of c.i. for variance, bootstrap', 'True variance of U[0, 1]');
 xlabel('Dataset size n')
 ylabel('Variance')
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
-
 
 % Prediction intervals 
 % Data is iid but not normal
 % Use theorem 2.5, Leboudec - ordered statistics
-N = 10000;
 step = 10;
 gamma = 0.95;
 alpha = 1 - gamma;
@@ -101,12 +85,7 @@ alpha_vec = alpha * ones(1, 100);
 figure, plot(1:100, alpha_vec, 1:100, 2./(1:100))
 xlabel('Dataset size n')
 legend('Alpha = 0.05', '2/(n+1)')
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
+
 % From this plot it can be seen that for n >= 39 the previous holds
 
 init_step = 40; % since step is 5 use an integer multiple
@@ -124,12 +103,41 @@ plot(step:step:N, data_matrix_pred(:, 1), step:step:N, data_matrix_pred(:, 2), s
 xlabel('Dataset size n')
 ylabel('Prediction interval')
 legend('Lower value of p.i.', 'Upper value of p.i.');
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
+
+figure
+plot(step:step:N, data_matrix_pred(:, 1), step:step:N, 0.025*ones(1, length(step:step:N)))
+xlabel('Dataset size n')
+ylabel('Prediction interval')
+ylim([0, 0.06])
+xlim([0, 2000])
+legend('Lower value of p.i.');
+
+
+% Using bootstrap
+rng('default');
+step = 10;
+gamma = 0.95;
+r0 = 50; % 1000 cycles for each bootstrap estimate
+
+init_step = 40; % since step is 5 use an integer multiple
+data_pi_boot = zeros(N/step, 2);
+for n = init_step:step:N
+    data = rand(n, 1);
+    data_pi_boot(n/step, :) = bootstrap_pi(data, gamma, r0);
+end
+figure
+plot(step:step:N, data_pi_boot(:, 1), step:step:N, data_pi_boot(:, 2), step:step:N, 0.025*ones(1, length(step:step:N)), step:step:N, 0.975*ones(1, length(step:step:N)))
+legend('Lower value of p.i.', 'Upper value of p.i.');
+xlabel('Dataset size')
+ylabel('P')
+
+figure
+plot(step:step:N, data_pi_boot(:, 1), step:step:N, 0.025*ones(1, length(step:step:N)))
+xlabel('Dataset size n')
+ylabel('Prediction interval')
+ylim([0, 0.06])
+xlim([0, 2000])
+legend('Lower value of p.i.');
 
 
 %% Normal (0,1) rv
@@ -145,7 +153,7 @@ true_var = 1;
 N = 10000; % n upper limit
 
 step = 5;
-data_matrix = zeros(N/step, 4);
+data_matrix_norm = zeros(N/step, 4);
 for n = step:step:N
     % generate indipendently n random variables
     v = randn(n, 1);
@@ -154,69 +162,58 @@ for n = step:step:N
     s_2 = var_est(v, 0);
     ci_mean = m + [-1.96, 1.96] *sqrt(s_2/n); %exact value
     % Store data
-    data_matrix(n/step, :) = [m, s_2, ci_mean];
+    data_matrix_norm(n/step, :) = [m, s_2, ci_mean];
 end
 
 % compare true mean and estimated one
 figure
 subplot(2, 1, 1)
-plot(step:step:N, data_matrix(:, 1))
+plot(step:step:N, data_matrix_norm(:, 1))
 hold on
-plot(step:step:N, true_mean, 'r', 'LineWidth', 1.5)
+plot(step:step:N, true_mean*ones(1, length(step:step:N)), 'r', 'LineWidth', 1.5)
 hold off
 legend('Sample mean', 'True mean')
 xlabel('Dataset size')
 ylabel('Mean')
+ylim([-0.3, 0.3])
 subplot(2, 1, 2)
-plot(step:step:N, data_matrix(:, 2))
+plot(step:step:N, data_matrix_norm(:, 2))
 hold on
-plot(step:step:N, true_var, 'r', 'LineWidth', 1.5)
+plot(step:step:N, true_var*ones(1, length(step:step:N)), 'r', 'LineWidth', 1.5)
 hold off
 legend('Sample variance', 'True variance')
 xlabel('Dataset size n')
 ylabel('Variance')
+ylim([0.6, 1.4])
 
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
 
 % bootstrap estimation of variance c.i. as a function of n
 % reset RNG to Mersenne Twister with seed 0. MT periodicity is higher than
 % the number of random variables needed in this experiment.
 rng('default');
-N = 10000;
 step = 10;
 gamma = 0.95;
 r0 = 50; % 1000 cycles for each bootstrap estimate
 
-data_matrix_boot = zeros(N/step, 2);
+data_matrix_boot_norm = zeros(N/step, 2);
 for n = step:step:N
    data = randn(n, 1);
    ci_var = bootstrap_var(data, gamma, r0);
-   data_matrix_boot(n/step, :) = ci_var;
+   data_matrix_boot_norm(n/step, :) = ci_var;
 end
 
 true_var = 1;
 figure
-plot(step:step:N, data_matrix_boot(:, 1), step:step:N, data_matrix_boot(:, 2), step:step:N, true_var*ones(1, length(step:step:N)))
+plot(step:step:N, data_matrix_boot_norm(:, 1), step:step:N, data_matrix_boot_norm(:, 2), step:step:N, true_var*ones(1, length(step:step:N)))
 legend('Lower value of c.i. for variance', 'Upper value of c.i. for variance', 'True variance of N[0, 1]');
 xlabel('Dataset size')
 ylabel('Variance')
-axis([0, 10000, 0, 4])
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
+axis([0, 10000, 0, 2])
+
 
 % actually, since data are normal, we can theoretically compute confidence
 % intervals since they follow a chi-square distribution (Theorem 2.3 leb)
 rng('default');
-N = 10000;
 step = 10;
 gamma = 0.95;
 
@@ -235,70 +232,100 @@ plot(step:step:N, data_matrix_chi(:, 1), step:step:N, data_matrix_chi(:, 2), ste
 legend('Lower value of c.i. for variance', 'Upper value of c.i. for variance', 'True variance of N[0, 1]');
 xlabel('Dataset size')
 ylabel('Variance')
-axis([0, 10000, 0, 4])
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
+axis([0, 10000, 0, 2])
+
+
+% Prediction intervals 
+% Data is iid but "not normal" (actually it is, but let's assume it isn't
+% known)
+% Use theorem 2.5, Leboudec - ordered statistics
+rng('default');
+step = 10;
+gamma = 0.95;
+alpha = 1 - gamma;
+
+init_step = 40; % since step is 5 use an integer multiple
+data_matrix_pred_norm = zeros(N/step, 2);
+for n = init_step:step:N
+   data = randn(n, 1);
+   data = sort(data);
+   lb = floor((n+1)*alpha/2);
+   ub = ceil((n+1)*(1 - alpha/2));
+   data_matrix_pred_norm(n/step, :) = [data(lb), data(ub)];
+end
+
+figure
+plot(step:step:N, data_matrix_pred_norm(:, 1), step:step:N, data_matrix_pred_norm(:, 2), step:step:N, -1.96*ones(1, length(step:step:N)), step:step:N, 1.96*ones(1, length(step:step:N)))
+xlabel('Dataset size n')
+ylabel('Prediction interval')
+legend('Lower value of p.i.', 'Upper value of p.i.');
+
+figure
+plot(step:step:N, data_matrix_pred_norm(:, 1), step:step:N, -1.96*ones(1, length(step:step:N)))
+xlabel('Dataset size n')
+ylabel('Prediction interval')
+ylim([-2.5, -1.5])
+xlim([0, 2000])
+legend('Lower value of p.i.');
+
+
+
+
+% Using bootstrap
+rng('default');
+step = 10;
+gamma = 0.95;
+r0 = 100; % 1000 cycles for each bootstrap estimate
+
+init_step = 40; % since step is 5 use an integer multiple
+data_pi_boot_norm = zeros(N/step, 2);
+for n = init_step:step:N
+    data = randn(n, 1);
+    data_pi_boot_norm(n/step, :) = bootstrap_pi(data, gamma, r0);
+end
+figure
+plot(step:step:N, data_pi_boot_norm(:, 1), step:step:N, data_pi_boot_norm(:, 2), step:step:N, 1.96*ones(1, length(step:step:N)), step:step:N, -1.96*ones(1, length(step:step:N)))
+legend('Lower value of p.i.', 'Upper value of p.i.');
+xlabel('Dataset size')
+ylabel('P')
+
+figure
+plot(step:step:N, data_pi_boot_norm(:, 1), step:step:N, -1.96*ones(1, length(step:step:N)))
+xlabel('Dataset size n')
+ylabel('Prediction interval')
+ylim([-2.5, -1.5])
+xlim([0, 2000])
+legend('Lower value of p.i.');
+
 
 % Prediction intervals 
 % Data is normal, apply Theorem 2.6 Leboudec
 rng('default');
-N = 10000;
 step = 10;
 gamma = 0.95;
 r0 = 50;
 alpha = 1 - gamma;
-data_matrix_pred = zeros(N/step, 2);
+data_matrix_th_norm = zeros(N/step, 2);
 
 for n = step:step:N
    data = randn(n, 1);
    eta = tinv((1-alpha/2), n-1);
    mean = mean_est(data);
    var = var_est(data, 0);
-   data_matrix_pred(n/step, :) = mean + [-eta, eta]*sqrt((1+1/n)*var);
+   data_matrix_th_norm(n/step, :) = mean + [-eta, eta]*sqrt((1+1/n)*var);
 end
 figure
-plot(step:step:N, data_matrix_pred(:, 1), step:step:N, data_matrix_pred(:, 2), step:step:N, 1.96*ones(1, length(step:step:N)), step:step:N, -1.96*ones(1, length(step:step:N)))
+plot(step:step:N, data_matrix_th_norm(:, 1), step:step:N, data_matrix_th_norm(:, 2), step:step:N, 1.96*ones(1, length(step:step:N)), step:step:N, -1.96*ones(1, length(step:step:N)))
 legend('Lower value of p.i.', 'Upper value of p.i.');
 xlabel('Dataset size')
 ylabel('P')
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
-
-% Prediction intervals 
-% Data is iid but not normal
-% Use theorem 2.5, Leboudec - ordered statistics
-rng('default');
-N = 10000;
-step = 10;
-gamma = 0.95;
-alpha = 1 - gamma;
-
-init_step = 40; % since step is 5 use an integer multiple
-data_matrix_pred = zeros(N/step, 2);
-for n = init_step:step:N
-   data = randn(n, 1);
-   data = sort(data);
-   lb = floor((n+1)*alpha/2);
-   ub = ceil((n+1)*(1 - alpha/2));
-   data_matrix_pred(n/step, :) = [data(lb), data(ub)];
-end
 
 figure
-plot(step:step:N, data_matrix_pred(:, 1), step:step:N, data_matrix_pred(:, 2), step:step:N, -1.96*ones(1, length(step:step:N)), step:step:N, 1.96*ones(1, length(step:step:N)))
+plot(step:step:N, data_matrix_th_norm(:, 1), step:step:N, -1.96*ones(1, length(step:step:N)))
 xlabel('Dataset size n')
 ylabel('Prediction interval')
-legend('Lower value of p.i.', 'Upper value of p.i.');
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
+ylim([-2.5, -1.5])
+xlim([0, 2000])
+legend('Lower value of p.i.');
+
+

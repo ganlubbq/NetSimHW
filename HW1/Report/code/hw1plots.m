@@ -83,12 +83,6 @@ title('Histogram, old')
 subplot(1, 4, 4)
 hist(data_new)
 title('Histogram, new')
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
 
 
 % fig 2.2
@@ -98,12 +92,6 @@ xlabel('Execution time [ms]')
 ylabel('ECDF')
 legend('Old', 'New', 'Location', 'SouthEast')
 title('Empirical CDFs')
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
 
 
 % fig 2.3
@@ -133,19 +121,6 @@ line([1.5 2.5], [max(prediction_int_new(1), 0), max(prediction_int_new(1), 0)], 
 hold on
 line([1.5 2.5], [prediction_int_new(2), prediction_int_new(2)], 'LineStyle', '--', 'Color', 'b');
 hold off
-% make plot nicer
-fig=gcf;
-
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-set(findall(fig,'-property','FontSize'),'FontSize',20)
-
-handler = findall(fig, 'Type', 'hggroup');
-labels = findall(handler, 'Type', 'text');
-for j = 1:length(labels)
-    set(labels(j), 'Position', get(labels(j), 'Position') - [0, 10, 0]);
-end
 
 % fig 2.7
 figure
@@ -173,12 +148,6 @@ line([0.5 1.5], [prediction_int_diff(1), prediction_int_diff(1)], 'LineStyle', '
 hold on
 line([0.5 1.5], [prediction_int_diff(2), prediction_int_diff(2)], 'LineStyle', '--', 'Color', 'b');
 hold off
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
 
 % fig 2.8
 mean_vec = [mean_old, mean_old, mean_old, mean_new, mean_new, mean_new];
@@ -193,12 +162,7 @@ set(gca, 'XTickLabel', {' ', 'Old', 'Old', 'Old', 'New', 'New', 'New', ' '});
 xlabel('Data Set');
 ylabel('Mean execution time [ms]');
 title('Normal, Asymptotic and Bootstrap percentile confidence intervals');
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [1500, 1000]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',20)
+
 
 %% Example 2.5
 
@@ -212,7 +176,7 @@ autoc = autocorrelation(joe - mean_est(joe), N_corr);
 % fig 2.10
 figure;
 
-% axes handling
+% axes handling for lag plots
 h(1) = subplot(7, 3, 21);
 h(2) = subplot(7, 3, 20);
 h(3) = subplot(7, 3, 19);
@@ -222,33 +186,24 @@ h(6) = subplot(7, 3, 16);
 h(7) = subplot(7, 3, 15);
 h(8) = subplot(7, 3, 14);
 h(9) = subplot(7, 3, 13);
-h(10)=subplot(4, 2, 3);
-h(11) = subplot(4, 2, 4);
-h(12)=subplot(4, 1, 1);
 
 % plot
-plot(h(12), joe, 'r');
-title(h(12), 'Data');
+subplot(4, 1, 1);
+plot(joe, 'r');
+title('Data');
 
-probplot(h(10), 'normal', joe)
-title(h(10), 'QQ Plot of Sample Data versus Standard Normal')
-xlabel(h(10), 'Quantiles of Input Sample')
-ylabel(h(10), 'Standard Normal Quantiles')
+subplot(4, 2, 3);
+stem(autoc(2:length(autoc)), '.')
+title('Autocorrelation');
 
-stem(h(11), autoc(2:length(autoc)), '.')
-title(h(11), 'Autocorrelation');
-
+subplot(4, 2, 4);
+qqplot(joe);
+title('QQ Plot of Sample Data versus Standard Normal')
+xlabel('Quantiles of Input Sample')
+ylabel('Standard Normal Quantiles')
 
 for i = 1:9
     scatter(h(10 - i), joe(1:length(joe) - i), joe(i+1:length(joe)), '.');
     j = 10 - i;
     title(h(10 - i), sprintf('h = %d', i));
 end
-% make plot nicer
-set(gcf, 'PaperUnits', 'points');
-set(gcf, 'PaperSize', [700, 1050]);
-set(gcf, 'Color', 'w');
-fig=gcf;
-set(findall(fig,'-property','FontSize'),'FontSize',14)
-
-
