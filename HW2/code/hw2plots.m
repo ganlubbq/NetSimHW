@@ -16,8 +16,10 @@ sequence(1) = x0;
 for i = 2:limit
     sequence(i) = mod(a*sequence(i-1), m);
 end
+% renormalize in [0,1]
+sequence = sequence/m;
 
-uni_mat = m*rand(1, 1000); %1000 samples from a unif(0, m)
+uni_mat = rand(1, 1000); %1000 samples from a unif(0, m)
 autoc = autocorrelation(sequence, 30);
 
 figure; 
@@ -37,22 +39,21 @@ h(11)= subplot(4, 1, 1);
 
 % plot
 qqplot(uni_mat, sequence)
-title(h(11), 'QQplot');
-axis(h(11), [0, m-1, 0, m-1])
+title(h(11), 'Uniform QQplot');
 
 stem(h(10), autoc(2:end))
 title(h(10), 'Autocorrelation');
+xlabel(h(10), 'lag')
 
 
 for i = 1:9
     scatter(h(10 - i), sequence(1:100), sequence(i*100+1:(i+1)*100), '.');
     j = 10 - i;
     title(h(10 - i), sprintf('h = %d', i*100));
-    axis(h(10 - i), [0, m-1, 0, m-1])
 end
 
 %% 6.7
-sequence_fromtwo = zeros(limit, 1);
+sequence_fromtwo = zeros(limit, 1); 
 sequence_fromend = zeros(limit, 1); % note: 0 is a standpoint for a multiplicative LCG,
 % it will never be reached. Because of this the period is at most m-1
 
@@ -62,11 +63,14 @@ for i = 2:limit
     sequence_fromtwo(i) = mod(a*sequence_fromtwo(i-1), m);
     sequence_fromend(i) = mod(a*sequence_fromend(i-1), m);
 end
+sequence_fromtwo = sequence_fromtwo/m;
+sequence_fromend = sequence_fromend/m;
+
 
 figure, scatter(sequence, sequence_fromtwo)
-axis([0, m-1, 0, m-1])
+title(sprintf('2 streams, seed = %d and %d', 1, 2))
 figure, scatter(sequence, sequence_fromend)
-axis([0, m-1, 0, m-1])
+title(sprintf('2 streams, seed = %d and %d', 1, sequence_fromend(1)))
 
 %% 6.10
 rng('default');

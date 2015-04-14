@@ -4,6 +4,8 @@ clear all;
 close all;
 clc;
 
+profile on;
+
 %% Consider the two LCGs: LCG1: a = 18, m = 101; LCG2: a = 2, m = 101
 % a. Check whether they are full period
 % b. Plot all pairs (Ui, Ui+1) in a unit square and comment the results
