@@ -12,11 +12,12 @@ clc;
 experiments = 100000;
 begin = 20;
 step = 20;
-limit = 5000;
+limit = 10000;
 time_inv = zeros(limit/step, 5);
 time_ber = zeros(limit/step, 5);
 time_geo = zeros(limit/step, 5);
 
+%p_vec = [0.1, 0.2, 0.3, 0.4, 0.5];
 p_vec = [10^-9, 10^-8, 10^-7, 10^-6, 10^-5];
 
 for n = begin:step:limit
@@ -46,11 +47,11 @@ for n = begin:step:limit
             X_inv(j) = i;
             
         end
-        time_inv(floor(n/20), k) = toc;
+        time_inv(floor(n/step), k) = toc;
         
         disp(strcat('Iteration with n=', num2str(n), ' probability =', num2str(p), ' time inv=', num2str(time_inv(floor(n/20), k))))
         
-%         % Series of Bernoulli
+        % Series of Bernoulli
 %         
 %         rng('default');
 %         
@@ -60,20 +61,21 @@ for n = begin:step:limit
 %         for j = 1:experiments
 %             
 %             X = 0;
+%             u_vec = rand(n, 1);
 %             for i = 1:n
-%                 u = rand();
-%                 if(u < p)
+%                 %u = rand();
+%                 if(u_vec(i) < p)
 %                     X = X + 1;
 %                 end
 %             end
 %             X_ber(j) = X;
 %             
 %         end
-%         time_ber(n/20, k) = toc;
+%         time_ber(n/step, k) = toc;
 %         
 %         disp(strcat('Iteration with n=', num2str(n), ' probability =', num2str(p), ' time ber=', num2str(time_ber(floor(n/20), k))))
 %         
-        
+%         
         % Strings of zeros of length G(p)
         
         rng('default');
@@ -96,7 +98,7 @@ for n = begin:step:limit
             X_geo(j) = X;
         end
         
-        time_geo(n/20, k) = toc;
+        time_geo(n/step, k) = toc;
         
         disp(strcat('Iteration with n=', num2str(n), ' probability =', num2str(p), ' time geo=', num2str(time_geo(floor(n/20), k))))
         
@@ -114,13 +116,43 @@ figure, plot(begin:step:limit, time_geo)
 title('Time to generate 1000 RV with geometric strings')
 legend('0.1', '0.2', '0.3', '0.4', '0.5')
 
-figure, scatter(time_geo(:, 1), time_inv(:,1))
-xlabel('Geometric strings method')
+figure
+for i = 1:5
+    scatter(time_inv(:, i), time_geo(:, i), 10, 'filled', 'DisplayName', strcat('p = ', num2str(p_vec(i))))
+    legend('-DynamicLegend')
+    hold on
+    ylabel('Geometric strings method')
+    xlabel('CDF INV method')
+    axis([0.024, 0.032, 0.009, 0.018])
+end
+
+figure
+h(1) = subplot(1, 2, 1);
+b1 = boxplot(h(1), [time_inv, time_geo], 'notch', 'on', 'labels', {'CDF inv', 'Geom'});
+h(2) = subplot(1, 2, 2);
+b2 = boxplot(h(2), [time_inv(:, 2), time_geo(:, 2)], 'notch', 'on', 'labels', {'CDF inv', 'Geom'});
+
+figure
+for i = 1:5
+    scatter(time_inv(:, i), time_ber(:, i), 'DisplayName', strcat('p = ', num2str(p_vec(i))));
+    legend('-DynamicLegend')
+    hold on
+    ylabel('Bernoulli trials method')
+    xlabel('CDF INV method')
+end
+
+figure
+for i = 1:5
+    scatter(time_geo(:, i), time_ber(:, i),'DisplayName', strcat('p = ', num2str(p_vec(i))));
+    legend('-DynamicLegend')
+    hold on
+    ylabel('Bernoulli trials method')
+    xlabel('Geometric strings method')
+end
+
+
+figure, surf(time_ber, time_inv, time_geo)
 ylabel('CDF INV method')
-
-
-figure, surf(time_ber, time_geo, time_inv)
-zlabel('CDF INV method')
 xlabel('Bernoulli trials method')
-ylabel('Geometric strings method')
+zlabel('Geometric strings method')
 
