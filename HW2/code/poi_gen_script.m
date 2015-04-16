@@ -12,15 +12,13 @@ lambda = 100;
 %profile on
 
 experiments = 100000;
-begin = 100;
-step = 1;
-limit = 100;
+begin = 0.001;
+step = 0.01;
+limit = 5;
 time_inv = zeros(limit/step, 1);
 time_exp = zeros(limit/step, 1);
 time_prod = zeros(limit/step, 1);
-%iter_inv = zeros(limit/step, 1);
-%iter_exp = zeros(limit/step, 1);
-%iter_prod = zeros(limit/step, 1);
+k = 1;
 
 for lambda = begin:step:limit
     
@@ -40,13 +38,11 @@ for lambda = begin:step:limit
             pr = lambda * pr / (i+1);
             F = F + pr;
             i = i + 1;
-            %iter = iter + 1;
         end
         X_inv(j) = i;
     end
-    %iter_inv(lambda/step) = iter;
-    time_inv(lambda/step) = toc;
-    disp(strcat('Iteration with lambda=', num2str(lambda), ' time inv=', num2str(time_inv(lambda/step))))
+    time_inv(k) = toc;
+    disp(strcat('Iteration with lambda=', num2str(lambda), ' time inv=', num2str(time_inv(k))))
     
     
     
@@ -55,7 +51,6 @@ for lambda = begin:step:limit
     rng('default');
     
     tic;
-    %iter = 0;
     X_exp = zeros(experiments, 1);
     for j = 1:experiments
         % Generation of an exp(lambda) rv
@@ -68,44 +63,42 @@ for lambda = begin:step:limit
             X = X + 1;
             E = -1/lambda * log(rand());
             i = i + E; % next arrival time
-            %iter = iter + 1;
+           
         end
         X_exp(j) = X;
     end
-    %iter_exp(lambda/step) = iter;
-    time_exp(lambda/step) = toc;
-    disp(strcat('Iteration with lambda=', num2str(lambda), ' time exp= ', num2str(time_exp(lambda/step))))
-    % The same as before, note that sum(exp(lambda))<1 <=> sum(-1/lambda * ln(U))<1 <=>  ln(prod(U)) > -lambda <=> prod(U) > exp(-lambda)
+    time_exp(k) = toc;
+    disp(strcat('Iteration with lambda=', num2str(lambda), ' time exp= ', num2str(time_exp(k))))
+    
+    
+    %% The same as before, note that sum(exp(lambda))<1 <=> sum(-1/lambda * ln(U))<1 <=>  ln(prod(U)) > -lambda <=> prod(U) > exp(-lambda)
     
     
     rng('default');
     tic;
-    %iter = 0;
     bound = exp(-lambda);
     X_prod = zeros(experiments, 1);
     for j = 1:experiments
         X_prod(j) = 0;
-        prod = rand();
-        
-        while (prod >= bound)
+        prd = rand();
+        while prd >= bound
             X_prod(j) = X_prod(j) + 1;
-            prod = prod*rand();
-            %iter = iter + 1;
+            prd = prd*rand();
         end 
     end
-    %iter_prod(lambda/step) = iter;
-    time_prod(lambda/step) = toc;
+    time_prod(k) = toc;
     
-    disp(strcat('Iteration with lambda=', num2str(lambda), ' time prod= ', num2str(time_prod(lambda/step))))
+    disp(strcat('Iteration with lambda=', num2str(lambda), ' time prod= ', num2str(time_prod(k))))
     
+    k = k+1;
 end
 
 figure
-scatter(begin:step:limit, iter_inv, 10)
+scatter(begin:step:limit, time_inv, 10)
 hold on
-scatter(begin:step:limit, iter_exp, 20)
+scatter(begin:step:limit, time_exp, 10)
 hold on
-scatter(begin:step:limit, iter_prod, 30)
+scatter(begin:step:limit, time_prod, 10)
 xlabel('lambda')
 ylabel('iterations')
 legend('CDF inv', 'Exponential interarrivals', 'Uniform product')
