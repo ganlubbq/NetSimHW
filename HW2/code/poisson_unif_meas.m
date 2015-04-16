@@ -20,18 +20,18 @@ for lambda = begin:step:limit
     bound = exp(-lambda);
     X_prod = zeros(experiments, 1);
     for j = 1:experiments
-        tic;
+        
         X_prod(j) = 0;
         prod = rand();
         while (prod >= bound)
-            
+            tic;
             X_prod(j) = X_prod(j) + 1;
             prod = prod*rand();
-            
+            time_prod(i) = toc;
+            i = i + 1;
             iter = iter + 1;
         end 
-        time_prod(i) = toc;
-        i = i + 1;
+        
     end
     iter_prod(lambda/step) = iter;
    

@@ -20,7 +20,7 @@ for lambda = begin:step:limit
     iter = 0;
     X_exp = zeros(experiments, 1);
     for j = 1:experiments
-        tic;
+        
         % Generation of an exp(lambda) rv
         E = -1/lambda * log(rand()); % interarrival times
         i = E; % time of last arrival
@@ -28,14 +28,16 @@ for lambda = begin:step:limit
         % if the time of last arrival is greater than 1 we're done
         
         while(i <= 1)
+            tic;
             X = X + 1;
             E = -1/lambda * log(rand());
             i = i + E; % next arrival time
             iter = iter + 1;
+            time_exp(m) = toc;
+        m = m + 1;
         end
         X_exp(j) = X;
-        time_exp(m) = toc;
-        m = m + 1;
+        
     end
     iter_exp(lambda/step) = iter;
     time_exp(lambda/step) = toc;

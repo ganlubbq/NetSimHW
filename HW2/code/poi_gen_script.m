@@ -12,9 +12,9 @@ lambda = 100;
 %profile on
 
 experiments = 100000;
-begin = 20;
-step = 10;
-limit = 740;
+begin = 100;
+step = 1;
+limit = 100;
 time_inv = zeros(limit/step, 1);
 time_exp = zeros(limit/step, 1);
 time_prod = zeros(limit/step, 1);
@@ -80,7 +80,7 @@ for lambda = begin:step:limit
     
     rng('default');
     tic;
-    iter = 0;
+    %iter = 0;
     bound = exp(-lambda);
     X_prod = zeros(experiments, 1);
     for j = 1:experiments
@@ -90,10 +90,10 @@ for lambda = begin:step:limit
         while (prod >= bound)
             X_prod(j) = X_prod(j) + 1;
             prod = prod*rand();
-            iter = iter + 1;
+            %iter = iter + 1;
         end 
     end
-    iter_prod(lambda/step) = iter;
+    %iter_prod(lambda/step) = iter;
     time_prod(lambda/step) = toc;
     
     disp(strcat('Iteration with lambda=', num2str(lambda), ' time prod= ', num2str(time_prod(lambda/step))))

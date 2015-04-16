@@ -17,65 +17,65 @@ time_inv = zeros(limit/step, 5);
 time_ber = zeros(limit/step, 5);
 time_geo = zeros(limit/step, 5);
 
-%p_vec = [0.1, 0.2, 0.3, 0.4, 0.5];
-p_vec = [10^-9, 10^-8, 10^-7, 10^-6, 10^-5];
+p_vec = [0.1, 0.2, 0.3, 0.4, 0.5];
+%p_vec = [10^-9, 10^-8, 10^-7, 10^-6, 10^-5];
 
 for n = begin:step:limit
     for k = 1:5
-        p = p_vec(k);
-        % CDF Inversion
-        rng('default');
-        
-        tic;
-        
-        X_inv = zeros(experiments, 1);
-        for j = 1:experiments
-            
-            U = rand();
-            c = p/(1-p);
-            pr = (1-p)^n;
-            if (pr == 0)
-                return;
-            end
-            F = pr;
-            i = 0;
-            while(U >= F)
-                pr = c*(n - i)*pr/(i + 1);
-                F = F + pr;
-                i = i + 1;
-            end
-            X_inv(j) = i;
-            
-        end
-        time_inv(floor(n/step), k) = toc;
-        
-        disp(strcat('Iteration with n=', num2str(n), ' probability =', num2str(p), ' time inv=', num2str(time_inv(floor(n/20), k))))
-        
-        % Series of Bernoulli
-%         
+         p = p_vec(k);
+%         % CDF Inversion
 %         rng('default');
 %         
 %         tic;
 %         
-%         X_ber = zeros(experiments, 1);
+%         X_inv = zeros(experiments, 1);
 %         for j = 1:experiments
 %             
-%             X = 0;
-%             u_vec = rand(n, 1);
-%             for i = 1:n
-%                 %u = rand();
-%                 if(u_vec(i) < p)
-%                     X = X + 1;
-%                 end
+%             U = rand();
+%             c = p/(1-p);
+%             pr = (1-p)^n;
+%             if (pr == 0)
+%                 return;
 %             end
-%             X_ber(j) = X;
+%             F = pr;
+%             i = 0;
+%             while(U >= F)
+%                 pr = c*(n - i)*pr/(i + 1);
+%                 F = F + pr;
+%                 i = i + 1;
+%             end
+%             X_inv(j) = i;
 %             
 %         end
-%         time_ber(n/step, k) = toc;
+%         time_inv(floor(n/step), k) = toc;
 %         
-%         disp(strcat('Iteration with n=', num2str(n), ' probability =', num2str(p), ' time ber=', num2str(time_ber(floor(n/20), k))))
-%         
-%         
+%         disp(strcat('Iteration with n=', num2str(n), ' probability =', num2str(p), ' time inv=', num2str(time_inv(floor(n/20), k))))
+        
+        % Series of Bernoulli
+        
+        rng('default');
+        
+        tic;
+        
+        X_ber = zeros(experiments, 1);
+        for j = 1:experiments
+            
+            X = 0;
+            u_vec = rand(n, 1);
+            for i = 1:n
+                %u = rand();
+                if(u_vec(i) < p)
+                    X = X + 1;
+                end
+            end
+            X_ber(j) = X;
+            
+        end
+        time_ber(n/step, k) = toc;
+        
+        disp(strcat('Iteration with n=', num2str(n), ' probability =', num2str(p), ' time ber=', num2str(time_ber(floor(n/20), k))))
+        
+        
         % Strings of zeros of length G(p)
         
         rng('default');
@@ -143,7 +143,7 @@ end
 
 figure
 for i = 1:5
-    scatter(time_geo(:, i), time_ber(:, i),'DisplayName', strcat('p = ', num2str(p_vec(i))));
+    scatter(time_geo1(:, i), time_ber1(:, i),'DisplayName', strcat('p = ', num2str(p_vec(i))));
     legend('-DynamicLegend')
     hold on
     ylabel('Bernoulli trials method')

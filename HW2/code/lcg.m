@@ -11,47 +11,58 @@ profile on;
 % b. Plot all pairs (Ui, Ui+1) in a unit square and comment the results
 
 % LCG 1
-x0 = 1;
-a = 18;
+x0 = 17;
+a = 53;
 m = 101;
 
-sequence = zeros(m - 1, 1); % note: 0 is a standpoint for a multiplicative LCG,
+sequence_1 = zeros(m - 1, 1); % note: 0 is a standpoint for a multiplicative LCG,
 % it will never be reached. Because of this the period is at most m-1
 
-sequence(1) = x0;
+sequence_1(1) = x0;
 for i = 2:m-1
-    sequence(i) = mod(a*sequence(i-1), m);
+    sequence_1(i) = mod(a*sequence_1(i-1), m);
 end
 
-if (size(sequence) == size(unique(sequence)))
-    if (sequence == sequence(unique(sequence)))
+% normalize
+%sequence_1 = sequence_1/m;
+
+if (size(sequence_1) == size(unique(sequence_1)))
+    if (sort(sequence_1) == unique(sequence_1))  % unique sorts the values
         disp('LCG1 full period!')
     end
 end
 
-figure, scatter(sequence(1:m-2), sequence(2:m-1))
+
+
+figure, scatter(sequence_1(1:m-2), sequence_1(2:m-1))
+title('Lag plot for LCG1, lag = 1')
 
 
 % LCG 2
-x0 = 1;
+x0 = 17;
 a = 2;
 m = 101;
 
-sequence = zeros(m - 1, 1); % note: 0 is a standpoint for a multiplicative LCG,
+sequence_2 = zeros(m - 1, 1); % note: 0 is a standpoint for a multiplicative LCG,
 % it will never be reached. Because of this the period is at most m-1
 
-sequence(1) = x0;
+sequence_2(1) = x0;
 for i = 2:m-1
-    sequence(i) = mod(a*sequence(i-1), m);
+    sequence_2(i) = mod(a*sequence_2(i-1), m);
 end
 
-if (size(sequence) == size(unique(sequence)))
-    if (sequence == sequence(unique(sequence)))
-        disp('LCG2 full period!')
+% normalize
+%sequence_2 = sequence_2/m;
+
+if (size(sequence_2) == size(unique(sequence_2)))
+    if (sort(sequence_2) == unique(sequence_2)) % unique sorts the values
+        disp('LCG1 full period!')
     end
 end
 
-figure, scatter(sequence(1:m-2), sequence(2:m-1))
+
+figure, scatter(sequence_2(1:m-2), sequence_2(2:m-1))
+title('Lag plot for LCG2, lag = 1')
 
 
 %% Consider the LCG with a = 65539, m = 2^31
@@ -64,12 +75,12 @@ a = 65539;
 m = 2^31;
 
 limit = floor(1000);
-sequence = zeros(limit - 1, 1); % note: 0 is a standpoint for a multiplicative LCG,
+sequence_1 = zeros(limit - 1, 1); % note: 0 is a standpoint for a multiplicative LCG,
 % it will never be reached. Because of this the period is at most m-1
 
-sequence(1) = x0;
+sequence_1(1) = x0;
 for i = 2:limit-1
-    sequence(i) = mod(a*sequence(i-1), m);
+    sequence_1(i) = mod(a*sequence_1(i-1), m);
 end
 
 % if (size(sequence) == size(unique(sequence)))
@@ -78,5 +89,5 @@ end
 %     end
 % end
 
-figure, scatter(sequence(1:limit-2), sequence(2:limit-1))
-figure, scatter3(sequence(1:limit-3), sequence(2:limit-2), sequence(3:limit - 1))
+figure, scatter(sequence_1(1:limit-2), sequence_1(2:limit-1))
+figure, scatter3(sequence_1(1:limit-3), sequence_1(2:limit-2), sequence_1(3:limit - 1))

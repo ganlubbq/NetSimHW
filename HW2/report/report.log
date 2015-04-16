@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.4.16)  15 APR 2015 17:31
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.4.16)  16 APR 2015 12:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -400,18 +400,18 @@ Package: placeins 2005/04/18  v 2.2
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
 
 (/usr/local/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -506,11 +506,11 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 88.
+LaTeX Font Info:    Try loading font information for U+msa on input line 90.
 (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 88.
+LaTeX Font Info:    Try loading font information for U+msb on input line 90.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -523,7 +523,7 @@ Package epstopdf Info: Source file: <images/hw2_1_65.eps>
 (epstopdf)                    size: 86002 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/hw2_1_65-eps-conver
 ted-to.pdf images/hw2_1_65.eps>
-(epstopdf)             \includegraphics on input line 94.
+(epstopdf)             \includegraphics on input line 97.
 Package epstopdf Info: Output file is already uptodate.
 
 <images/hw2_1_65-eps-converted-to.pdf, id=1, 652.4375pt x 982.67125pt>
@@ -531,8 +531,15 @@ File: images/hw2_1_65-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/hw2_1_65-eps-converted-to.pdf>
 Package pdftex.def Info: images/hw2_1_65-eps-converted-to.pdf used on input lin
-e 94.
+e 97.
 (pdftex.def)             Requested size: 366.27048pt x 551.67163pt.
+
+Overfull \hbox (2.37718pt too wide) in paragraph at lines 93--101
+[]\T1/cmr/m/n/10 A \T1/cmr/m/it/10 Lin-ear Con-gru-en-tial Gen-er-a-tor \T1/cmr
+/m/n/10 (LCG) is a pseu-do-ran-dom num-ber gen-er-a-tor, char-ac-ter-ized by th
+e pa-ram-e-ters $\OML/cmm/m/it/10 a; c; m; x[]$\T1/cmr/m/n/10 .
+ []
+
 Package epstopdf Info: Source file: <images/hw2_1_67a.eps>
 (epstopdf)                    date: 2015-04-13 15:16:47
 (epstopdf)                    size: 201473 bytes
@@ -541,15 +548,14 @@ Package epstopdf Info: Source file: <images/hw2_1_67a.eps>
 (epstopdf)                    size: 34743 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/hw2_1_67a-eps-conve
 rted-to.pdf images/hw2_1_67a.eps>
-(epstopdf)             \includegraphics on input line 102.
+(epstopdf)             \includegraphics on input line 105.
 Package epstopdf Info: Output file is already uptodate.
-
 <images/hw2_1_67a-eps-converted-to.pdf, id=2, 562.1pt x 421.575pt>
 File: images/hw2_1_67a-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/hw2_1_67a-eps-converted-to.pdf>
 Package pdftex.def Info: images/hw2_1_67a-eps-converted-to.pdf used on input li
-ne 102.
+ne 105.
 (pdftex.def)             Requested size: 366.27048pt x 274.70236pt.
 Package epstopdf Info: Source file: <images/hw2_1_67b.eps>
 (epstopdf)                    date: 2015-04-13 15:17:09
@@ -559,7 +565,7 @@ Package epstopdf Info: Source file: <images/hw2_1_67b.eps>
 (epstopdf)                    size: 42269 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/hw2_1_67b-eps-conve
 rted-to.pdf images/hw2_1_67b.eps>
-(epstopdf)             \includegraphics on input line 103.
+(epstopdf)             \includegraphics on input line 106.
 Package epstopdf Info: Output file is already uptodate.
 
 <images/hw2_1_67b-eps-converted-to.pdf, id=3, 562.1pt x 421.575pt>
@@ -567,7 +573,7 @@ File: images/hw2_1_67b-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/hw2_1_67b-eps-converted-to.pdf>
 Package pdftex.def Info: images/hw2_1_67b-eps-converted-to.pdf used on input li
-ne 103.
+ne 106.
 (pdftex.def)             Requested size: 366.27048pt x 274.70236pt.
 Package epstopdf Info: Source file: <images/hw2_1_610.eps>
 (epstopdf)                    date: 2015-04-13 15:16:12
@@ -577,7 +583,7 @@ Package epstopdf Info: Source file: <images/hw2_1_610.eps>
 (epstopdf)                    size: 129212 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/hw2_1_610-eps-conve
 rted-to.pdf images/hw2_1_610.eps>
-(epstopdf)             \includegraphics on input line 111.
+(epstopdf)             \includegraphics on input line 114.
 Package epstopdf Info: Output file is already uptodate.
 
 <images/hw2_1_610-eps-converted-to.pdf, id=4, 562.1pt x 421.575pt>
@@ -585,11 +591,11 @@ File: images/hw2_1_610-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/hw2_1_610-eps-converted-to.pdf>
 Package pdftex.def Info: images/hw2_1_610-eps-converted-to.pdf used on input li
-ne 111.
+ne 114.
 (pdftex.def)             Requested size: 366.27048pt x 274.70236pt.
 
 
-LaTeX Warning: Reference `cdfbininv' on page 1 undefined on input line 175.
+LaTeX Warning: Reference `cdfbininv' on page 1 undefined on input line 178.
 
 [1
 
@@ -605,7 +611,7 @@ Package epstopdf Info: Source file: <images/inv_ber.eps>
 (epstopdf)                    size: 15298 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/inv_ber-eps-convert
 ed-to.pdf images/inv_ber.eps>
-(epstopdf)             \includegraphics on input line 183.
+(epstopdf)             \includegraphics on input line 185.
 Package epstopdf Info: Output file is already uptodate.
 
 <images/inv_ber-eps-converted-to.pdf, id=64, 562.1pt x 421.575pt>
@@ -613,7 +619,7 @@ File: images/inv_ber-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/inv_ber-eps-converted-to.pdf>
 Package pdftex.def Info: images/inv_ber-eps-converted-to.pdf used on input line
- 183.
+ 185.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/geo_ber.eps>
 (epstopdf)                    date: 2015-04-15 16:26:57
@@ -623,7 +629,7 @@ Package epstopdf Info: Source file: <images/geo_ber.eps>
 (epstopdf)                    size: 15185 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/geo_ber-eps-convert
 ed-to.pdf images/geo_ber.eps>
-(epstopdf)             \includegraphics on input line 184.
+(epstopdf)             \includegraphics on input line 186.
 Package epstopdf Info: Output file is already uptodate.
 
 <images/geo_ber-eps-converted-to.pdf, id=65, 562.1pt x 421.575pt>
@@ -631,7 +637,7 @@ File: images/geo_ber-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/geo_ber-eps-converted-to.pdf>
 Package pdftex.def Info: images/geo_ber-eps-converted-to.pdf used on input line
- 184.
+ 186.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/inv_geo.eps>
 (epstopdf)                    date: 2015-04-15 16:25:52
@@ -641,7 +647,7 @@ Package epstopdf Info: Source file: <images/inv_geo.eps>
 (epstopdf)                    size: 14532 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/inv_geo-eps-convert
 ed-to.pdf images/inv_geo.eps>
-(epstopdf)             \includegraphics on input line 185.
+(epstopdf)             \includegraphics on input line 187.
 Package epstopdf Info: Output file is already uptodate.
 
 <images/inv_geo-eps-converted-to.pdf, id=66, 562.1pt x 421.575pt>
@@ -649,8 +655,12 @@ File: images/inv_geo-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/inv_geo-eps-converted-to.pdf>
 Package pdftex.def Info: images/inv_geo-eps-converted-to.pdf used on input line
- 185.
+ 187.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 Package epstopdf Info: Source file: <images/bin_smallp.eps>
 (epstopdf)                    date: 2015-04-15 17:30:52
 (epstopdf)                    size: 1238801 bytes
@@ -659,56 +669,115 @@ Package epstopdf Info: Source file: <images/bin_smallp.eps>
 (epstopdf)                    size: 120119 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/bin_smallp-eps-conv
 erted-to.pdf images/bin_smallp.eps>
-(epstopdf)             \includegraphics on input line 192.
+(epstopdf)             \includegraphics on input line 194.
 Package epstopdf Info: Output file is already uptodate.
-
 <images/bin_smallp-eps-converted-to.pdf, id=67, 562.1pt x 421.575pt>
 File: images/bin_smallp-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/bin_smallp-eps-converted-to.pdf>
 Package pdftex.def Info: images/bin_smallp-eps-converted-to.pdf used on input l
-ine 192.
+ine 194.
 (pdftex.def)             Requested size: 418.59825pt x 313.94832pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5 <./images/inv_ber-eps-converted-to.pdf> <./images/geo_ber-eps-converted-to.p
-df> <./images/inv_geo-eps-converted-to.pdf>] [6 <./images/bin_smallp-eps-conver
-ted-to.pdf>] (./report.aux)
+Package epstopdf Info: Source file: <images/poi_iter.eps>
+(epstopdf)                    date: 2015-04-15 19:15:51
+(epstopdf)                    size: 97846 bytes
+(epstopdf)             Output file: <images/poi_iter-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-16 12:14:30
+(epstopdf)                    size: 14071 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/poi_iter-eps-conver
+ted-to.pdf images/poi_iter.eps>
+(epstopdf)             \includegraphics on input line 265.
+Package epstopdf Info: Output file is already uptodate.
+<images/poi_iter-eps-converted-to.pdf, id=68, 562.1pt x 421.575pt>
+File: images/poi_iter-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/poi_iter-eps-converted-to.pdf>
+Package pdftex.def Info: images/poi_iter-eps-converted-to.pdf used on input lin
+e 265.
+(pdftex.def)             Requested size: 418.59825pt x 313.94832pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5]
+Package epstopdf Info: Source file: <images/hw2_4_lcg1.eps>
+(epstopdf)                    date: 2015-04-16 12:01:33
+(epstopdf)                    size: 32458 bytes
+(epstopdf)             Output file: <images/hw2_4_lcg1-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-16 12:14:31
+(epstopdf)                    size: 10603 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/hw2_4_lcg1-eps-conv
+erted-to.pdf images/hw2_4_lcg1.eps>
+(epstopdf)             \includegraphics on input line 276.
+Package epstopdf Info: Output file is already uptodate.
+ <images/hw2_4_lcg1-eps-converted-to.pdf, id=73, 562.1pt x 421.575pt>
+File: images/hw2_4_lcg1-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/hw2_4_lcg1-eps-converted-to.pdf>
+Package pdftex.def Info: images/hw2_4_lcg1-eps-converted-to.pdf used on input l
+ine 276.
+(pdftex.def)             Requested size: 313.95068pt x 235.46284pt.
+Package epstopdf Info: Source file: <images/hw2_4_lcg2.eps>
+(epstopdf)                    date: 2015-04-16 12:01:44
+(epstopdf)                    size: 32458 bytes
+(epstopdf)             Output file: <images/hw2_4_lcg2-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-16 12:14:32
+(epstopdf)                    size: 10735 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/hw2_4_lcg2-eps-conv
+erted-to.pdf images/hw2_4_lcg2.eps>
+(epstopdf)             \includegraphics on input line 283.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/hw2_4_lcg2-eps-converted-to.pdf, id=74, 562.1pt x 421.575pt>
+File: images/hw2_4_lcg2-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/hw2_4_lcg2-eps-converted-to.pdf>
+Package pdftex.def Info: images/hw2_4_lcg2-eps-converted-to.pdf used on input l
+ine 283.
+(pdftex.def)             Requested size: 313.95068pt x 235.46284pt.
+ [6 <./images/inv_ber-eps-converted-to.pdf> <./images/geo_ber-eps-converted-to.
+pdf> <./images/inv_geo-eps-converted-to.pdf>] [7 <./images/bin_smallp-eps-conve
+rted-to.pdf>] [8 <./images/poi_iter-eps-converted-to.pdf> <./images/hw2_4_lcg1-
+eps-converted-to.pdf>] [9 <./images/hw2_4_lcg2-eps-converted-to.pdf>] (./report
+.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 7199 strings out of 493488
- 102154 string characters out of 3141326
- 196462 words of memory out of 3000000
- 10330 multiletter control sequences out of 15000+200000
+ 7223 strings out of 493488
+ 102765 string characters out of 3141326
+ 199533 words of memory out of 3000000
+ 10352 multiletter control sequences out of 15000+200000
  18255 words of font info for 51 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,8n,40p,870b,319s stack positions out of 5000i,500n,10000p,400000b,50000s
+ 38i,8n,40p,1250b,319s stack positions out of 5000i,500n,10000p,400000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
 /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
-r/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/loc
-al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
-texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
-exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
-live/2012/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texli
-ve/2012/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive
-/2012/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2
-012/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/201
-2/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2012/
-texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2012/te
-xmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2012/texm
-f-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on report.pdf (6 pages, 644136 bytes).
+usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
+r/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/
+local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
+cal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local
+/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/te
+xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
+live/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texli
+ve/2012/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive
+/2012/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2
+012/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/201
+2/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2012/
+texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2012/te
+xmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2012/texm
+f-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2012/texmf-
+dist/fonts/type1/public/cm-super/sfti1000.pfb>
+Output written on report.pdf (9 pages, 692003 bytes).
 PDF statistics:
- 146 PDF objects out of 1000 (max. 8388607)
- 101 compressed objects within 2 object streams
+ 192 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
