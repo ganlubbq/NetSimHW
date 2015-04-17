@@ -12,9 +12,9 @@ lambda = 100;
 %profile on
 
 experiments = 100000;
-begin = 0.001;
-step = 0.01;
-limit = 5;
+begin = 740;
+step = 10;
+limit = 2000;
 time_inv = zeros(limit/step, 1);
 time_exp = zeros(limit/step, 1);
 time_prod = zeros(limit/step, 1);
@@ -23,26 +23,26 @@ k = 1;
 for lambda = begin:step:limit
     
     %% CDF Inversion
-    rng('default');
-    
-    tic;
-    
-    %iter = 0;
-    X_inv = zeros(experiments, 1);
-    for j = 1:experiments
-        pr = exp(-lambda);
-        U = rand();
-        F = pr;
-        i = 0;
-        while(U >= F)
-            pr = lambda * pr / (i+1);
-            F = F + pr;
-            i = i + 1;
-        end
-        X_inv(j) = i;
-    end
-    time_inv(k) = toc;
-    disp(strcat('Iteration with lambda=', num2str(lambda), ' time inv=', num2str(time_inv(k))))
+%     rng('default');
+%     
+%     tic;
+%     
+%     %iter = 0;
+%     X_inv = zeros(experiments, 1);
+%     for j = 1:experiments
+%         pr = exp(-lambda);
+%         U = rand();
+%         F = pr;
+%         i = 0;
+%         while(U >= F)
+%             pr = lambda * pr / (i+1);
+%             F = F + pr;
+%             i = i + 1;
+%         end
+%         X_inv(j) = i;
+%     end
+%     time_inv(k) = toc;
+%     disp(strcat('Iteration with lambda=', num2str(lambda), ' time inv=', num2str(time_inv(k))))
     
     
     
@@ -100,8 +100,8 @@ scatter(begin:step:limit, time_exp, 10)
 hold on
 scatter(begin:step:limit, time_prod, 10)
 xlabel('lambda')
-ylabel('iterations')
+ylabel('execution time [s]')
 legend('CDF inv', 'Exponential interarrivals', 'Uniform product')
-title('Iterations required to generate N = 1000 Poisson rv')
+title('Time required to generate N = 10^5 Poisson rv')
 
 

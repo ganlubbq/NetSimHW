@@ -258,7 +258,7 @@ In the previous the Poisson random variable $X$ is defined as $X = \argmax_n{\su
   \end{algorithmic}
 \end{algorithm}
 
-All three methods have a computational complexity which is proportional to $\lambda$, as it can be seen in Figure~\ref{fig:poi_iter}. However the implementation of the third algorithm is much more expensive. This can be seen in
+All three methods have a computational complexity which is proportional to $\lambda$, as it can be seen in Figure~\ref{fig:poi_iter}. However the implementation of the second algorithm is much more expensive, since it requires to compute a logarithm and a division at each iteration. This can be seen in Figures~\ref{fig:} and~\ref{fig:} where the time to generate $10^5$ Poisson random variables with the three algorithms is plotted against the value of $\lambda$. In Figure~\ref{fig:} $\lambda \in [0.001, 10]$ while in Figure~\ref{} $\lambda \in [10, 740]$. For $\lambda > 745.14$ the CDF inversion is unfeasible since the starting $pr(k=0) = e^{-\lambda} < \delta$ with $\delta = 4.9407e-324$ the lowest positive number which can be represented in MATLAB, so it is approximated to 0.
 
 \begin{figure}[h]
   \centering
@@ -267,26 +267,41 @@ All three methods have a computational complexity which is proportional to $\lam
   \label{fig:poi_iter}
 \end{figure}
 
+\begin{figure}
+  \centering
+  \includegraphics
+
 \section{Exercise 4}
-Let the first linear congruential generator (LCG1) have $a = 18, m = 101, c = 0$ and the second (LCG2) $a = 2$ and the same $m, c$. They are both full period. Indeed by generating a sequence of $m-1$ samples there are no repeated samples for both of them. \\
-Figures~\ref{fig:lcg1}and~\ref{fig:lcg2} contain the lag plot for lag 1 of these generators. It can seen that the samples are strongly correlated because of the bad choices of the LCGs parameters. Actually, up to the wrap around, for any choice of $x_0$, the sample $n+1$ is $a$ times the sample $n$. Moreover, since the number of possible values is small, the randomness of the sequence is limited.
+Let the first linear congruential generator (LCG1) have $a = 18, m = 101, c = 0$ and the second (LCG2) $a = 2$ and the same $m, c$. They are both full period. Indeed by generating a sequence of $m-1$ samples there are no repeated samples for both of them. Note that a period for a multiplicative LCG ($c = 0$) is $m-1$.\\
+Figure ~\ref{fig:lcg} contains the lag plot for lag 1 of these generators. From Figure~\ref{fig:lcg}c it can seen that the samples of LCG2 are strongly correlated because of the bad choices of the LCGs parameters. Actually, up to the wrap around, for any choice of $x_0$, the sample $n+1$ is $a = 2$ times the sample $n$. Moreover, since the number of possible values is small, the randomness of the sequence is limited. The other LCG seems to have samples which are uniformly distributed in a 2d space at lag 1, with rows of points which are equally spaced, but by looking at the analysis in three dimensions in Figure~\ref{fig:lcg}b it can be clearly seen that they are not well distributed and that they fall into hyperplanes, as it always happens for LCG (Masaglia Theorem \cite{masaglia}).
 
 \begin{figure}
   \centering
-  \includegraphics[width = 0.6\textwidth]{images/hw2_4_lcg1}
-  \caption{Lag plot for LCG1 at lag 1}
-  \label{fig:lcg1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width = 0.6\textwidth]{images/hw2_4_lcg2}
-  \caption{Lag plot for LCG2 at lag 1}
-  \label{fig:lcg2}
+  \subfigure[LCG1]{\includegraphics[width = 0.45\textwidth]{images/hw2_4_lcg1}}
+  \subfigure[LCG1 in 3 dimensions]{\includegraphics[width = 0.45\textwidth]{images/hw2_4_lcg1_3d}}
+  \subfigure[LCG2]{\includegraphics[width = 0.45\textwidth]{images/hw2_4_lcg2}}
+  \caption{Lag plots for LCG1 and LCG2}
+  \label{fig:lcg}
 \end{figure}
 
 \section{Exercise 5}
+The third LCG under analysis belongs to the family of LCGs with $m = 2^M$, in particular $m = 2^{31}$ and $a = 65539$, which is a prime number ($c = 0$ as usual). If the seed is an odd number (for example $x_0 = 1$) these are the parameters of the rng called RANDU, a random number generator which was designed by IBM in the 1960s \cite{kn}. Apparently, if just 2 dimensions are observed, the numbers at lag 1 are equally distributed in the unit square and there are not hyperplanes structures as shown in Figure~\ref{fig:randu2d}. However if another dimension is taken into account the correlation between subsequent samples is clear, since there are 15 hyperplanes on which the points are distributed, approximately with the same distance one to each other as it can be seen in Figure~\ref{fig:randu3d}. As previously stated, this is a common result in LCG analysis. However Masaglia Theorem states that if n-tuples of subsequent samples of a LCG are considered then there are at most $n!m^{\frac{1}{n}}$ hyperplanes in n-space (and they have $n-1$ dimensionality and are parallel). The more the number of actual hyperplanes is closer to this limit the better the rng is. For n=3 and RNADU rng ($m = 2^{31}$), there should be at most $(3! 2^{31})^{1/3} \approx 2344$ hyperplanes, but the triplets of this LCG are distributed only on 15 of them and this shows the weakness of RANDU in generating samples which are uncorrelated.
 
+\begin{figure}
+  \centering
+  \subfigure[1000 samples]{\includegraphics[width = 0.3\textwidth]{images/hw2_5_1000}}
+  \subfigure[10000 samples]{\includegraphics[width = 0.3\textwidth]{images/hw2_5_10000}}
+  \subfigure[20000 samples]{\includegraphics[width = 0.3\textwidth]{images/hw2_5_20000}}
+  \caption{Lag plots for RANDU, lag = 1, $x0 = 1$}
+  \label{fig:randu2d}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.9\textwidth]{images/hw2_5_3d}
+  \caption{Lag plot for RANDU in three dimension, each point is $x_n, x_{n+1}, x_{n+2}$, 20000 points}
+  \label{fig:randu3d}
+\end{figure}
 
 \begin{thebibliography}{10}
 
@@ -295,6 +310,12 @@ Y. Le Boudec, Performance Evaluation of Computer and Communications Systems, EPF
 
 \bibitem{pk}
 M. Pinsky, S. Karlin, An Introduction to Stochastic Modeling, $4^{th}$ edition, Elsevier, 2011
+
+\bibitem{kn}
+D.E. Knuth, The Art of Computer Programming, volume 2: Seminumerical Algorithms, Addison-Wesley, Reading, MA, 2nd edition, 1981.
+
+\bibitem{masaglia}
+G. Masaglia, Random numbers fall mainly in the planes, Mathematics Research Laboratory, Boeing Scientific Research Laboratories, 1968
 
 
 \end{thebibliography}

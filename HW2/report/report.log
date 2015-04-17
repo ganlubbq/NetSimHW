@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.4.16)  16 APR 2015 12:14
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.4.16)  17 APR 2015 09:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -720,7 +720,26 @@ File: images/hw2_4_lcg1-eps-converted-to.pdf Graphic file (type pdf)
 <use images/hw2_4_lcg1-eps-converted-to.pdf>
 Package pdftex.def Info: images/hw2_4_lcg1-eps-converted-to.pdf used on input l
 ine 276.
-(pdftex.def)             Requested size: 313.95068pt x 235.46284pt.
+(pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
+Package epstopdf Info: Source file: <images/hw2_4_lcg1_3d.eps>
+(epstopdf)                    date: 2015-04-17 09:45:09
+(epstopdf)                    size: 80609 bytes
+(epstopdf)             Output file: <images/hw2_4_lcg1_3d-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2015-04-17 09:45:29
+(epstopdf)                    size: 13986 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/hw2_4_lcg1_3d-eps-c
+onverted-to.pdf images/hw2_4_lcg1_3d.eps>
+(epstopdf)             \includegraphics on input line 277.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/hw2_4_lcg1_3d-eps-converted-to.pdf, id=74, 562.1pt x 421.575pt>
+File: images/hw2_4_lcg1_3d-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/hw2_4_lcg1_3d-eps-converted-to.pdf>
+Package pdftex.def Info: images/hw2_4_lcg1_3d-eps-converted-to.pdf used on inpu
+t line 277.
+(pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/hw2_4_lcg2.eps>
 (epstopdf)                    date: 2015-04-16 12:01:44
 (epstopdf)                    size: 32458 bytes
@@ -729,33 +748,108 @@ Package epstopdf Info: Source file: <images/hw2_4_lcg2.eps>
 (epstopdf)                    size: 10735 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/hw2_4_lcg2-eps-conv
 erted-to.pdf images/hw2_4_lcg2.eps>
-(epstopdf)             \includegraphics on input line 283.
+(epstopdf)             \includegraphics on input line 278.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/hw2_4_lcg2-eps-converted-to.pdf, id=74, 562.1pt x 421.575pt>
+<images/hw2_4_lcg2-eps-converted-to.pdf, id=75, 562.1pt x 421.575pt>
 File: images/hw2_4_lcg2-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/hw2_4_lcg2-eps-converted-to.pdf>
 Package pdftex.def Info: images/hw2_4_lcg2-eps-converted-to.pdf used on input l
-ine 283.
-(pdftex.def)             Requested size: 313.95068pt x 235.46284pt.
+ine 278.
+(pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
  [6 <./images/inv_ber-eps-converted-to.pdf> <./images/geo_ber-eps-converted-to.
-pdf> <./images/inv_geo-eps-converted-to.pdf>] [7 <./images/bin_smallp-eps-conve
-rted-to.pdf>] [8 <./images/poi_iter-eps-converted-to.pdf> <./images/hw2_4_lcg1-
-eps-converted-to.pdf>] [9 <./images/hw2_4_lcg2-eps-converted-to.pdf>] (./report
-.aux)
+pdf> <./images/inv_geo-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <images/hw2_5_1000.eps>
+(epstopdf)                    date: 2015-04-17 09:37:27
+(epstopdf)                    size: 201187 bytes
+(epstopdf)             Output file: <images/hw2_5_1000-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-17 09:44:26
+(epstopdf)                    size: 42375 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/hw2_5_1000-eps-conv
+erted-to.pdf images/hw2_5_1000.eps>
+(epstopdf)             \includegraphics on input line 288.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/hw2_5_1000-eps-converted-to.pdf, id=94, 562.1pt x 421.575pt>
+File: images/hw2_5_1000-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/hw2_5_1000-eps-converted-to.pdf>
+Package pdftex.def Info: images/hw2_5_1000-eps-converted-to.pdf used on input l
+ine 288.
+(pdftex.def)             Requested size: 156.97534pt x 117.73141pt.
+Package epstopdf Info: Source file: <images/hw2_5_10000.eps>
+(epstopdf)                    date: 2015-04-17 09:36:45
+(epstopdf)                    size: 1635605 bytes
+(epstopdf)             Output file: <images/hw2_5_10000-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-17 09:44:27
+(epstopdf)                    size: 271532 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/hw2_5_10000-eps-con
+verted-to.pdf images/hw2_5_10000.eps>
+(epstopdf)             \includegraphics on input line 289.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/hw2_5_10000-eps-converted-to.pdf, id=95, 562.1pt x 421.575pt>
+File: images/hw2_5_10000-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/hw2_5_10000-eps-converted-to.pdf>
+Package pdftex.def Info: images/hw2_5_10000-eps-converted-to.pdf used on input 
+line 289.
+(pdftex.def)             Requested size: 156.97534pt x 117.73141pt.
+Package epstopdf Info: Source file: <images/hw2_5_20000.eps>
+(epstopdf)                    date: 2015-04-17 09:37:18
+(epstopdf)                    size: 2147948 bytes
+(epstopdf)             Output file: <images/hw2_5_20000-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-17 09:44:28
+(epstopdf)                    size: 374393 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/hw2_5_20000-eps-con
+verted-to.pdf images/hw2_5_20000.eps>
+(epstopdf)             \includegraphics on input line 290.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/hw2_5_20000-eps-converted-to.pdf, id=96, 562.1pt x 421.575pt>
+File: images/hw2_5_20000-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/hw2_5_20000-eps-converted-to.pdf>
+Package pdftex.def Info: images/hw2_5_20000-eps-converted-to.pdf used on input 
+line 290.
+(pdftex.def)             Requested size: 156.97534pt x 117.73141pt.
+Package epstopdf Info: Source file: <images/hw2_5_3d.eps>
+(epstopdf)                    date: 2015-04-17 09:37:42
+(epstopdf)                    size: 5764740 bytes
+(epstopdf)             Output file: <images/hw2_5_3d-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-17 09:44:30
+(epstopdf)                    size: 361789 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/hw2_5_3d-eps-conver
+ted-to.pdf images/hw2_5_3d.eps>
+(epstopdf)             \includegraphics on input line 297.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/hw2_5_3d-eps-converted-to.pdf, id=97, 562.1pt x 421.575pt>
+File: images/hw2_5_3d-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/hw2_5_3d-eps-converted-to.pdf>
+Package pdftex.def Info: images/hw2_5_3d-eps-converted-to.pdf used on input lin
+e 297.
+(pdftex.def)             Requested size: 470.91805pt x 353.18784pt.
+ [7 <./images/bin_smallp-eps-converted-to.pdf>] [8] [9 <./images/poi_iter-eps-c
+onverted-to.pdf>] [10 <./images/hw2_4_lcg1-eps-converted-to.pdf> <./images/hw2_
+4_lcg1_3d-eps-converted-to.pdf> <./images/hw2_4_lcg2-eps-converted-to.pdf> <./i
+mages/hw2_5_1000-eps-converted-to.pdf> <./images/hw2_5_10000-eps-converted-to.p
+df> <./images/hw2_5_20000-eps-converted-to.pdf>] [11 <./images/hw2_5_3d-eps-con
+verted-to.pdf>] (./report.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 7223 strings out of 493488
- 102765 string characters out of 3141326
- 199533 words of memory out of 3000000
- 10352 multiletter control sequences out of 15000+200000
+ 7251 strings out of 493488
+ 103734 string characters out of 3141326
+ 200550 words of memory out of 3000000
+ 10375 multiletter control sequences out of 15000+200000
  18255 words of font info for 51 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,8n,40p,1250b,319s stack positions out of 5000i,500n,10000p,400000b,50000s
+ 38i,8n,40p,1458b,319s stack positions out of 5000i,500n,10000p,400000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
 /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
@@ -774,10 +868,10 @@ texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2012/te
 xmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2012/texm
 f-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2012/texmf-
 dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on report.pdf (9 pages, 692003 bytes).
+Output written on report.pdf (11 pages, 1745428 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
- 133 compressed objects within 2 object streams
+ 243 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
