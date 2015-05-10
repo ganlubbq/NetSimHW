@@ -5,10 +5,10 @@ clc;
 %% Poisson(lambda)
 lambda = 100;
 
-experiments = 100000;
-begin = 740;
+experiments = 10000;
+begin = 1;
 step = 1;
-limit = 2000;
+limit = 30;
 time_inv = zeros(limit/step, 1);
 time_exp = zeros(limit/step, 1);
 time_prod = zeros(limit/step, 1);
