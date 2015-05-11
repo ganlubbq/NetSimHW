@@ -10,3 +10,5 @@ HW1/Report/HW-templateLateX.fls
 *.fdb_latexmk
 
 *.aux
+
+*.m~
