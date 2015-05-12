@@ -7,6 +7,9 @@ if (nnodes > 0)
     position = halfCircleUni(nnodes);
     distance = sqrt((D - position(:, 1)).^2 + position(:, 2).^2);
     D_step = min(distance);
+    if D_step > D % actually check if there's an improvement
+        D_step = D;
+    end
 else
     D_step = D;
 end

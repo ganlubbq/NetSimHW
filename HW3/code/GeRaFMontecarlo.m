@@ -1,6 +1,6 @@
 %% GeRaF Montecarlo simulation
 
-clear
+%clear
 close all
 clc
 rng default
@@ -10,11 +10,12 @@ numsim = 10000;
 
 % every length is normalized to the coverage radius
 D_vec = [5, 10, 20]; % distance to the dst
-hops = zeros(numsim, 30, length(D_vec));
+M_max = 50;
+hops = zeros(numsim, M_max, length(D_vec));
 
 for i = 1:length(D_vec)
     D = D_vec(i);
-    for N = 1:30 % sensors phisically deployed in an unit area
+    for N = 1:M_max % sensors phisically deployed in an unit area
         disp(N);
         d = 1; % duty cycle
         M = N*d; % average number of active users per unit area
@@ -34,6 +35,10 @@ end
 m_hops = mean(hops, 1);
 stddev_hops = std(hops, 1);
 
+GeRaFIterative;
+
 for i = 1:length(D_vec)
-    figure, errorbar(1:30, m_hops(:, :, i), stddev_hops(:, :, i))
+    figure, errorbar(1:M_max, m_hops(:, :, i), stddev_hops(:, :, i)), hold on, 
+    plot(1:M_max, hops_ub(i, :), 1:M_max, hops_lb(i, :))
+    legend('monte', 'ub', 'lb')
 end
