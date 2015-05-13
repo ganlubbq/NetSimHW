@@ -34,7 +34,7 @@ for rho = 1:length(rho_vec)
     free_server_perc(rho) = mean(free_server_iter); 
 end
 
-figure, plot(rho_vec, m_delay)
+figure, plot(rho_vec(1:end-1), m_delay(1:end-1))
 figure, plot(rho_vec, free_server_perc)
 
 
