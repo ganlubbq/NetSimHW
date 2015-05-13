@@ -1,7 +1,7 @@
 %% GeRaF iterative approach
 %clear
 
-nu = 50; % number of intervals per unit step
+nu = 100; % number of intervals per unit step
 
 %% Lower bound
 
