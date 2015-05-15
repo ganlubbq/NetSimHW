@@ -38,7 +38,9 @@ stddev_hops = std(hops, 1);
 GeRaFIterative;
 
 for i = 1:length(D_vec)
-    figure, errorbar(1:M_max, m_hops(:, :, i), stddev_hops(:, :, i)), hold on, 
-    plot(1:M_max, hops_ub(i, :), 1:M_max, hops_lb(i, :))
+    figure, 
+    %errorbar(1:M_max, m_hops(:, :, i), stddev_hops(:, :, i)), hold on, 
+    plot(1:M_max, hops_ub(i, :), 1:M_max, hops_lb(i, :)), hold on,
+    stem(1:M_max, m_hops(:, :, i), 'LineStyle', 'none', 'Marker', '^', 'MarkerSize', 8)
     legend('monte', 'ub', 'lb')
 end

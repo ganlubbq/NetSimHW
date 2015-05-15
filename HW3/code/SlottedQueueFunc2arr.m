@@ -1,4 +1,4 @@
-function [nUsers_time, delay_array] = SlottedQueueFunc(sim_len, p_arr, servopt, serv_param)
+function [nUsers_time, delay_array] = SlottedQueueFunc2arr(sim_len, p_arr, servopt, serv_param)
 %% DT Slotted Queue (1 server, FIFO)
 
 % Useful counters
@@ -65,10 +65,20 @@ for t = 1:sim_len
     end
     
     % Arrivals
-    if (rand() < p_arr)
+    if (rand() < 1 - 2*p_arr)
+        % do nothing
+    elseif (rand() >= 1 - 2*p_arr && rand() < 1-p_arr)
         nUsers = nUsers + 1;
         nArrivals = nArrivals + 1;
         %fprintf('Arrival, now %d users \n', nUsers);
+        delay_queue(first_queue, :) = [nArrivals, t]; % push
+        first_queue = first_queue + 1;
+    else
+        nUsers = nUsers + 2;
+        nArrivals = nArrivals + 2;
+        %fprintf('Arrival, now %d users \n', nUsers);
+        delay_queue(first_queue, :) = [nArrivals - 1, t]; % push
+        first_queue = first_queue + 1;
         delay_queue(first_queue, :) = [nArrivals, t]; % push
         first_queue = first_queue + 1;
     end
