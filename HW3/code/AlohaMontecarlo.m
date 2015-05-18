@@ -12,33 +12,50 @@ eta = 4; % indoor?
 
 % The SIR is given by R0e^xi0 / (sum Rie^xii (r0/ri)^eta)
 max_user = 30;
-numsim = 10^7;
-pcap = zeros(max_user, numsim);
+numsim = 1000000;
+G = linspace(0.1, 30, 50).';
+b = [6, 8];
+cn = zeros(max_user, numsim, length(b));
+throughput = zeros(length(G), numsim, length(b));
 
-for b = [6, 8]
-    disp(b)
-    b_lin = 10^(b/10);
+% create poisson probabilities
+poipr = zeros(length(G), max_user);
+for n = 1:max_user
+    poipr(:, n) = G.^n .* exp(-G) ./ factorial(n);
+end
+
+for b_ind = 1:length(b)
+    b_lin = 10^(b(b_ind)/10);
     for i = 1:numsim
+        if (mod(i, 100) == 0)
+            fprintf('b = %d, iter = %d \n', b_lin, i);
+        end
         % Random variables generation for the channel
         shd_complete = exp(randn(1, max_user)*sigma_sh); % n lognormal shadowing
         R2_complete = 1*sqrt(-2*log(rand(1, max_user))); % n rayleigh with sigma = 1
         % Random distance from the BS of n users
         % CDF inversion
         r_complete = sqrt(rand(1, max_user));
-        pcap(1, i) = 1;
+        cn(1, i, b_ind) = 1;
         for j = 2:max_user
             shd = datasample(shd_complete, j, 'Replace', false);
             R2 = datasample(R2_complete, j, 'Replace', false);
             r = datasample(r_complete, j, 'Replace', false);
             % Compute SIR
             SIR = (shd(1)*R2(1)^2)/(sum(R2(2:end).^2.*shd(2:end).*(r(1)./r(2:end)).^eta));
-            pcap(j, i) = (SIR >= b_lin);
+            cn(j, i, b_ind) = j*(SIR >= b_lin);
         end
+        for k = 1:length(G)
+            throughput(k, i, b_ind) = poipr(k, :)*cn(:, i, b_ind);
+        end
+        
     end
     % average and ci
-    % pcmean = sum(pcap, 2)/numsim;
-    pcmean2 = pcmean.*(1:1:max_user).';
-    save(strcat('completeAlohaMatrix', num2str(b)), 'pcap', 'numsim', 'b');
-    save(strcat('pmean', num2str(b)), 'pcmean2');
+    cnmean(b_ind, :) = sum(cn(:, :, b_ind), 2)/numsim;
+    Smean(b_ind, :) = sum(throughput(:, :, b_ind), 2)/numsim;
 end
 
+save(strcat('completeAlohaMatrix', num2str(b)), 'cn', 'numsim', 'b', 'Smean', 'cnmean');
+
+%figure, plot(1:max_user, cnmean)
+%figure, plot(G, Smean)
