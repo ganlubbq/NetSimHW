@@ -4,7 +4,7 @@ function [droppedUsers, nArrivals] = SlottedQueueFunc2arrFixed(sim_len, p_arr, s
 % Useful counters
 nUsers = 0;
 nArrivals = 0; % a sort of unique SN
-
+droppedUsers = 0;
 fixed_st = serv_param;
 inService_slot = 0;
 
@@ -35,7 +35,7 @@ for t = 1:sim_len
         if (nUsers < size - 1)
             nUsers = nUsers + 2;
             nArrivals = nArrivals + 2;
-        elseif (nUsers = size - 1)
+        elseif (nUsers == size - 1)
             nUsers = nUsers + 1;
             droppedUsers = droppedUsers + 1;
             nArrivals = nArrivals + 2;
