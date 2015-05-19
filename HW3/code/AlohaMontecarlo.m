@@ -12,9 +12,9 @@ eta = 4; % indoor?
 
 % The SIR is given by R0e^xi0 / (sum Rie^xii (r0/ri)^eta)
 max_user = 30;
-numsim = 1000000;
+numsim = 10^6;
 G = linspace(0.1, 30, 50).';
-b = [6, 8];
+b = [10];
 cn = zeros(max_user, numsim, length(b));
 throughput = zeros(length(G), numsim, length(b));
 
@@ -27,7 +27,7 @@ end
 for b_ind = 1:length(b)
     b_lin = 10^(b(b_ind)/10);
     for i = 1:numsim
-        if (mod(i, 100) == 0)
+        if (mod(i, 1000) == 0)
             fprintf('b = %d, iter = %d \n', b_lin, i);
         end
         % Random variables generation for the channel
