@@ -21,7 +21,7 @@ switch servopt
     case 'fixed'
         fixed = 1;
         fixed_st = serv_param;
-        inService_slot = 0;
+        inService_slot = 1;
     otherwise
         disp('error')
         return
@@ -65,9 +65,10 @@ for t = 1:sim_len
     end
     
     % Arrivals
-    if (rand() < 1 - 2*p_arr)
+    pr_arr = rand();
+    if (pr_arr < 1 - 2*p_arr)
         % do nothing
-    elseif (rand() >= 1 - 2*p_arr && rand() < 1-p_arr)
+    elseif (pr_arr >= 1 - 2*p_arr && pr_arr < 1-p_arr)
         nUsers = nUsers + 1;
         nArrivals = nArrivals + 1;
         %fprintf('Arrival, now %d users \n', nUsers);

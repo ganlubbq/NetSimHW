@@ -4,14 +4,16 @@ close all
 clear
 clc
 
+parpool(4);
+
 %% Exercise 1ai
 % Simulation length
-sim_len = 10000; % in number of slots
+sim_len = 1000000; % in number of slots
 iterations = 100; % number of iterations of each s
 
 % Arrival and service processes specifications
 service_time = 1; % 1 slot, fixed
-p_vec = 0.03:0.03:0.36;
+p_vec = (0.1:0.1:0.9)/3;
 
 m_delay = zeros(1, length(p_vec));
 free_server_perc = zeros(1, length(p_vec));
@@ -20,8 +22,8 @@ for k = 1:length(p_vec)
     disp(p_arr);
     m_delay_iter = zeros(1, iterations);
     free_server_iter = zeros(1, iterations);
-    for i = 1:iterations
-        disp(i);
+    parfor i = 1:iterations
+        % disp(i);
         [nUsers, delay] = SlottedQueueFunc2arr(sim_len, p_arr, 'fixed', service_time);
         free_server_iter(i) = length(find(nUsers == 0))/sim_len;
         m_delay_iter(i) = mean(delay);
@@ -33,7 +35,7 @@ end
 rho = (3.*p_vec); % since 3a is the mean number of arrivals for each a
 
 figure, plot(rho, m_delay), grid on, title('Delay vs \rho'), xlabel('\rho'), ylabel('Delay')
-xlim([0, 0.99])
+xlim([0, 0.9])
 
 %% Exercise 1aii
 
@@ -49,7 +51,7 @@ end
 
 
 %% Exercise 1bi
-sim_len = 10000; % in number of slots
+sim_len = 1000000; % in number of slots
 iterations = 100; % number of iterations of each s
 
 p_arr = 0.5; % probability of arrivals
