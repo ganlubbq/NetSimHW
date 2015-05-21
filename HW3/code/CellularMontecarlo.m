@@ -1,6 +1,6 @@
 %% Montecarlo Simulation of capture probability in cellular networks
 
-clear
+%clear
 close all
 clc
 rng default
@@ -14,7 +14,8 @@ sigma_dB = 8; %std dev of lognormal shadowing in dB
 sigma_sh = sigma_dB * 0.1 * log(10);
 eta = 4; % free space
 n = 6; % max number of possible interferers in a reuse-3 scheme
-D = 3; % distance between the center of 2 interfering cells in a reuse-3 scheme
+N = 3;
+D = sqrt(3*N); % distance between the center of 2 interfering cells in a reuse-3 scheme
 xD = D * cos(pi/6);
 yD = D * sin(pi/6);
 b = 6; %dB
