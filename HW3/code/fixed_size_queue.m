@@ -14,7 +14,7 @@ parpool(8);
 service_time = 1; % slot
 a = 0.25;
 % say 22
-size_vec = 20:25;
+size_vec = 14:17; % 16
 p_drop_fixed = zeros(length(size_vec), n_sim);
 for sindex = 1:length(size_vec)
     size = size_vec(sindex);
@@ -29,7 +29,7 @@ pmean_fixed = mean(p_drop_fixed, 2);
 p_ci_ub_fixed = std(p_drop_fixed, 0, 2)/sqrt(length(p_drop_fixed(1, :)));
 figure, errorbar(size_vec, pmean_fixed, 2*p_ci_ub_fixed), hold on, plot(size_vec, target*ones(length(size_vec),1))
 
-return
+
 %% Geometric queue
 % for the only stable b
 b = 2/3;

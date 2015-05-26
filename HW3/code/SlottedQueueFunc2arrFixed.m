@@ -21,9 +21,10 @@ for t = 1:sim_len
     end
     
     % Arrivals
-    if (rand() < 1 - 2*p_arr)
+    probabilityOfArrival = rand();
+    if (probabilityOfArrival < 1 - 2*p_arr)
         % do nothing
-    elseif (rand() >= 1 - 2*p_arr && rand() < 1-p_arr)
+    elseif (probabilityOfArrival >= 1 - 2*p_arr && probabilityOfArrival < 1-p_arr)
         if (nUsers < size)
             nUsers = nUsers + 1;
             nArrivals = nArrivals + 1;
