@@ -1,12 +1,12 @@
-function [droppedUsers, nArrivals] = SlottedQueueFunc2arrFixed(sim_len, p_arr, serv_param, size)
+function [droppedUsers, nArrivals, users_in_system] = SlottedQueueFunc2arrFixed(sim_len, p_arr, serv_param, size)
 % DT Slotted Queue (1 server, FIFO), fixed size,
-
+users_in_system = zeros(length(sim_len), 1);
 % Useful counters
 nUsers = 0;
 nArrivals = 0; % a sort of unique SN
 droppedUsers = 0;
 fixed_st = serv_param;
-inService_slot = 0;
+inService_slot = 1;
 
 % Simulate the process
 for t = 1:sim_len
@@ -45,5 +45,7 @@ for t = 1:sim_len
             nArrivals = nArrivals + 2;
         end
     end
+    users_in_system(t) = nUsers;
 end
+
 end
