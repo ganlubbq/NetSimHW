@@ -92,9 +92,9 @@ In this exercise I simulated the behavior of two different queues. They are both
 \begin{equation}
   \mbox{number of arrivals} = 
   \begin{cases}
-    2 & \mbox{with probability} a\\
-    1 & \mbox{with probability} a\\
-    0 & \mbox{with probability} 1-2a
+    2 & \mbox{with probability } a\\
+    1 & \mbox{with probability } a\\
+    0 & \mbox{with probability } 1-2a
   \end{cases}
   \label{eq:queue1arr}
 \end{equation}
@@ -125,7 +125,7 @@ The second element that I studied on each of this queues is the probability of o
 \end{equation}
 where the denominator is equal to the total number of arrivals in the system. 
 
-I studied this probability with 2 dedicated functions for each type of queue, which handle the departures and arrivals as before but don't track the number of users in the system and the delay metric in order to speed up the simulation. The length of each simulation is indeed a critical issue. In order to estimate a very low probability very long simulations must be run, because otherwise the number of obeserved events would be to small to provide a reliable estimate. In particular, for each simulation with $n_{arr}$ arrivals, a general result from \cite{leb} states that if the number of drop events observed is $z \ge 6$ and $n_{arr} - z \ge 6$ than it is possible to apply a normal approximation for the confidence interval at a certain level $\gamma$, i.e.
+I studied this probability with 2 dedicated functions for each type of queue, which handle the departures and arrivals as before but don't track the number of users in the system and the delay metric in order to speed up the simulation. The length of each simulation is indeed a critical issue. In order to estimate a very low probability very long simulations must be run, because otherwise the number of observed events would be to small to provide a reliable estimate. In particular, for each simulation with $n_{arr}$ arrivals, a general result from \cite{leb} states that if the number of drop events observed is $z \ge 6$ and $n_{arr} - z \ge 6$ than it is possible to apply a normal approximation for the confidence interval at a certain level $\gamma$, i.e.
 \begin{equation}
   \begin{cases}
   L(z) \approx \frac{z}{n} - \frac{\eta}{n}\sqrt{z\left(1 - \frac{z}{n}\right)} \\
@@ -134,7 +134,7 @@ I studied this probability with 2 dedicated functions for each type of queue, wh
 \end{equation}
 with $\eta$ such that $N_{0,1}(\eta) = \frac{1+\gamma}{2}$.
 
-Since the target to reach is $P_{of} \le 10^-5$, then the chosen length of the simulation in number of slots will be of $n_{slots} = \frac{100}{\lambda_i P_{of}}$ in order to observe on average at least $\frac{100}{\lambda_i}$ events. 
+However the events involved in the queue overflow are not independent, since when there is a dropping event it is probable that the following arrival will be dropped too. Therefore in order to compute a confidence interval on the $P_{of}$ I repeated $N$ times for each supposed length the simulation of a queue with $n_{slots} = \frac{100}{\lambda_i \hat{P}_{of}}$, where $\hat{P}_{of}$ is the target probability of overflow of $10^{-5}$, in order to observe on average at least $\frac{100}{\lambda_i}$ events. 
 
 The experiment is repeated $N$ times, in order to reduce the variance, and the final probability of overflow for a given size is computed as the sample mean of the $N$ probability of overflow. The size chosen is the one that guarantees that the upper bound of the confidence interval for the sample mean estimator is below the required threshold of $10^{-5}$. 
 
@@ -174,6 +174,7 @@ with
 Then the capture probability, that describes the probability that the strongest transmission can be successfully received even with $n-1$ interferers, is
 \begin{equation}
   C_n = \int_0^1 nP_n(r_0)h(r_0) dr_0 = \int_{-\infty}^{\infty} \frac{d\xi_0}{\sqrt{2\pi}\sigma} e^{-\frac{\xi_0^2}{2\sigma^2}} \int_0^1 n h(r_0) [I(\xi_0, r_0)]^{n-1} dr_0
+  \label{eq:cn}
 \end{equation}
 
 In this homework I evaluated these probabilities using both a Montecarlo simulation and numerical integration, for a total number of users up to 30. The Montecarlo simulation computes directly the SIR and compares it to the desired threshold. In particular, in order to speed up the simulation, at each iteration the simulator generates the complete set of random variables as described previously for all the $N_{tot} = 30$ users. Then it computes the SIR as if there were 2 users, 3 users and so on, sampling from the $N_{tot}$ random variables, and compares it with the threshold $b$. It uses a matrix $\mathbf{P}$ of size $n_{sim} \times N_{tot}$ in order to store at each iteration of the simulation $i$ the value
@@ -190,6 +191,35 @@ Then each for each column $n$ of the matrix the estimate of $C_n$ is computed as
 \begin{equation}
   \hat{C}_n = \frac{1}{n_{sim}} \sum_{i = 0}^{n_{sim} - 1} P(i, n)
 \end{equation}
+The result is in Figure
+
+I also computed the results of Equation~\eqref{eq:cn} with numerical integration, using Gauss-Legendre and Gauss-Hermite quadrature formulas. The derivation is as follows. Let $h(r) = h(r_0) = 2r$ because of the uniform distribution of the users in a circular cell of radius 1. Then
+\begin{eqnarray}
+  C_n = \int_{-\infty}^{\infty} \frac{d\xi_0}{\sqrt{2\pi}\sigma} e^{-\frac{\xi_0^2}{2\sigma^2}} \int_0^1 n 2 r_0 dr_0 \left[
+  \int_{-\infty}^{\infty} 
+  \frac{d\xi}{\sqrt{2\pi}\sigma} 
+  e^{-\frac{\xi^2}{2\sigma^2}} 
+  \int_{0}^{1} 
+  \frac{2r dr}{1 + b e^{\xi - \xi_0} \left( \frac{r}{r_0} \right)^{-\eta}}
+  \right]^{n-1}
+  = \\
+  \int_{-\infty}^{\infty} \frac{dx_1}{\sqrt{\pi}}e^{-x_1^2}
+  \int_{-1}^{1} n 0.5 (x_2 + 1) dx_2
+  \left[
+  \int_{-\infty}^{\infty} \frac{dx_3}{\sqrt{\pi}}e^{-x_3^2}
+  \int_{-1}{1} \frac{0.5(x_4+1)}{1 + b e^{\sqrt{2}\sigma(x_3 - x_1)}\left( \frac{x_4+1}{x_2+1} \right)^{-\eta}}
+  \right]^{n-1}
+\end{eqnarray}
+with 
+\begin{eqnarray*}
+x_1 &=& \frac{\xi_0}{\sqrt{2}\sigma}, \, \sqrt{2}\sigma dx_1 =  d\xi_0 \\
+x_3 &=& \frac{\xi}{\sqrt{2}\sigma}, \, \sqrt{2}\sigma dx_3 = d\xi \\
+x_2 &=& 2(r_0 + 1), \, 0.5 dx_2 = dr_0 \\
+x_4 &=& 2(r + 1), \, 0.5 dx_4 = dr
+\end{eqnarray*}
+
+The results are in Figure
+
 
 \section*{GeRaF}
 

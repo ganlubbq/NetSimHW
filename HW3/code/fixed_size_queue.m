@@ -11,10 +11,10 @@ parpool(8);
 %% Fixed service time queue
 a = 0.25;
 arr_rate = 3*a;
-sim_len = 100/(target*arr_rate);
+sim_len = 300/(target*arr_rate);
 
 service_time = 1; % slot
-size_vec = 14:16; % 16
+size_vec = 14:15; % 16
 p_drop_fixed = zeros(length(size_vec), n_sim);
 drop_events = zeros(length(size_vec), n_sim);
 arrival_events = zeros(length(size_vec), n_sim);
@@ -38,8 +38,10 @@ figure, errorbar(size_vec, pmean_fixed, 2*p_ci_ub_fixed), hold on, plot(size_vec
 % for the only stable b
 b = 2/3;
 p_arr = 0.5;
+arr_rate = 1/p_arr;
+sim_len = 100/(target*arr_rate);
 % try with 13 or 14
-size_vec = 13:17;
+size_vec = 12:14;
 p_drop_geo = zeros(length(size_vec), n_sim);
 
 for sindex = 1:length(size_vec)

@@ -1,6 +1,6 @@
-function [droppedUsers, nArrivals, users_in_system] = SlottedQueueFunc2arrFixed(sim_len, p_arr, serv_param, size)
+function [droppedUsers, nArrivals] = SlottedQueueFunc2arrFixed(sim_len, p_arr, serv_param, size)
 % DT Slotted Queue (1 server, FIFO), fixed size,
-users_in_system = zeros(length(sim_len), 1);
+%users_in_system = zeros(length(sim_len), 1);
 % Useful counters
 nUsers = 0;
 nArrivals = 0; % a sort of unique SN
@@ -25,7 +25,7 @@ for t = 1:sim_len
     if (probabilityOfArrival < 1 - 2*p_arr)
         % do nothing
     elseif (probabilityOfArrival >= 1 - 2*p_arr && probabilityOfArrival < 1-p_arr)
-        if (nUsers < size)
+        if (nUsers - 1 < size)
             nUsers = nUsers + 1;
             nArrivals = nArrivals + 1;
         else
@@ -33,10 +33,10 @@ for t = 1:sim_len
             droppedUsers = droppedUsers + 1;
         end
     else
-        if (nUsers < size - 1)
+        if (nUsers - 1 < size - 1)
             nUsers = nUsers + 2;
             nArrivals = nArrivals + 2;
-        elseif (nUsers == size - 1)
+        elseif (nUsers - 1 == size - 1)
             nUsers = nUsers + 1;
             droppedUsers = droppedUsers + 1;
             nArrivals = nArrivals + 2;
@@ -45,7 +45,7 @@ for t = 1:sim_len
             nArrivals = nArrivals + 2;
         end
     end
-    users_in_system(t) = nUsers;
+    %users_in_system(t) = nUsers;
 end
 
 end

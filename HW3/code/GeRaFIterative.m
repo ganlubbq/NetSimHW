@@ -1,21 +1,21 @@
 %% GeRaF iterative approach
 %clear
 
-nu = 100; % number of intervals per unit step
-
+nu = 50; % number of intervals per unit step
+parpool(8);
 %% Lower bound
 
 D_vec = [5, 10, 20];
 M_max = 50;
 hops_ub = zeros(length(D_vec), M_max);
-for pos = 1:length(D_vec)
+parfor pos = 1:length(D_vec)
     D = D_vec(pos);
     numint = nu*D;
     for M = 1:M_max
         P = zeros(numint, numint);
         for i = 1:numint - nu - 1 % up to the states that are outside the area of dst
             D_st = D - (i-1)/nu;
-            % compute the areas
+            % compute the areas©
             area = zeros(1, nu+1);
             for j = 0:nu
                 r = D_st - j/nu;
@@ -50,7 +50,7 @@ end
 %% Upper bound
 
 hops_lb = zeros(length(D_vec), M_max);
-for pos = 1:length(D_vec)
+parfor pos = 1:length(D_vec)
     D = D_vec(pos);
     numint = nu*D;
     for M = 1:M_max

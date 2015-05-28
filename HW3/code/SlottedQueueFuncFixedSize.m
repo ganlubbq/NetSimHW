@@ -20,7 +20,7 @@ for t = 1:sim_len
     end
     % Arrivals
     if (rand() < p_arr)
-        if(nUsers > size)
+        if(nUsers - 1 > size)
             % drop the packet
             droppedUsers = droppedUsers + 1;
             nArrivals = nArrivals + 1;
