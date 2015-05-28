@@ -2,11 +2,11 @@
 %clear
 
 nu = 50; % number of intervals per unit step
-parpool(8);
+parpool(4);
 %% Lower bound
 
 D_vec = [5, 10, 20];
-M_max = 50;
+M_max = 30;
 hops_ub = zeros(length(D_vec), M_max);
 parfor pos = 1:length(D_vec)
     D = D_vec(pos);
@@ -20,7 +20,7 @@ parfor pos = 1:length(D_vec)
             for j = 0:nu
                 r = D_st - j/nu;
                 w = (D_st^2 - r^2 + 1)/(2*D_st);
-                area(j+1) = circle_int_func(w, 1) + circle_int_func(D_st - w, r);
+                area(j+1) = num_int_circle(r, D_st, gl); %circle_int_func(w, 1) + circle_int_func(D_st - w, r);
             end
             % compute the probabilities
             for j = 1:nu % actually 0:nu-1, but for MATLAB indexing...
@@ -62,7 +62,7 @@ parfor pos = 1:length(D_vec)
             for j = 0:nu
                 r = D_st - j/nu;
                 w = (D_st^2 - r^2 + 1)/(2*D_st);
-                area(j+1) = circle_int_func(w, 1) + circle_int_func(D_st - w, r);
+                area(j+1) = num_int_circle(r, D_st, gl);%circle_int_func(w, 1) + circle_int_func(D_st - w, r);
             end
             % compute the probabilities
             for j = 2:nu+1 % actually 0:nu-1, but for MATLAB indexing...
