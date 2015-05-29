@@ -75,6 +75,7 @@ basicstyle=\footnotesize\ttfamily
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
+%\DeclareMathOperator*{\arccos}{arc\,cos}
 
 
 % Package used to keep inherent figures in the same section
@@ -160,6 +161,7 @@ Then the signal to interference ratio of a user against $k$ interferers can be e
 There is a successful transmission for this user with probability 
 \begin{equation}
   P_s = P[SIR > b]
+  \label{eq:ps}
 \end{equation}
 with b a suitable threshold, that in the following simulations will be set to 6 and 10 dB. 
 
@@ -170,6 +172,7 @@ This quantity can be computed analytically as it is done in \cite{capture} and t
 with 
 \begin{equation}
   I(\xi_0, r_0) = \int_{-\infty}^{\infty} \frac{d\xi}{\sqrt{2\pi}\sigma}e^{-\frac{\xi^2}{2\sigma^2}} \int_{0}^{1} \frac{h(r) dr}{1+be^{\xi - \xi_0}\left(\frac{r}{r_0}\right)^{-\eta}}
+  \label{eq:I}
 \end{equation}
 Then the capture probability, that describes the probability that the strongest transmission can be successfully received even with $n-1$ interferers, is
 \begin{equation}
@@ -220,8 +223,122 @@ x_4 &=& 2(r + 1), \, 0.5 dx_4 = dr
 
 The results are in Figure
 
+The second study of this exercise regards the simulation of interference in a cellular environment, with interfering users which are present only in the neighborhood cells where the same frequency of the central cell is reused. Four different reuse schemes are used, with $N = \{1, 3, 4, 7\}$ the number of cells with different frequencies in the system.
+
+An assumption is done, which is that the interfering cells are only the 6 closest ones. In particular a user in each cell is active with probability $\alpha$ and inactive with probability $1-\alpha$. Therefore the number of active interferers with a given traffic level $\alpha \in [0,1]$ is a binomial $Bin(6, \alpha)$. The central-cell user experiences an outage when the SIR falls below a threshold, which is set to $b = \{6, 10\}$ dB. It can be computed as $1 - P_{s}$ with $P_{s}$ defined as in Equation~\eqref{eq:ps}. In particular the probability that the user in the central cell transmits successfully, given its position $r_0$, is 
+\begin{eqnarray}
+  P_s(r_0) = \int_{-\infty}^{\infty} \frac{d\xi_0}{\sqrt{2\pi}\sigma} e^{-\frac{\xi_0^2}{2\sigma^2}} 
+  \sum_{i = 0}^{6} \binom{6}{i} (1 - \alpha)^{6-i} \left(\alpha I(r_0, \xi_0) \right)^{i} = \\
+  \int_{-\infty}^{\infty} \frac{d\xi_0}{\sqrt{2\pi}\sigma} e^{-\frac{\xi_0^2}{2\sigma^2}} (1 - \alpha + \alpha I(r_0, \xi_0))^6
+  \label{eq:succ_cell}
+\end{eqnarray}
+with $I(r_0, \xi_0)$ defined as in Equation~\eqref{eq:I}. Then this probability is averaged over the distribution of the distance from the base station (BS) of the central user. This distribution and the ones of interfering users from close cells are different from the ones of Slotted Aloha simulation. The central user is uniformly distributed in an hexagon, of unitary radius, and the interferers are in the same hexagon whose center is at a distance $D = \sqrt(3N)$. 
+
+In the Montecarlo simulation for this scenario I actually distributed the users in an hexagon, generating points in a rectangle and moving the ones which are on the top, and would be outside the hexagon, on the bottom with the proper geometric translation. Then, since the system is symmetric and only the distance of the interferer from the central BS matters, then the interferers are generated in the central hexagon at random and then translated in one of the neighboring cells. In particular the center of the $x, y$ axes is at the center of the central hexagon cell. Then let $\theta$ be the angle between the $x$ axis and the the vector connecting $(0, 0)$ with the center of the interfering hexagon, and $(u, v)$ be the coordinates of the generated point in the central hexagon. Then the translation will be
+\begin{equation}
+  \begin{cases}
+  x = u + D\cos(\theta) \\
+  y = v + D\sin(\theta)
+  \end{cases}
+\end{equation}
+and then the distance from the central BS of a neighboring interferer is $r = \sqrt{x^2 + y^2}$. The other random variables that characterize the received power at the BS are as in the Slotted Aloha simulations. The considered angles are reported in Table~\ref{table:angles}
+\begin{table}[h!]
+\centering
+  \begin{tabular}{c|c|c|c|c}
+  N = & 1 & 3 & 4 & 7 \\ \hline
+  $\theta$ = & 0 & $\pi/6$ & 0 & $\cos^{-1}({5\sqrt{2}/\sqrt{7}})$
+  \end{tabular}
+  \caption{$\theta$ for different reuse factors}
+  \label{table:angles}
+\end{table}
+
+Therefore in each iteration of the Montecarlo simulations 7 sets of random variables are generated, and the outage event is checked for the number of interferers $i$ ranging from 0 to 6. Obviously, for $i = 0$, there can't be outage ($\mathrm{I}_{out}^0 = 0$, instead if $SIR_i < b, i = 1, \dots, 6$ then an outage is counted and $\mathrm{I}_{out}^i = 1$. Then for each simulation $j$ the probability of outage is computed as $P_{outage}^j(\alpha) = \sum_{i = 0}^{6} \binom{6}{i} (1 - \alpha)^{6-i}(\alpha)^i \mathrm{I}_{out}^i$. 
+
+Finally, given the number of simulations $n_{sim}$, the estimate of the outage probability will be
+\begin{equation}
+  P_{outage}(\alpha) = \frac{1}{n_{sim}} \sum_{j = 0}^{n_{sim} - 1} P_{outage}^j(\alpha)
+\end{equation}
+Note that by computing the outage probability in each iteration in this way the variance of the estimator is reduced. 
+
+An approximation of Equation~\eqref{eq:succ_cell} can be computed also with numerical integration. Note that computing the exact distribution of the points inside the central and the interfering hexagons is hard to compute in a close form. Therefore the central cell is approximated with a circle of radius $R_0 = 0.91$, and the interfering cells become a circular ring of parameters $R_1, R_2$ which vary for each different reuse factor. 
+The integral to compute is 
+\begin{eqnarray}
+P_{out}(\alpha)  =   1 - \int_{-\infty}^{\infty} \frac{d\xi_0}{\sqrt{2\pi}\sigma} e^{-\frac{\xi_0^2}{2\sigma^2}} \int_0^{R_0} \frac{2 r_0}{R_0^2} dr_0 \left[
+  1 - \alpha + \alpha \int_{-\infty}^{\infty} 
+  \frac{d\xi}{\sqrt{2\pi}\sigma} 
+  e^{-\frac{\xi^2}{2\sigma^2}} 
+  \int_{R_1}^{R_2} 
+  \frac{2r dr}{(R_2^2-R_1^2)\left(1 + b e^{\xi - \xi_0} \left( \frac{r}{r_0} \right)^{-\eta}\right)}
+  \right]^{6}
+  \\
+   =  1 - \int_{-\infty}^{\infty} \frac{dx_1}{\sqrt{\pi}} e^{-x_1^2} \int_{-1}^{1} 0.5(x_2+1) dx_2 \left[
+  1 - \alpha + \alpha \int_{-\infty}^{\infty} 
+  \frac{dx_3}{\sqrt{\pi}} 
+  e^{-x_3^2} 
+  \int_{-1}^{1} 
+  \frac{2(R_dx_4 + R_s) R_d dx_4}{(R_2^2-R_1^2)\left(1 + b e^{\sqrt{2}\sigma(x_3 - x_1)} 
+  \left( \frac{R_dx_4 + R_s}{0.5R_0(x_2+1)} \right)^{-\eta}\right)}
+  \right]^{6}
+\end{eqnarray}
+with the following substitutions
+\begin{eqnarray*}
+  \frac{\xi_0}{\sqrt{2}\sigma} &=& x_1, \, d\xi_0 = \sqrt{2}\sigma dx_1 \\ 
+  \frac{\xi}{\sqrt{2}\sigma} &=& x_3, \, = d\xi = \sqrt{2}\sigma dx_3  \\
+  r_0 &=& \frac{R_0}{2}(x_2 + 1), \, dr_0 = \frac{R_0}{2} dr_0\\
+  r &=& (R_d x_4 + R_s), \, dr = R_d dx_4, \, R_d = \frac{R_2 - R_1}{2}, \, R_s = \frac{R_2 + R_1}{2}
+\end{eqnarray*}
+
+The results are in Figure
 
 \section*{GeRaF}
+The GeRaF protocol, proposed in \cite{tmc}, suggests a routing strategy for packets in ad hoc networks, in particular sensor networks. The goal is to minimize the sensors' power consumption while keeping as small as possible the number of hops the packet has to do. In particular when a sensor has to transmit some information it broadcast the message with the hope that some neighbor may act as relay. In particular nodes have to be aware of their position. 
+
+The following simulation is a Montecarlo simulation that studies the number of hops that a packet has to go through as a function of the active number of relays in the coverage radius of the sensor, which is assumed normalized to 1. In particular, given the distance $D$ between the node and the destination (which is assumed always awake), the simulator extracts a random number of nodes in the half of the circle which is closest to the destination, selects the one which has the minimum distance from the destination and forwards the packet to is, while increasing the number of hops by 1. This procedure is repeated until the packet reaches a node which is in reach of the destination (i.e. until the residual distance is less than 1). 
+
+The nodes are extracted with rejection sampling in half of a circle, and since the protocol requires that a relay forwards the packet only if it is closer to the destination than the broadcasting node, the points whose distance is greater than D are rejected too with an additional control. The number of nodes which are in the coverage radius is a Poisson random variable of mean $M = d \rho \pi$ with $d$ the duty cycle that takes into account the fact that some nodes may be asleep and $\rho$ the mean number of nodes per unit area. Therefore the nodes that are uniformly placed into half of the coverage area are $M/2$. In there is not any suitable relay in the coverage area the number of hops is still increased by 1 but the position is not updated. The observed behavior is in Figure..
+
+An analytical bound can be computed too with a recursive computation. The distance $D$ from the source to the destination is quantized into small intervals. In particular let $\nu$ be the number of intervals of this kind inside the coverage radius. 
+
+Let's consider as first an upper bound to the number of hops by assuming that if the relaying node is inside the $i$-th interval then it is placed at the beginning of this interval. Note that in this way the longest distance that can be covered in one hop is $(\nu - 1) / (\nu)$. With this approximation the intervals can be seen as states of a Markov chain. For $i = 0, \dots, \nu (D - 1) - 2$ (i.e. the intervals that are farther than 1 from the destination) the probability of going from the beginning of interval $i$ to the beginning of interval $k = i + j$ is 
+\begin{equation}
+\begin{cases}
+  P(i, i + j) = e^{-M/pi A(j+1)} - e^{-M/pi A(j)}, \; j = 1, \nu-1 \\
+  P(i, i) = e^{-M/pi A(1)} \; j = 0
+\end{cases}
+\end{equation}
+where $A(j)$ is the area of the portion of the intersection between the coverage area circle and a circle at distance $D$, of radius $r = D - j/nu$. This area is given by
+\begin{equation}
+  A(j) = A(r, D) = 2\int_{D-1}^r a \cos^-1 \left( \frac{a^2 + D^2 - 1}{2aD} \right) da
+\end{equation}
+which is evaluated with Gauss-Legendre numerical integration. Indeed the primitive provided in \cite{tmc} generates a lower and upper bound which are above the upper bound of confidence interval the results of the Montecarlo simulation. 
+
+The probability matrix $\mathbf{P}$ is computed with a MATLAB script and the last states (with index $D\nu - \nu - 1, \dots, D\nu -1 $) are considered absorbing states since they are in reach of the destination, thus
+\begin{equation}
+  P(i, i) = 1, \; i = D\nu - \nu - 1, \dots, D\nu -1 
+\end{equation} 
+Then the number of hops until absorption is 
+\begin{equation}
+\begin{cases}
+  v(i) = 1, \; i = D\nu - \nu - 1, \dots, D\nu -1  \\
+  v(i) = \frac{1+\sum_{j = 0}^{\nu - 1} P(i, i + j) v(i + j)}{1-P(i, i)}, \; i = 0, \dots, D\nu - \nu - 2
+\end{cases}
+\end{equation}
+
+A lower bound can be computed too by assuming that each time the relay is inside the $i$-th interval then it is placed at the end of this interval. Therefore the distance covered by a single hop can range from 0 to 1. This is the second way of modeling the system as a Markov Chain, whose transition probability matrix is
+\begin{equation}
+\begin{cases}
+  P(i, i + j) = e^{-M/pi A(j+1)} - e^{-M/pi A(j)}, & i = 0, \dots, \nu (D - 1) - 1, j = 1, \nu-1 \\
+  P(i, i) = e^{-M/pi A(1)} & i = 0, \dots, \nu (D - 1) - 1, j = 0 \\
+  P(i, i) = 1 & i = D\nu - \nu, \dots, D\nu 
+\end{cases}
+\end{equation}
+and the number of hops until absorption is
+\begin{equation}
+\begin{cases}
+  v(i) = 1, & i = D\nu - \nu , \dots, D\nu  \\
+  v(i) = \frac{1+\sum_{j = 0}^{\nu} P(i, i + j) v(i + j)}{1-P(i, i)}, & i = 0, \dots, D\nu - \nu - 1
+\end{cases}
+\end{equation}
 
 
 \begin{thebibliography}{10}
@@ -233,6 +350,9 @@ Y. Le Boudec, Performance Evaluation of Computer and Communications Systems, EPF
 M. Zorzi and R. R. Rao, Capture and retransmission control in
 mobile radio, IEEE J. Sel. Areas Commun., vol. SAC-12, no. 8, pp.
 1289 - 1298, Oct. 1994
+
+\bibitem{tmc}
+Zorzi, M.; Rao, R.R., Geographic random forwarding (GeRaF) for ad hoc and sensor networks: multihop performance, Mobile Computing, IEEE Transactions on , vol.2, no.4, pp.337,348, Oct.-Dec. 2003
 
 
 \end{thebibliography}

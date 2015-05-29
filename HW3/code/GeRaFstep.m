@@ -1,7 +1,7 @@
 function [ D_step ] = GeRaFstep( D, M )
 % Function that simulates a step in GeRaF protocol
 
-% The number of nodes in half of the circle is a Poisson of mean M pi/2
+% The number of nodes in half of the circle is a Poisson of mean M/2
 nnodes = poisson_cdfinv(M/2);
 if (nnodes > 0)
     position = halfCircleUni(nnodes);
