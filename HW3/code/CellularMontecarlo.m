@@ -5,11 +5,9 @@ close all
 clc
 rng default
 
-% TODO numerical integration, vary the reuse scheme and the relative
-% distance
 
 % Data
-numsim = 1000;
+numsim = 1000000;
 sigma_dB = 8; %std dev of lognormal shadowing in dB
 sigma_sh = sigma_dB * 0.1 * log(10);
 eta = 4; % free space
@@ -20,7 +18,7 @@ angle_cell = [0, pi/6, 0, acos(5/(2*sqrt(7)))];
 b_vec = [6, 10];
 alpha = linspace(0.00001, 1, 50); % activity of the users in interfering cells
 p_out_alpha = zeros(length(alpha), length(b_vec), length(N_factor));
-
+ci_out_alpha = zeros(length(alpha), length(b_vec), length(N_factor));
 for reuse_index = 1:length(N_factor)
     N = N_factor(reuse_index);
     fprintf('Reuse factor = %d \n', N);
@@ -71,19 +69,22 @@ for reuse_index = 1:length(N_factor)
             
         end
         p_out_alpha(:, b_index, reuse_index) = mean(poutagealpha, 1);
+        ci_out_alpha(:, b_index, reuse_index) = 1.96*std(poutagealpha, 0, 1)/sqrt(numsim);
         
     end
 end
 
-for b_index = 1:length(b_vec)
-    figure, hold on
-    title(strcat('b= ', num2str(b_vec(b_index)), ' dB'))
-    for reuse_index = 1:length(N_factor)
-        plot(alpha, p_out_alpha(:, b_index, reuse_index), 'DisplayName', strcat('N = ', num2str(N_factor(reuse_index))))
-        hold on
-        legend('-DynamicLegend')
-        hold on
-    end
-    grid on, xlabel(strcat('Average activity of the interfering users \alpha, for b = ', num2str(b_vec(b_index)))),
-    ylabel('P_{outage}')
-end
+save('cellular_monte', 'p_out_alpha', 'ci_out_alpha', 'b_vec', 'N_factor');
+
+% for b_index = 1:length(b_vec)
+%     figure, hold on
+%     title(strcat('b= ', num2str(b_vec(b_index)), ' dB'))
+%     for reuse_index = 1:length(N_factor)
+%         errorbar(alpha, p_out_alpha(:, b_index, reuse_index), ci_out_alpha(:, b_index, reuse_index),'DisplayName', strcat('N = ', num2str(N_factor(reuse_index))))
+%         hold on
+%         legend('-DynamicLegend')
+%         hold on
+%     end
+%     grid on, xlabel(strcat('Average activity of the interfering users \alpha, for b = ', num2str(b_vec(b_index)))),
+%     ylabel('P_{outage}')
+% end

@@ -10,8 +10,8 @@
 #$ -m ea
 #
 # Specify parallel queue
-# no
+# 
 # and set the number of parallel jobs
 # no
 
-matlab -nodesktop -nosplash -r "AlohaMontecarlo"
+matlab -nodesktop -nosplash -r "CellularMontecarlo"

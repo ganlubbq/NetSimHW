@@ -101,7 +101,6 @@ In this exercise I simulated the behavior of two different queues. They are both
 \end{equation}
 Therefore the average rate of arrivals is $\lambda_1 = 3a$, the service rate $\mu_1 = 1$ and $\rho = \frac{\lambda_1}{\mu_1} = 3a$. 
 The goal of the simulation is to study as first the throughput-delay tradeoff, in particular for $a \in [0, 1/3]$ study the delay of the queue as a function of $\rho$. Note that for $a = 1/3$ then $\rho = 1$, therefore the queue is unstable. 
-%% TODO check this sentence 
 The queue behaves as follows. At the beginning of each slot, if there's at least one user, the first user who arrived is served. Then the arrivals take place, with the probabilities of~\eqref{eq:queue1arr}, and finally the number of users in the queue is sampled. Since the service process is deterministic of $N_s$ solts, there's a counter that in presence of users in the queue increases at each slot of one unit until it reaches the given $N_s$. In particular the users cannot be served in the same slot in which they arrive. The slot in which they begin their service time already counts as 1, therefore the counter of the remaining slots is initialized to 1 and not to 0. Since in this queue the service time $N_s = 1$, then the first slot in which a user enters in service is also the slot in which it leaves the queue. However the MATLAB function that simulates the queue is general and it can handle any deterministic service time. 
 
 In this implementation the delay of each departed packet is measured with the help of a queue. In MATLAB this is an array whose last position is filled with the couple $(slot, n)$ at each arrival, where $slot$ is the index of the time slot in which there is the $n$-th arrival. If there are two arrival, then they are both inserted in the queue with the same $slot$ value and an increasing $n$. When a there's a departure, instead, the first position of the queue is read, and the difference between current slot index and the $slot$ value is stored in an array. Then the first couple of the queue is popped out and every element shifts by one. 
@@ -196,6 +195,13 @@ Then each for each column $n$ of the matrix the estimate of $C_n$ is computed as
 \end{equation}
 The result is in Figure
 
+The throughput of the system is computed by averaging the $C_n$ of each simulation with a Poisson distribution of mean $G$, the offered traffic, i.e.
+\begin{equation}
+  S = \sum_{i = 0}^{30} \frac{G^{i} e^{-G}}{i!} C_i 
+  \label{eq:aloha_S}
+\end{equation}
+and computing the sample mean of the throughput at each iteration. The results are in Figure
+
 I also computed the results of Equation~\eqref{eq:cn} with numerical integration, using Gauss-Legendre and Gauss-Hermite quadrature formulas. The derivation is as follows. Let $h(r) = h(r_0) = 2r$ because of the uniform distribution of the users in a circular cell of radius 1. Then
 \begin{eqnarray}
   C_n = \int_{-\infty}^{\infty} \frac{d\xi_0}{\sqrt{2\pi}\sigma} e^{-\frac{\xi_0^2}{2\sigma^2}} \int_0^1 n 2 r_0 dr_0 \left[
@@ -221,7 +227,7 @@ x_2 &=& 2(r_0 + 1), \, 0.5 dx_2 = dr_0 \\
 x_4 &=& 2(r + 1), \, 0.5 dx_4 = dr
 \end{eqnarray*}
 
-The results are in Figure
+The results are in Figure, while the throughput computed as in~\eqref{eq:aloha_S} is in Figure
 
 The second study of this exercise regards the simulation of interference in a cellular environment, with interfering users which are present only in the neighborhood cells where the same frequency of the central cell is reused. Four different reuse schemes are used, with $N = \{1, 3, 4, 7\}$ the number of cells with different frequencies in the system.
 

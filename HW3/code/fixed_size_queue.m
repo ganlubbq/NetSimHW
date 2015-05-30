@@ -14,7 +14,7 @@ arr_rate = 3*a;
 sim_len = 300/(target*arr_rate);
 
 service_time = 1; % slot
-size_vec = 14:15; % 16
+size_vec = 13:15; % 16
 p_drop_fixed = zeros(length(size_vec), n_sim);
 drop_events = zeros(length(size_vec), n_sim);
 arrival_events = zeros(length(size_vec), n_sim);
@@ -32,7 +32,8 @@ end
 
 pmean_fixed = mean(p_drop_fixed, 2);
 p_ci_ub_fixed = std(p_drop_fixed, 0, 2)/sqrt(length(p_drop_fixed(1, :)));
-figure, errorbar(size_vec, pmean_fixed, 2*p_ci_ub_fixed), hold on, plot(size_vec, target*ones(length(size_vec),1))
+figure, errorbar(size_vec, pmean_fixed, 2*p_ci_ub_fixed), hold on, plot(size_vec, target*ones(length(size_vec),1)),
+legend('Simulated P_{of}', 'Target'), grid on, xlabel('Queue size'), ylabel('P_{of}'), title('Queue A')
 
 %% Geometric queue
 % for the only stable b
@@ -58,3 +59,5 @@ delete(gcp);
 pmean_geo = mean(p_drop_geo, 2);
 p_ci_ub_geo = std(p_drop_geo, 0, 2)/sqrt(length(p_drop_geo(1, :)));
 figure, errorbar(size_vec, pmean_geo, 2*p_ci_ub_geo), hold on, plot(size_vec, target*ones(length(size_vec),1))
+legend('Simulated P_{of}', 'Target'), grid on, xlabel('Queue size'), ylabel('P_{of}'), title('Queue B')
+

@@ -1,4 +1,5 @@
 %% GQR for Cn
+load('GQR.mat')
 gh = gaussher20;
 gl = gaussleg60;
 
@@ -35,7 +36,22 @@ for b = 10.^([6, 10]./10)
     i = i +1;
 end
 
-figure, plot(1:30, cn_gauss), hold on, plot(1:30, cnmean1), hold on, plot(1:30, cnmean)
+%% Plot 
+load('completeAlohaMatrix6  8.mat')
+
+cnmean6 = cnmean(1, :);
+Smean6 = Smean(1, :);
+cnstd6 = std(cn(:, :, 1), 0, 2);
+
+load('completeAlohaMatrix10.mat')
+cnmean10 = cnmean;
+Smean10 = Smean;
+cnstd10 = std(cn(:, :, 1), 0, 2);
+
+figure, plot(1:30, cn_gauss), hold on, errorbar(1:30, cnmean6, 1.96*cnstd6/sqrt(numsim)), hold on,
+errorbar(1:30, cnmean10, 1.96*cnstd10/sqrt(numsim)),
+legend('b = 6, GQR', 'b = 10, GQR', 'b = 6', 'b = 10'), xlabel('n'), ylabel('C_n'), grid on,
+xlim([0, 31]), ylim([0.2, 1])
 
 G = linspace(0.1, 30, 50).';
 % create poisson probabilities
@@ -45,7 +61,14 @@ for n = 1:max_user
 end
 
 for k = 1:length(G)
-            throughput(k) = poipr(k, :)*cn_gauss(:, 1);
+   throughput_6(k) = poipr(k, :)*cn_gauss(:, 1);
 end
 
-figure, plot(G, throughput)
+for k = 1:length(G)
+   throughput_10(k) = poipr(k, :)*cn_gauss(:, 2);
+end
+
+figure, plot(G, throughput_6, G, throughput_10), hold on, plot(G, Smean6, G, Smean10), 
+legend('b = 6, GQR', 'b = 10, GQR', 'b = 6', 'b = 10'),
+xlabel('G'), ylabel('S'), grid on,
+xlim([0, 31])

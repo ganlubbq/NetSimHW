@@ -14,7 +14,7 @@ eta = 4; % indoor?
 max_user = 30;
 numsim = 10^6;
 G = linspace(0.1, 30, 50).';
-b = [10];
+b = [6, 10];
 cn = zeros(max_user, numsim, length(b));
 throughput = zeros(length(G), numsim, length(b));
 
@@ -56,6 +56,27 @@ for b_ind = 1:length(b)
 end
 
 save(strcat('completeAlohaMatrix', num2str(b)), 'cn', 'numsim', 'b', 'Smean', 'cnmean');
+
+%% Plot 
+load('completeAlohaMatrix6  8.mat')
+
+cnmean6 = cnmean(1, :);
+Smean6 = Smean(1, :);
+cnstd6 = std(cn(:, :, 1), 0, 2);
+
+load('completeAlohaMatrix10.mat')
+cnmean10 = cnmean;
+Smean10 = Smean;
+cnstd10 = std(cn(:, :, 1), 0, 2);
+
+figure, errorbar(1:30, cnmean6, 1.96*cnstd6/sqrt(numsim)), hold on,
+errorbar(1:30, cnmean10, 1.96*cnstd10/sqrt(numsim)),
+legend('b = 6', 'b = 10'), xlabel('n'), ylabel('C_n'), grid on,
+xlim([0, 31])
+
+figure, plot(G, Smean6, G, Smean10), legend('b = 6', 'b = 10'),
+xlabel('G'), ylabel('S'), grid on,
+xlim([0, 31])
 
 %figure, plot(1:max_user, cnmean)
 %figure, plot(G, Smean)

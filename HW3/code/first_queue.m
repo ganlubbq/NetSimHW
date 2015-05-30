@@ -38,20 +38,20 @@ rho = (3.*p_vec); % since 3a is the mean number of arrivals for each a
 
 save('queueA', 'rho', 'm_delay', 'std_delay');
 
-% figure, plot(rho, m_delay), grid on, title('Delay vs \rho'), xlabel('\rho'), ylabel('Delay')
-% xlim([0, 0.9])
+figure, errorbar(rho, m_delay, std_delay), grid on, title('Delay vs \rho'), xlabel('\rho'), ylabel('Delay')
+xlim([0.08, 0.91])
 
 %% Exercise 1aii
 
-% p_vec = [1/4, 1/3, 1/2];
-% service_time = 1; % 1 slot, fixed
-% sim_len = 10000; % in number of slots
-% for k = 1:length(p_vec)
-%     p_arr = p_vec(k);
-%     disp(p_arr);
-%     [nUsers, delay] = SlottedQueueFunc2arr(sim_len, p_arr, 'fixed', service_time);
-%     figure, plot(nUsers), grid on, title(strcat('Realization of the queue, a = ', num2str(p_arr))), xlabel('n'), ylabel('Queue size')
-% end
+p_vec = [1/4, 1/3, 1/2];
+service_time = 1; % 1 slot, fixed
+sim_len = 10000; % in number of slots
+for k = 1:length(p_vec)
+    p_arr = p_vec(k);
+    disp(p_arr);
+    [nUsers, delay] = SlottedQueueFunc2arr(sim_len, p_arr, 'fixed', service_time);
+    figure, plot(nUsers), grid on, title(strcat('Realization of the queue, a = ', num2str(p_arr))), xlabel('n'), ylabel('Queue size')
+end
 
 
 %% Exercise 1bi
@@ -81,18 +81,18 @@ rho_b = p_arr./b_vec;
 save('queueB', 'rho_b', 'm_delay_geo', 'std_delay_geo');
 
 
-% rho = p_arr./b_vec;
-% figure, plot(rho, m_delay_geo), grid on, title('Delay vs \rho'), xlabel('\rho'), ylabel('Delay')
-% xlim([0.5, 0.92])
+rho_b = p_arr./b_vec;
+figure, errorbar(rho_b(2:end), m_delay_geo(2:end), std_delay_geo(2:end)), grid on, title('Delay vs \rho'), xlabel('\rho'), ylabel('Delay')
+xlim([0.48, 0.92])
 %
-% %% Exercise 1bii
-% p_arr = 0.5; % probability of arrivals
-% b_vec = [1/3, 1/2, 2/3];
-%
-% sim_len = 10000; % in number of slots
-% for k = 1:length(b_vec)
-%     b = b_vec(k);
-%     disp(b);
-%     [nUsers, delay] = SlottedQueueFunc(sim_len, p_arr, 'geometric', b);
-%     figure, plot(nUsers), grid on, title(strcat('Realization of the queue, b = ', num2str(b))), xlabel('n'), ylabel('Queue size')
-% end
+%% Exercise 1bii
+p_arr = 0.5; % probability of arrivals
+b_vec = [1/3, 1/2, 2/3];
+
+sim_len = 10000; % in number of slots
+for k = 1:length(b_vec)
+    b = b_vec(k);
+    disp(b);
+    [nUsers, delay] = SlottedQueueFunc(sim_len, p_arr, 'geometric', b);
+    figure, plot(nUsers), grid on, title(strcat('Realization of the queue, b = ', num2str(b))), xlabel('n'), ylabel('Queue size')
+end
