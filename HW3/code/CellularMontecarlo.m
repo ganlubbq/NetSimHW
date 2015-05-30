@@ -7,7 +7,7 @@ rng default
 
 
 % Data
-numsim = 1000000;
+numsim = 100000;
 sigma_dB = 8; %std dev of lognormal shadowing in dB
 sigma_sh = sigma_dB * 0.1 * log(10);
 eta = 4; % free space
