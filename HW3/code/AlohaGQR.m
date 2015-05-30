@@ -6,11 +6,11 @@ gl = gaussleg60;
 sigma_dB = 8; % std dev of lognormal shadowing in dB
 sigma = sigma_dB * 0.1 * log(10);
 eta = 4; % indoor?
-max_user = 30;
-cn_gauss = zeros(30, 2);
+max_user = 50;
+cn_gauss = zeros(max_user, 2);
 i = 1;
 for b = 10.^([6, 10]./10)
-    for n = 1:30
+    for n = 1:max_user
         temp = 0;
         for i1 = 1:length(gh)
             for i2 = 1:length(gl)
@@ -49,11 +49,11 @@ Smean10 = Smean;
 cnstd10 = std(cn(:, :, 1), 0, 2);
 
 figure, plot(1:30, cn_gauss), hold on, errorbar(1:30, cnmean6, 1.96*cnstd6/sqrt(numsim)), hold on,
-errorbar(1:30, cnmean10, 1.96*cnstd10/sqrt(numsim)),
+errorbar(1:max_user, cnmean10, 1.96*cnstd10/sqrt(numsim)),
 legend('b = 6, GQR', 'b = 10, GQR', 'b = 6', 'b = 10'), xlabel('n'), ylabel('C_n'), grid on,
 xlim([0, 31]), ylim([0.2, 1])
 
-G = linspace(0.1, 30, 50).';
+G = linspace(0.1, 50, 50).';
 % create poisson probabilities
 poipr = zeros(length(G), max_user);
 for n = 1:max_user

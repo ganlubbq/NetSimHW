@@ -14,4 +14,4 @@
 # and set the number of parallel jobs
 # no
 
-matlab -nodesktop -nosplash -r "CellularMontecarlo"
+matlab -nodesktop -nosplash -r "AlohaMontecarlo"
