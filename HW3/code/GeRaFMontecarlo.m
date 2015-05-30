@@ -37,10 +37,16 @@ stddev_hops = std(hops, 1);
 
 GeRaFIterative;
 
+%% Plot
+
+%load('GeRaFMontecarloWS.mat')
+
 for i = 1:length(D_vec)
-    figure, 
-    %errorbar(1:M_max, m_hops(:, :, i), stddev_hops(:, :, i)), hold on, 
+    figure,
+    errorbar(1:30, m_hops(:, 1:30, i), stddev_hops(:, 1:30, i)), hold on,
+    %stem(1:M_max, m_hops(:, :, i), 'LineStyle', 'none', 'Marker', '^', 'MarkerSize', 8), hold on,
     plot(1:M_max, hops_ub(i, :), 1:M_max, hops_lb(i, :)), hold on,
-    stem(1:M_max, m_hops(:, :, i), 'LineStyle', 'none', 'Marker', '^', 'MarkerSize', 8)
-    legend('monte', 'ub', 'lb')
+    title(strcat('D = ', num2str(D_vec(i))))
+    legend('Montecarlo', 'Upper bound', 'Lower bound')
+    grid on, xlabel('M'), ylabel('Hops'), xlim([0, 31])
 end

@@ -81,6 +81,9 @@ basicstyle=\footnotesize\ttfamily
 % Package used to keep inherent figures in the same section
 \usepackage{placeins}
 
+\graphicspath{ {images/} }
+
+
 
 \begin{document}
 \title{Network Analysis and Simulation - Homework 3}
@@ -89,7 +92,7 @@ basicstyle=\footnotesize\ttfamily
 \maketitle
 
 \section*{Exercise 1 - Queue simulations}
-In this exercise I simulated the behavior of two different queues. They are both slotted, the first one has deterministic service, in one slot, and arrivals in each slot distributed in the following way
+In this exercise the behavior of two different queues is simulated. They are both slotted, the first one has deterministic service, in one slot, and arrivals in each slot distributed in the following way
 \begin{equation}
   \mbox{number of arrivals} = 
   \begin{cases}
@@ -100,32 +103,65 @@ In this exercise I simulated the behavior of two different queues. They are both
   \label{eq:queue1arr}
 \end{equation}
 Therefore the average rate of arrivals is $\lambda_1 = 3a$, the service rate $\mu_1 = 1$ and $\rho = \frac{\lambda_1}{\mu_1} = 3a$. 
-The goal of the simulation is to study as first the throughput-delay tradeoff, in particular for $a \in [0, 1/3]$ study the delay of the queue as a function of $\rho$. Note that for $a = 1/3$ then $\rho = 1$, therefore the queue is unstable. 
+The goal of the simulation is to study as first the throughput-delay tradeoff, in particular for $a \in [0, 1/3]$ the delay of the queue is studied as a function of $\rho$. Note that for $a = 1/3$ then $\rho = 1$, therefore the queue is unstable and the result of the simulation would not be meaningful. Thus the extreme points of the interval $[0, 1/3]$ are not studied. 
+
 The queue behaves as follows. At the beginning of each slot, if there's at least one user, the first user who arrived is served. Then the arrivals take place, with the probabilities of~\eqref{eq:queue1arr}, and finally the number of users in the queue is sampled. Since the service process is deterministic of $N_s$ solts, there's a counter that in presence of users in the queue increases at each slot of one unit until it reaches the given $N_s$. In particular the users cannot be served in the same slot in which they arrive. The slot in which they begin their service time already counts as 1, therefore the counter of the remaining slots is initialized to 1 and not to 0. Since in this queue the service time $N_s = 1$, then the first slot in which a user enters in service is also the slot in which it leaves the queue. However the MATLAB function that simulates the queue is general and it can handle any deterministic service time. 
 
-In this implementation the delay of each departed packet is measured with the help of a queue. In MATLAB this is an array whose last position is filled with the couple $(slot, n)$ at each arrival, where $slot$ is the index of the time slot in which there is the $n$-th arrival. If there are two arrival, then they are both inserted in the queue with the same $slot$ value and an increasing $n$. When a there's a departure, instead, the first position of the queue is read, and the difference between current slot index and the $slot$ value is stored in an array. Then the first couple of the queue is popped out and every element shifts by one. 
+In this implementation the delay of each departed packet is measured with the help of a FIFO queue as data structure. In MATLAB this is an array whose last position is filled with the couple $(slot, n)$ at each arrival, where $slot$ is the index of the time slot in which there is the $n$-th arrival. If there are two arrival, then they are both inserted in the queue with the same $slot$ value and an increasing $n$. When a there's a departure, instead, the first position of the queue is read, and the difference between current slot index and the $slot$ value is stored in an array. Then the first couple of the queue is popped out and every element shifts by one. 
 
 The function that simulates the queue finally returns an array with the number of users for each slot and a second one with the delay for each departed user, in order to let the main class handle statistics. In particular, for each value of $a$ (which is sampled in $[0.1, 0.9]/3$), I repeat 100 indipendent simulations, each of length $n_{slot} = 10^6$ slots. For each simulation, given the number $n_{d}$ of departed users, I compute the mean delay as 
 \begin{equation}
   dl_{sim} = \frac{1}{n_d} \sum_{i = 0}^{n_d} dl_{user_i}
 \end{equation}
-and then I average over the 100 simulations to get a lower variance. The results are in Figure
+and then I average over the 100 simulations to get a lower variance. The results are in Figure~\ref{fig:queue_a}.
+I also studied the behavior of one realization of the queue in $10^4$ slots, whose occupancy is in Figure~\ref{fig:queue_a_real}.
 
-I also studied the behavior of one realization of the queue in $10^4$ slots. The results are in Figure
+\begin{figure}[h!]
+\centering
+  \includegraphics[width = 0.6\textwidth]{queue_a_dl}
+  \caption{Delay vs. utilization factor $\rho$}
+  \label{fig:queue_a}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+  \subfigure[Realization of the queue for $a = 0.25, \rho = 3/4$]{\includegraphics[width = 0.45\textwidth]{queue_a25}}
+  \subfigure[Realization of the queue for $a = 1/3, \rho = 1$]{\includegraphics[width = 0.45\textwidth]{queue_a33}}
+  \subfigure[Realization of the queue for $a = 0.5, \rho = 1.5$]{\includegraphics[width = 0.45\textwidth]{queue_a50}}
+  \caption{Realization of the queue for $10^4$ slots}
+  \label{fig:queue_a_real}
+\end{figure}
+
 
 The second queue, instead, has a bernoulli arrival process, with one arrival with probability $1/2$ in each slot, and a geometric service time of average $1/b$. Since the arrival rate is $\lambda_2 = 1/2$ and the service rate is $\mu_2 = b$, then the utilization factor is $\rho = \frac{1}{2b}$. Also for this queue I studied the throughput-delay trade-off, with the events happening in each slot as in the previous queue and with delay measured for each departed packet with a FIFO queue. Note that since departures are geometric, they are memoryless and the counter of the number of slots spent in service is useless. Therefore at every slot, if there's at least one user, it departs with probability $b$ and it remains in service with probability $1-b$. 
 
-The results 
+The results are in Figure~\ref{fig:queue_b}, while the realizations of the queue in $10^4$ slots are Figure~\ref{fig:queue_b_real}.
 
-The realizations are
+\begin{figure}[h!]
+\centering
 
-The second element that I studied on each of this queues is the probability of overflow with a fixed sized queue, for stable $\rho$. The probability of overflow is given by 
+  \includegraphics[width = 0.6\textwidth]{queue_b_dl}
+  \caption{Delay vs. utilization factor $\rho$}
+  \label{fig:queue_b}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+  \subfigure[Realization of the queue for $b = 3/4, \rho = 2/3$]{\includegraphics[width = 0.45\textwidth]{queue_b66}}
+  \subfigure[Realization of the queue for $b = 1/2, \rho = 1$]{\includegraphics[width = 0.45\textwidth]{queue_b50}}
+  \subfigure[Realization of the queue for $b = 1/3, \rho = 1.5$]{\includegraphics[width = 0.45\textwidth]{queue_b33}}
+  \caption{Realization of the queue for $10^4$ slots}
+  \label{fig:queue_b_real}
+\end{figure}
+
+
+The second element that is studied on each of these queues is the probability of overflow with a fixed sized queue, for stable $\rho$. The probability of overflow is given by 
 \begin{equation}
   P_{of} = \frac{\mbox{dropped packets}}{\mbox{dropped packets} + \mbox{served packets}}
 \end{equation}
 where the denominator is equal to the total number of arrivals in the system. 
 
-I studied this probability with 2 dedicated functions for each type of queue, which handle the departures and arrivals as before but don't track the number of users in the system and the delay metric in order to speed up the simulation. The length of each simulation is indeed a critical issue. In order to estimate a very low probability very long simulations must be run, because otherwise the number of observed events would be to small to provide a reliable estimate. In particular, for each simulation with $n_{arr}$ arrivals, a general result from \cite{leb} states that if the number of drop events observed is $z \ge 6$ and $n_{arr} - z \ge 6$ than it is possible to apply a normal approximation for the confidence interval at a certain level $\gamma$, i.e.
+I studied this probability with 2 dedicated functions for each type of queue, which handle the departures and arrivals as before but don't track the number of users in the system for each slot and the delay metric in order to speed up the simulation. The length of each simulation is indeed a critical issue. In order to estimate a very low probability very long simulations must be run, because otherwise the number of observed events would be to small to provide a reliable estimate. In particular, for each simulation with $n_{arr}$ arrivals, a general result from \cite{leb} states that if the number of drop events observed is $z \ge 6$ and $n_{arr} - z \ge 6$ and if the events are iid then it is possible to apply a normal approximation for the confidence interval at a certain level $\gamma$, i.e.
 \begin{equation}
   \begin{cases}
   L(z) \approx \frac{z}{n} - \frac{\eta}{n}\sqrt{z\left(1 - \frac{z}{n}\right)} \\
@@ -136,11 +172,25 @@ with $\eta$ such that $N_{0,1}(\eta) = \frac{1+\gamma}{2}$.
 
 However the events involved in the queue overflow are not independent, since when there is a dropping event it is probable that the following arrival will be dropped too. Therefore in order to compute a confidence interval on the $P_{of}$ I repeated $N$ times for each supposed length the simulation of a queue with $n_{slots} = \frac{100}{\lambda_i \hat{P}_{of}}$, where $\hat{P}_{of}$ is the target probability of overflow of $10^{-5}$, in order to observe on average at least $\frac{100}{\lambda_i}$ events. 
 
-The experiment is repeated $N$ times, in order to reduce the variance, and the final probability of overflow for a given size is computed as the sample mean of the $N$ probability of overflow. The size chosen is the one that guarantees that the upper bound of the confidence interval for the sample mean estimator is below the required threshold of $10^{-5}$. 
+The experiment is repeated $N = 160$ times, in order to reduce the variance, and the final probability of overflow for a given size is computed as the sample mean of the $N$ probability of overflow. The size chosen is the one that guarantees that the upper bound of the confidence interval for the sample mean estimator is below the required threshold of $10^{-5}$. 
 
-In Figure 
+In Figure~\ref{fig:pofA} it can be seen that for the first queue, $a = 0.25$, the required size is 14, while Figure~\ref{fig:pofB} shows that for the geometric queue, $b = 0.75$, the size that guarantees $P_{of} < 10^{-5}$ is 13.
 
-In Figure, instead... 
+\begin{figure}[h!]
+\centering
+  \includegraphics[width = 0.7\textwidth]{queue_a_of}
+  \caption{$P_{of}$ of the queue A for $a = 0.25, \rho = 0.75$}
+  \label{fig:pofA}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[width = 0.7\textwidth]{queue_b_of}
+  \caption{$P_{of}$ of the queue A for $b = 0.75, \rho = 2/3$}
+  \label{fig:pofB}
+\end{figure}
+
+\clearpage
 
 \section*{Cellular system and Aloha}
 In a slotted Aloha system it is interesting to study which is the probability that some transmission are successful even in presence of interferers. 
@@ -148,10 +198,10 @@ Each user in the system which has to communicate with a central base station is 
 \begin{itemize}
 \item distance $r$ from the BS. Since the users are uniform in a circle of radius 1, then the probability density function of this distribution is $h(r) = 2r$.
 \item $\eta$ power loss law exponent, which in the following simulations is set to 4
-\item a log-normal random variable $e^{\xi}$ that describes shadowing, with $\xi ~ N_{0,\sigma^2}$. Note that the given $\sigma_{dB}= 8$ is in dB, thus $\sigma = (0.1 \log_e(10))\sigma_{dB}$
+\item a log-normal random variable $e^{\xi}$ that describes shadowing, with $\xi \sim N_{0,\sigma^2}$. Note that the given $\sigma_{dB}= 8$ is in dB, thus $\sigma = (0.1 \log_e(10))\sigma_{dB}$
 \item a Rayleigh distributed r.v. with unit power $\sigma_R = 1$. Note that a Rayleigh r.v. can be generated as $\sigma_R \sqrt{-2*\log_e(X)}$ with $X \sim N_{0,1}$.
 \end{itemize}
-The received power from a transmitter at distance $r$ is then $P_R = R^2 e^{\xi} K r^{-\eta} P_T$. We assume that a constant term $K P_T$ and the exponent $\eta$ are equal for all the users, and also that the Rayleigh fading and the log-normal shadowing are iid. 
+The received power from a transmitter at distance $r$ is then $P_R = R^2 e^{\xi} K r^{-\eta} P_T$. The constant term $K P_T$ and the exponent $\eta$ are equal for all the users, and also the Rayleigh fading and the log-normal shadowing are iid. 
 
 Then the signal to interference ratio of a user against $k$ interferers can be expressed as
 \begin{equation}
@@ -162,7 +212,7 @@ There is a successful transmission for this user with probability
   P_s = P[SIR > b]
   \label{eq:ps}
 \end{equation}
-with b a suitable threshold, that in the following simulations will be set to 6 and 10 dB. 
+with $b$ a suitable threshold, that in the following simulations will be set to 6 and 10 dB. 
 
 This quantity can be computed analytically as it is done in \cite{capture} and the final result of the probability of having a success for a user at distance $r_0$ given that $n$ packets are transmitted (thus $n-1$ interferers) is
 \begin{equation}
@@ -179,7 +229,7 @@ Then the capture probability, that describes the probability that the strongest 
   \label{eq:cn}
 \end{equation}
 
-In this homework I evaluated these probabilities using both a Montecarlo simulation and numerical integration, for a total number of users up to 30. The Montecarlo simulation computes directly the SIR and compares it to the desired threshold. In particular, in order to speed up the simulation, at each iteration the simulator generates the complete set of random variables as described previously for all the $N_{tot} = 30$ users. Then it computes the SIR as if there were 2 users, 3 users and so on, sampling from the $N_{tot}$ random variables, and compares it with the threshold $b$. It uses a matrix $\mathbf{P}$ of size $n_{sim} \times N_{tot}$ in order to store at each iteration of the simulation $i$ the value
+In this homework these probabilities are evaluated using a Montecarlo simulation exaclty computed with numerical integration, for a total number of users $n$ up to 30. The Montecarlo simulation computes directly the SIR and compares it to the desired threshold. In particular, in order to speed up the simulation, at each iteration the simulator generates the complete set of random variables as described previously for all the $N_{tot} = 30$ users. Then it computes the SIR as if there were 2 users, 3 users and so on, sampling from the $N_{tot}$ random variables, and compares it with the threshold $b$. It uses a matrix $\mathbf{P}$ of size $n_{sim} \times N_{tot}$ in order to store at each iteration of the simulation $i$ the value
 \begin{equation}
 P(i, n) = 
 \begin{cases}
@@ -193,14 +243,28 @@ Then each for each column $n$ of the matrix the estimate of $C_n$ is computed as
 \begin{equation}
   \hat{C}_n = \frac{1}{n_{sim}} \sum_{i = 0}^{n_{sim} - 1} P(i, n)
 \end{equation}
-The result is in Figure
+and results are in Figure~\ref{fig:aloha_monte}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width = 0.6\textwidth]{aloha_monte}
+  \caption{Montecarlo simulation results for capture probability in Slotted Aloha, $b = 6, 10$ dB}
+  \label{fig:aloha_monte}
+\end{figure}
 
 The throughput of the system is computed by averaging the $C_n$ of each simulation with a Poisson distribution of mean $G$, the offered traffic, i.e.
 \begin{equation}
   S = \sum_{i = 0}^{30} \frac{G^{i} e^{-G}}{i!} C_i 
   \label{eq:aloha_S}
 \end{equation}
-and computing the sample mean of the throughput at each iteration. The results are in Figure
+and computing the sample mean of the throughput at each iteration. The results are in Figure~\ref{fig:aloha_monte_S}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width = 0.6\textwidth]{aloha_monte_S}
+  \caption{Montecarlo simulation results for throughput in Slotted Aloha, $b = 6, 10$ dB}
+  \label{fig:aloha_monte_S}
+\end{figure}
 
 I also computed the results of Equation~\eqref{eq:cn} with numerical integration, using Gauss-Legendre and Gauss-Hermite quadrature formulas. The derivation is as follows. Let $h(r) = h(r_0) = 2r$ because of the uniform distribution of the users in a circular cell of radius 1. Then
 \begin{eqnarray}
@@ -227,7 +291,21 @@ x_2 &=& 2(r_0 + 1), \, 0.5 dx_2 = dr_0 \\
 x_4 &=& 2(r + 1), \, 0.5 dx_4 = dr
 \end{eqnarray*}
 
-The results are in Figure, while the throughput computed as in~\eqref{eq:aloha_S} is in Figure
+The results are in Figure~\ref{fig:aloha_GQR}, while the throughput computed as in~\eqref{eq:aloha_S} is in Figure~\ref{fig:aloha_GQR_S}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width = 0.6\textwidth]{aloha_GQR}
+  \caption{Montecarlo simulation and numerical integration results for capture probabilities in Slotted Aloha, $b = 6, 10$ dB}
+  \label{fig:aloha_GQR}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width = 0.6\textwidth]{aloha_GQR_S}
+  \caption{Montecarlo simulation and numerical integration results for throughput in Slotted Aloha, $b = 6, 10$ dB}
+  \label{fig:aloha_GQR_S}
+\end{figure}
 
 The second study of this exercise regards the simulation of interference in a cellular environment, with interfering users which are present only in the neighborhood cells where the same frequency of the central cell is reused. Four different reuse schemes are used, with $N = \{1, 3, 4, 7\}$ the number of cells with different frequencies in the system.
 
@@ -266,7 +344,7 @@ Finally, given the number of simulations $n_{sim}$, the estimate of the outage p
 \end{equation}
 Note that by computing the outage probability in each iteration in this way the variance of the estimator is reduced. 
 
-An approximation of Equation~\eqref{eq:succ_cell} can be computed also with numerical integration. Note that computing the exact distribution of the points inside the central and the interfering hexagons is hard to compute in a close form. Therefore the central cell is approximated with a circle of radius $R_0 = 0.91$, and the interfering cells become a circular ring of parameters $R_1, R_2$ which vary for each different reuse factor. 
+An approximation of Equation~\eqref{eq:succ_cell} can be computed also with numerical integration. Note that computing the exact distribution of the points inside the central and the interfering hexagons is hard to compute in a close form. Therefore the central cell is approximated with a circle of radius $R_0 = 0.91$, and the interfering cells become a circular ring of parameters $R_1, R_2$ which vary for each different reuse factor as in table. 
 The integral to compute is 
 \begin{eqnarray}
 P_{out}(\alpha)  =   1 - \int_{-\infty}^{\infty} \frac{d\xi_0}{\sqrt{2\pi}\sigma} e^{-\frac{\xi_0^2}{2\sigma^2}} \int_0^{R_0} \frac{2 r_0}{R_0^2} dr_0 \left[
@@ -296,12 +374,23 @@ with the following substitutions
 
 The results are in Figure
 
+\FloatBarrier
+
 \section*{GeRaF}
 The GeRaF protocol, proposed in \cite{tmc}, suggests a routing strategy for packets in ad hoc networks, in particular sensor networks. The goal is to minimize the sensors' power consumption while keeping as small as possible the number of hops the packet has to do. In particular when a sensor has to transmit some information it broadcast the message with the hope that some neighbor may act as relay. In particular nodes have to be aware of their position. 
 
 The following simulation is a Montecarlo simulation that studies the number of hops that a packet has to go through as a function of the active number of relays in the coverage radius of the sensor, which is assumed normalized to 1. In particular, given the distance $D$ between the node and the destination (which is assumed always awake), the simulator extracts a random number of nodes in the half of the circle which is closest to the destination, selects the one which has the minimum distance from the destination and forwards the packet to is, while increasing the number of hops by 1. This procedure is repeated until the packet reaches a node which is in reach of the destination (i.e. until the residual distance is less than 1). 
 
-The nodes are extracted with rejection sampling in half of a circle, and since the protocol requires that a relay forwards the packet only if it is closer to the destination than the broadcasting node, the points whose distance is greater than D are rejected too with an additional control. The number of nodes which are in the coverage radius is a Poisson random variable of mean $M = d \rho \pi$ with $d$ the duty cycle that takes into account the fact that some nodes may be asleep and $\rho$ the mean number of nodes per unit area. Therefore the nodes that are uniformly placed into half of the coverage area are $M/2$. In there is not any suitable relay in the coverage area the number of hops is still increased by 1 but the position is not updated. The observed behavior is in Figure..
+The nodes are extracted with rejection sampling in half of a circle, and since the protocol requires that a relay forwards the packet only if it is closer to the destination than the broadcasting node, the points whose distance is greater than D are rejected too with an additional control. The number of nodes which are in the coverage radius is a Poisson random variable of mean $M = d \rho \pi$ with $d$ the duty cycle that takes into account the fact that some nodes may be asleep and $\rho$ the mean number of nodes per unit area. Therefore the nodes that are uniformly placed into half of the coverage area are $M/2$. In there is not any suitable relay in the coverage area the number of hops is still increased by 1 but the position is not updated. The observed behavior is in Figure~\ref{fig:geraf1}.
+
+\begin{figure}[h!]
+  \centering
+  \subfigure[$D = 5$]{\includegraphics[width = 0.45\textwidth]{GeRaF_1}}
+  \subfigure[$D = 10$]{\includegraphics[width = 0.45\textwidth]{GeRaF_2}}
+  \subfigure[$D = 20$]{\includegraphics[width = 0.45\textwidth]{GeRaF_3}}
+  \caption{Results for Montecarlo simulation for GeRaF}
+  \label{fig:geraf1}
+\end{figure}
 
 An analytical bound can be computed too with a recursive computation. The distance $D$ from the source to the destination is quantized into small intervals. In particular let $\nu$ be the number of intervals of this kind inside the coverage radius. 
 
@@ -346,7 +435,25 @@ and the number of hops until absorption is
 \end{cases}
 \end{equation}
 
-The results are in Figure... 
+The results are in Figure~\ref{fig:geraf2}, note that for $\nu = 100$ the bounds are very close to each other and to the Montecarlo simulation (see~\ref{fig:geraf3} for a detail).
+
+\begin{figure}[h!]
+  \centering
+  \subfigure[$D = 5$]{\includegraphics[width = 0.45\textwidth]{GeRaF_8}}
+  \subfigure[$D = 10$]{\includegraphics[width = 0.45\textwidth]{GeRaF_9}}
+  \subfigure[$D = 20$]{\includegraphics[width = 0.45\textwidth]{GeRaF_10}}
+  \caption{Results for Montecarlo simulation and analytical bounds for GeRaF}
+  \label{fig:geraf2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width= 0.4\textwidth]{GeRaF_detail}
+  \caption{Detail of the 3 curves for GeRaF Montecarlo and bounds, $D = 5$}
+  \label{fig:geraf3}
+\end{figure}
+
+\FloatBarrier
 
 \begin{thebibliography}{10}
 
