@@ -1,7 +1,8 @@
 %% GeRaF iterative approach
 %clear
-
-nu = 50; % number of intervals per unit step
+load('GQR.mat')
+gl = gaussleg60;
+nu = 100; % number of intervals per unit step
 parpool(4);
 %% Lower bound
 
