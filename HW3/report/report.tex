@@ -103,13 +103,13 @@ In this exercise the behavior of two different queues is simulated. They are bot
   \label{eq:queue1arr}
 \end{equation}
 Therefore the average rate of arrivals is $\lambda_1 = 3a$, the service rate $\mu_1 = 1$ and $\rho = \frac{\lambda_1}{\mu_1} = 3a$. 
-The goal of the simulation is to study as first the throughput-delay tradeoff, in particular for $a \in [0, 1/3]$ the delay of the queue is studied as a function of $\rho$. Note that for $a = 1/3$ then $\rho = 1$, therefore the queue is unstable and the result of the simulation would not be meaningful. Thus the extreme points of the interval $[0, 1/3]$ are not studied. 
+The goal of the simulation is to study as first the throughput-delay trade-off, in particular for $a \in [0, 1/3]$ the delay of the queue is studied as a function of $\rho$. Note that for $a = 1/3$ then $\rho = 1$, therefore the queue is unstable and the result of the simulation would not be meaningful. Thus the extreme points of the interval $[0, 1/3]$ are not studied. 
 
-The queue behaves as follows. At the beginning of each slot, if there's at least one user, the first user who arrived is served. Then the arrivals take place, with the probabilities of~\eqref{eq:queue1arr}, and finally the number of users in the queue is sampled. Since the service process is deterministic of $N_s$ solts, there's a counter that in presence of users in the queue increases at each slot of one unit until it reaches the given $N_s$. In particular the users cannot be served in the same slot in which they arrive. The slot in which they begin their service time already counts as 1, therefore the counter of the remaining slots is initialized to 1 and not to 0. Since in this queue the service time $N_s = 1$, then the first slot in which a user enters in service is also the slot in which it leaves the queue. However the MATLAB function that simulates the queue is general and it can handle any deterministic service time. 
+The queue behaves as follows. At the beginning of each slot, if there's at least one user, the first user who arrived is served. Then the arrivals take place, with the probabilities of~\eqref{eq:queue1arr}, and finally the number of users in the queue is sampled. Since the service process is deterministic of $N_s$ slots, there's a counter that in presence of users in the queue increases at each slot of one unit until it reaches the given $N_s$. In particular the users cannot be served in the same slot in which they arrive. The slot in which they begin their service time already counts as 1, therefore the counter of the remaining slots is initialized to 1 and not to 0. Since in this queue the service time $N_s = 1$, then the first slot in which a user enters in service is also the slot in which it leaves the queue. However the MATLAB function that simulates the queue is general and it can handle any deterministic service time. 
 
 In this implementation the delay of each departed packet is measured with the help of a FIFO queue as data structure. In MATLAB this is an array whose last position is filled with the couple $(slot, n)$ at each arrival, where $slot$ is the index of the time slot in which there is the $n$-th arrival. If there are two arrival, then they are both inserted in the queue with the same $slot$ value and an increasing $n$. When a there's a departure, instead, the first position of the queue is read, and the difference between current slot index and the $slot$ value is stored in an array. Then the first couple of the queue is popped out and every element shifts by one. 
 
-The function that simulates the queue finally returns an array with the number of users for each slot and a second one with the delay for each departed user, in order to let the main class handle statistics. In particular, for each value of $a$ (which is sampled in $[0.1, 0.9]/3$), I repeat 100 indipendent simulations, each of length $n_{slot} = 10^6$ slots. For each simulation, given the number $n_{d}$ of departed users, I compute the mean delay as 
+The function that simulates the queue finally returns an array with the number of users for each slot and a second one with the delay for each departed user, in order to let the main class handle statistics. In particular, for each value of $a$ (which is sampled in $[0.1, 0.9]/3$), I repeat 100 independent simulations, each of length $n_{slot} = 10^6$ slots. For each simulation, given the number $n_{d}$ of departed users, I compute the mean delay as 
 \begin{equation}
   dl_{sim} = \frac{1}{n_d} \sum_{i = 0}^{n_d} dl_{user_i}
 \end{equation}
@@ -133,7 +133,7 @@ I also studied the behavior of one realization of the queue in $10^4$ slots, who
 \end{figure}
 
 
-The second queue, instead, has a bernoulli arrival process, with one arrival with probability $1/2$ in each slot, and a geometric service time of average $1/b$. Since the arrival rate is $\lambda_2 = 1/2$ and the service rate is $\mu_2 = b$, then the utilization factor is $\rho = \frac{1}{2b}$. Also for this queue I studied the throughput-delay trade-off, with the events happening in each slot as in the previous queue and with delay measured for each departed packet with a FIFO queue. Note that since departures are geometric, they are memoryless and the counter of the number of slots spent in service is useless. Therefore at every slot, if there's at least one user, it departs with probability $b$ and it remains in service with probability $1-b$. 
+The second queue, instead, has a Bernoulli arrival process, with one arrival with probability $1/2$ in each slot, and a geometric service time of average $1/b$. Since the arrival rate is $\lambda_2 = 1/2$ and the service rate is $\mu_2 = b$, then the utilization factor is $\rho = \frac{1}{2b}$. Also for this queue I studied the throughput-delay trade-off, with the events happening in each slot as in the previous queue and with delay measured for each departed packet with a FIFO queue. Note that since departures are geometric, they are memoryless and the counter of the number of slots spent in service is useless. Therefore at every slot, if there's at least one user, it departs with probability $b$ and it remains in service with probability $1-b$. 
 
 The results are in Figure~\ref{fig:queue_b}, while the realizations of the queue in $10^4$ slots are Figure~\ref{fig:queue_b_real}.
 
@@ -229,7 +229,7 @@ Then the capture probability, that describes the probability that the strongest 
   \label{eq:cn}
 \end{equation}
 
-In this homework these probabilities are evaluated using a Montecarlo simulation exaclty computed with numerical integration, for a total number of users $n$ up to 30. The Montecarlo simulation computes directly the SIR and compares it to the desired threshold. In particular, in order to speed up the simulation, at each iteration the simulator generates the complete set of random variables as described previously for all the $N_{tot} = 30$ users. Then it computes the SIR as if there were 2 users, 3 users and so on, sampling from the $N_{tot}$ random variables, and compares it with the threshold $b$. It uses a matrix $\mathbf{P}$ of size $n_{sim} \times N_{tot}$ in order to store at each iteration of the simulation $i$ the value
+In this homework these probabilities are evaluated using a Monte Carlo simulation exactly computed with numerical integration, for a total number of users $n$ up to 30. The Monte Carlo simulation computes directly the SIR and compares it to the desired threshold. In particular, in order to speed up the simulation, at each iteration the simulator generates the complete set of random variables as described previously for all the $N_{tot} = 30$ users. Then it computes the SIR as if there were 2 users, 3 users and so on, sampling from the $N_{tot}$ random variables, and compares it with the threshold $b$. It uses a matrix $\mathbf{P}$ of size $n_{sim} \times N_{tot}$ in order to store at each iteration of the simulation $i$ the value
 \begin{equation}
 P(i, n) = 
 \begin{cases}
@@ -248,7 +248,7 @@ and results are in Figure~\ref{fig:aloha_monte}.
 \begin{figure}[h!]
   \centering
   \includegraphics[width = 0.6\textwidth]{aloha_monte}
-  \caption{Montecarlo simulation results for capture probability in Slotted Aloha, $b = 6, 10$ dB}
+  \caption{Monte Carlo simulation results for capture probability in Slotted Aloha, $b = 6, 10$ dB}
   \label{fig:aloha_monte}
 \end{figure}
 
@@ -262,7 +262,7 @@ and computing the sample mean of the throughput at each iteration. The results a
 \begin{figure}[h!]
   \centering
   \includegraphics[width = 0.6\textwidth]{aloha_monte_S}
-  \caption{Montecarlo simulation results for throughput in Slotted Aloha, $b = 6, 10$ dB}
+  \caption{Monte Carlo simulation results for throughput in Slotted Aloha, $b = 6, 10$ dB}
   \label{fig:aloha_monte_S}
 \end{figure}
 
@@ -296,14 +296,14 @@ The results are in Figure~\ref{fig:aloha_GQR}, while the throughput computed as 
 \begin{figure}[h!]
   \centering
   \includegraphics[width = 0.6\textwidth]{aloha_GQR}
-  \caption{Montecarlo simulation and numerical integration results for capture probabilities in Slotted Aloha, $b = 6, 10$ dB}
+  \caption{Monte Carlo simulation and numerical integration results for capture probabilities in Slotted Aloha, $b = 6, 10$ dB}
   \label{fig:aloha_GQR}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width = 0.6\textwidth]{aloha_GQR_S}
-  \caption{Montecarlo simulation and numerical integration results for throughput in Slotted Aloha, $b = 6, 10$ dB}
+  \caption{Monte Carlo simulation and numerical integration results for throughput in Slotted Aloha, $b = 6, 10$ dB}
   \label{fig:aloha_GQR_S}
 \end{figure}
 
@@ -318,7 +318,7 @@ An assumption is done, which is that the interfering cells are only the 6 closes
 \end{eqnarray}
 with $I(r_0, \xi_0)$ defined as in Equation~\eqref{eq:I}. Then this probability is averaged over the distribution of the distance from the base station (BS) of the central user. This distribution and the ones of interfering users from close cells are different from the ones of Slotted Aloha simulation. The central user is uniformly distributed in an hexagon, of unitary radius, and the interferers are in the same hexagon whose center is at a distance $D = \sqrt(3N)$. 
 
-In the Montecarlo simulation for this scenario I actually distributed the users in an hexagon, generating points in a rectangle and moving the ones which are on the top, and would be outside the hexagon, on the bottom with the proper geometric translation. Then, since the system is symmetric and only the distance of the interferer from the central BS matters, then the interferers are generated in the central hexagon at random and then translated in one of the neighboring cells. In particular the center of the $x, y$ axes is at the center of the central hexagon cell. Then let $\theta$ be the angle between the $x$ axis and the the vector connecting $(0, 0)$ with the center of the interfering hexagon, and $(u, v)$ be the coordinates of the generated point in the central hexagon. Then the translation will be
+In the Monte Carlo simulation for this scenario I actually distributed the users in an hexagon, generating points in a rectangle and moving the ones which are on the top, and would be outside the hexagon, on the bottom with the proper geometric translation. Then, since the system is symmetric and only the distance of the interferer from the central BS matters, then the interferers are generated in the central hexagon at random and then translated in one of the neighboring cells. In particular the center of the $x, y$ axes is at the center of the central hexagon cell. Then let $\theta$ be the angle between the $x$ axis and the the vector connecting $(0, 0)$ with the center of the interfering hexagon, and $(u, v)$ be the coordinates of the generated point in the central hexagon. Then the translation will be
 \begin{equation}
   \begin{cases}
   x = u + D\cos(\theta) \\
@@ -336,15 +336,46 @@ and then the distance from the central BS of a neighboring interferer is $r = \s
   \label{table:angles}
 \end{table}
 
-Therefore in each iteration of the Montecarlo simulations 7 sets of random variables are generated, and the outage event is checked for the number of interferers $i$ ranging from 0 to 6. Obviously, for $i = 0$, there can't be outage ($\mathrm{I}_{out}^0 = 0$, instead if $SIR_i < b, i = 1, \dots, 6$ then an outage is counted and $\mathrm{I}_{out}^i = 1$. Then for each simulation $j$ the probability of outage is computed as $P_{outage}^j(\alpha) = \sum_{i = 0}^{6} \binom{6}{i} (1 - \alpha)^{6-i}(\alpha)^i \mathrm{I}_{out}^i$. 
+Therefore in each iteration of the Monte Carlo simulations 7 sets of random variables are generated, and the outage event is checked for the number of interferers $i$ ranging from 0 to 6. Obviously, for $i = 0$, there can't be outage ($\mathrm{I}_{out}^0 = 0$, instead if $SIR_i < b, i = 1, \dots, 6$ then an outage is counted and $\mathrm{I}_{out}^i = 1$. Then for each simulation $j$ the probability of outage is computed as $P_{outage}^j(\alpha) = \sum_{i = 0}^{6} \binom{6}{i} (1 - \alpha)^{6-i}(\alpha)^i \mathrm{I}_{out}^i$. 
 
 Finally, given the number of simulations $n_{sim}$, the estimate of the outage probability will be
 \begin{equation}
   P_{outage}(\alpha) = \frac{1}{n_{sim}} \sum_{j = 0}^{n_{sim} - 1} P_{outage}^j(\alpha)
 \end{equation}
-Note that by computing the outage probability in each iteration in this way the variance of the estimator is reduced. 
+Note that by computing the outage probability in each iteration in this way the variance of the estimator is reduced and allows to perform less iterations for a given confidence level. The number of Monte Carlo iterations is set to $10^5$. In Figure~\ref{fig:cell_monte} there are the results of Monte Carlo simulation for $b = 6$ and $b = 10$.
 
-An approximation of Equation~\eqref{eq:succ_cell} can be computed also with numerical integration. Note that computing the exact distribution of the points inside the central and the interfering hexagons is hard to compute in a close form. Therefore the central cell is approximated with a circle of radius $R_0 = 0.91$, and the interfering cells become a circular ring of parameters $R_1, R_2$ which vary for each different reuse factor as in table. 
+\begin{figure}[h!]
+  \centering
+  \subfigure[$b= 6$]{\includegraphics[width = 0.45\textwidth]{cellular_monte_6}}
+  \subfigure[$b= 10$]{\includegraphics[width = 0.45\textwidth]{cellular_monte}}
+  \caption{Monte Carlo simulations for $P_{out}$ in a cellular system}
+  \label{fig:cell_monte}
+\end{figure}
+
+An approximation of Equation~\eqref{eq:succ_cell} can be computed also with numerical integration. Note that computing the exact distribution of the points inside the central and the interfering hexagons is hard to compute in a close form. Therefore the central cell is approximated with a circle of radius $R_0 = 0.91$, and the interfering cells become a circular ring of parameters $R_1, R_2$ which vary for each different reuse factor as in Table~\ref{table:radii}.
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c|c|c|c}
+N = & 1 & 3 & 4 & 7 \\ \hline
+$R_1$ = & $R_0$ & 2 & $2 + \sqrt{3}/2$ & $ \sqrt{(2\sqrt{3})^2 + 1}$ \\
+$R_2$ = & $R_0 + 2$ & 4 & $4 + \sqrt{3}/2$ & $\sqrt{(2\sqrt{3})^2 + 1} + 2$
+\end{tabular}
+\caption{Radii for the circular rings that approximate the interfering hexagons}
+\label{table:radii}
+\end{table}
+
+
+In Figure~\ref{fig:hexa_cell} there is an example of the considerations done in order to compute this approximations for $N = 7$.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width = 0.7\textwidth]{hexa}
+  \caption{Geometry of the system for $N = 7$}
+  \label{fig:hexa_cell}
+\end{figure}
+
+
 The integral to compute is 
 \begin{eqnarray}
 P_{out}(\alpha)  =   1 - \int_{-\infty}^{\infty} \frac{d\xi_0}{\sqrt{2\pi}\sigma} e^{-\frac{\xi_0^2}{2\sigma^2}} \int_0^{R_0} \frac{2 r_0}{R_0^2} dr_0 \left[
@@ -372,14 +403,30 @@ with the following substitutions
   r &=& (R_d x_4 + R_s), \, dr = R_d dx_4, \, R_d = \frac{R_2 - R_1}{2}, \, R_s = \frac{R_2 + R_1}{2}
 \end{eqnarray*}
 
-The results are in Figure
+The results are in Figure~\ref{fig:cell_GQR}. A comparison between the approximation given by the numerical integration (which is an exact result but with an approximated geometry) and the Monte Carlo simulations' results can be seen in Figure~\ref{fig:cell_both}. Note that for $N= 3, 7$ the geometric approximation is quite accurate, while for the reuse patterns in which the hexagons are placed side by side (i.e. $N= 1, 4$) it is not. 
+
+\begin{figure}[h!]
+  \centering
+  \subfigure[$b = 6$]{\includegraphics[width = 0.45\textwidth]{cellular_GQR_6}}
+  \subfigure[$b = 10$]{\includegraphics[width = 0.45\textwidth]{cellular_GQR_10}}
+  \caption{Numerical integration for $P_{out}$ in a cellular system}
+  \label{fig:cell_GQR}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \subfigure[$b = 6$]{\includegraphics[width = 0.45\textwidth]{cellular_both_6}}
+  \subfigure[$b = 10$]{\includegraphics[width = 0.45\textwidth]{cellular_both_10}}
+  \caption{Comparison between Monte Carlo and numerical integration for $P_{out}$ in a cellular system}
+  \label{fig:cell_both}
+\end{figure}
 
 \FloatBarrier
 
 \section*{GeRaF}
 The GeRaF protocol, proposed in \cite{tmc}, suggests a routing strategy for packets in ad hoc networks, in particular sensor networks. The goal is to minimize the sensors' power consumption while keeping as small as possible the number of hops the packet has to do. In particular when a sensor has to transmit some information it broadcast the message with the hope that some neighbor may act as relay. In particular nodes have to be aware of their position. 
 
-The following simulation is a Montecarlo simulation that studies the number of hops that a packet has to go through as a function of the active number of relays in the coverage radius of the sensor, which is assumed normalized to 1. In particular, given the distance $D$ between the node and the destination (which is assumed always awake), the simulator extracts a random number of nodes in the half of the circle which is closest to the destination, selects the one which has the minimum distance from the destination and forwards the packet to is, while increasing the number of hops by 1. This procedure is repeated until the packet reaches a node which is in reach of the destination (i.e. until the residual distance is less than 1). 
+The following simulation is a Monte Carlo simulation that studies the number of hops that a packet has to go through as a function of the active number of relays in the coverage radius of the sensor, which is assumed normalized to 1. In particular, given the distance $D$ between the node and the destination (which is assumed always awake), the simulator extracts a random number of nodes in the half of the circle which is closest to the destination, selects the one which has the minimum distance from the destination and forwards the packet to is, while increasing the number of hops by 1. This procedure is repeated until the packet reaches a node which is in reach of the destination (i.e. until the residual distance is less than 1). 
 
 The nodes are extracted with rejection sampling in half of a circle, and since the protocol requires that a relay forwards the packet only if it is closer to the destination than the broadcasting node, the points whose distance is greater than D are rejected too with an additional control. The number of nodes which are in the coverage radius is a Poisson random variable of mean $M = d \rho \pi$ with $d$ the duty cycle that takes into account the fact that some nodes may be asleep and $\rho$ the mean number of nodes per unit area. Therefore the nodes that are uniformly placed into half of the coverage area are $M/2$. In there is not any suitable relay in the coverage area the number of hops is still increased by 1 but the position is not updated. The observed behavior is in Figure~\ref{fig:geraf1}.
 
@@ -388,7 +435,7 @@ The nodes are extracted with rejection sampling in half of a circle, and since t
   \subfigure[$D = 5$]{\includegraphics[width = 0.45\textwidth]{GeRaF_1}}
   \subfigure[$D = 10$]{\includegraphics[width = 0.45\textwidth]{GeRaF_2}}
   \subfigure[$D = 20$]{\includegraphics[width = 0.45\textwidth]{GeRaF_3}}
-  \caption{Results for Montecarlo simulation for GeRaF}
+  \caption{Results for Monte Carlo simulation for GeRaF}
   \label{fig:geraf1}
 \end{figure}
 
@@ -405,7 +452,7 @@ where $A(j)$ is the area of the portion of the intersection between the coverage
 \begin{equation}
   A(j) = A(r, D) = 2\int_{D-1}^r a \cos^-1 \left( \frac{a^2 + D^2 - 1}{2aD} \right) da
 \end{equation}
-which is evaluated with Gauss-Legendre numerical integration. Indeed the primitive provided in \cite{tmc} generates a lower and upper bound which are above the upper bound of confidence interval the results of the Montecarlo simulation. 
+which is evaluated with Gauss-Legendre numerical integration. Indeed the primitive provided in \cite{tmc} generates a lower and upper bound which are above the upper bound of confidence interval the results of the Monte Carlo simulation. 
 
 The probability matrix $\mathbf{P}$ is computed with a MATLAB script and the last states (with index $D\nu - \nu - 1, \dots, D\nu -1 $) are considered absorbing states since they are in reach of the destination, thus
 \begin{equation}
@@ -435,21 +482,21 @@ and the number of hops until absorption is
 \end{cases}
 \end{equation}
 
-The results are in Figure~\ref{fig:geraf2}, note that for $\nu = 100$ the bounds are very close to each other and to the Montecarlo simulation (see~\ref{fig:geraf3} for a detail).
+The results are in Figure~\ref{fig:geraf2}, note that for $\nu = 100$ the bounds are very close to each other and to the Monte Carlo simulation (see~\ref{fig:geraf3} for a detail).
 
 \begin{figure}[h!]
   \centering
   \subfigure[$D = 5$]{\includegraphics[width = 0.45\textwidth]{GeRaF_8}}
   \subfigure[$D = 10$]{\includegraphics[width = 0.45\textwidth]{GeRaF_9}}
   \subfigure[$D = 20$]{\includegraphics[width = 0.45\textwidth]{GeRaF_10}}
-  \caption{Results for Montecarlo simulation and analytical bounds for GeRaF}
+  \caption{Results for Monte Carlo simulation and analytical bounds for GeRaF}
   \label{fig:geraf2}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width= 0.4\textwidth]{GeRaF_detail}
-  \caption{Detail of the 3 curves for GeRaF Montecarlo and bounds, $D = 5$}
+  \caption{Detail of the 3 curves for GeRaF Monte Carlo and bounds, $D = 5$}
   \label{fig:geraf3}
 \end{figure}
 

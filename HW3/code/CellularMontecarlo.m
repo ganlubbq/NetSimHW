@@ -76,15 +76,18 @@ end
 
 save('cellular_monte', 'p_out_alpha', 'ci_out_alpha', 'b_vec', 'N_factor');
 
-% for b_index = 1:length(b_vec)
-%     figure, hold on
-%     title(strcat('b= ', num2str(b_vec(b_index)), ' dB'))
-%     for reuse_index = 1:length(N_factor)
-%         errorbar(alpha, p_out_alpha(:, b_index, reuse_index), ci_out_alpha(:, b_index, reuse_index),'DisplayName', strcat('N = ', num2str(N_factor(reuse_index))))
-%         hold on
-%         legend('-DynamicLegend')
-%         hold on
-%     end
-%     grid on, xlabel(strcat('Average activity of the interfering users \alpha, for b = ', num2str(b_vec(b_index)))),
-%     ylabel('P_{outage}')
-% end
+%% Plot
+
+for b_index = 1:length(b_vec)
+    figure, hold on
+    title(strcat('b= ', num2str(b_vec(b_index)), ' dB'))
+    for reuse_index = 1:length(N_factor)
+        errorbar(alpha, p_out_alpha(:, b_index, reuse_index), ci_out_alpha(:, b_index, reuse_index),'DisplayName', strcat('N = ', num2str(N_factor(reuse_index))))
+        hold on
+        legend('-DynamicLegend')
+        hold on
+    end
+    grid on, xlabel('Average activity of the interfering users \alpha'),
+    ylabel('P_{outage}')
+    xlim([-0.05, 1.05])
+end

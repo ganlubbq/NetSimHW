@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.4.16)  30 MAY 2015 11:34
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.4.16)  30 MAY 2015 16:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -817,12 +817,137 @@ line 305.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8 <./images/aloha_GQR-eps-converted-to.pdf>] [9 <./images/aloha_GQR_S-eps-conv
-erted-to.pdf>]
-Overfull \hbox (16.62822pt too wide) in alignment at lines 349--366
+[8 <./images/aloha_GQR-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <images/cellular_monte_6.eps>
+(epstopdf)                    date: 2015-05-30 14:23:15
+(epstopdf)                    size: 152661 bytes
+(epstopdf)             Output file: <images/cellular_monte_6-eps-converted-to.p
+df>
+(epstopdf)                    date: 2015-05-30 15:56:25
+(epstopdf)                    size: 16453 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/cellular_monte_6-ep
+s-converted-to.pdf images/cellular_monte_6.eps>
+(epstopdf)             \includegraphics on input line 349.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/cellular_monte_6-eps-converted-to.pdf, id=170, 562.1pt x 421.575pt>
+File: images/cellular_monte_6-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/cellular_monte_6-eps-converted-to.pdf>
+Package pdftex.def Info: images/cellular_monte_6-eps-converted-to.pdf used on i
+nput line 349.
+(pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
+Package epstopdf Info: Source file: <images/cellular_monte.eps>
+(epstopdf)                    date: 2015-05-30 14:22:55
+(epstopdf)                    size: 152783 bytes
+(epstopdf)             Output file: <images/cellular_monte-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2015-05-30 15:56:26
+(epstopdf)                    size: 16466 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/cellular_monte-eps-
+converted-to.pdf images/cellular_monte.eps>
+(epstopdf)             \includegraphics on input line 350.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/cellular_monte-eps-converted-to.pdf, id=171, 562.1pt x 421.575pt>
+File: images/cellular_monte-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/cellular_monte-eps-converted-to.pdf>
+Package pdftex.def Info: images/cellular_monte-eps-converted-to.pdf used on inp
+ut line 350.
+(pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
+ [9 <./images/aloha_GQR_S-eps-converted-to.pdf>] <images/hexa.pdf, id=181, 963.
+6pt x 562.1pt>
+File: images/hexa.pdf Graphic file (type pdf)
+
+<use images/hexa.pdf>
+Package pdftex.def Info: images/hexa.pdf used on input line 373.
+(pdftex.def)             Requested size: 366.27048pt x 213.65167pt.
+
+Overfull \hbox (16.62822pt too wide) in alignment at lines 380--397
  [][][] []
  []
 
+[10 <./images/cellular_monte_6-eps-converted-to.pdf> <./images/cellular_monte-e
+ps-converted-to.pdf>]
+Package epstopdf Info: Source file: <images/cellular_GQR_6.eps>
+(epstopdf)                    date: 2015-05-30 15:43:14
+(epstopdf)                    size: 101788 bytes
+(epstopdf)             Output file: <images/cellular_GQR_6-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2015-05-30 16:01:12
+(epstopdf)                    size: 10990 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/cellular_GQR_6-eps-
+converted-to.pdf images/cellular_GQR_6.eps>
+(epstopdf)             \includegraphics on input line 410.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/cellular_GQR_6-eps-converted-to.pdf, id=209, 562.1pt x 421.575pt>
+File: images/cellular_GQR_6-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/cellular_GQR_6-eps-converted-to.pdf>
+Package pdftex.def Info: images/cellular_GQR_6-eps-converted-to.pdf used on inp
+ut line 410.
+(pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
+Package epstopdf Info: Source file: <images/cellular_GQR_10.eps>
+(epstopdf)                    date: 2015-05-30 15:43:01
+(epstopdf)                    size: 100985 bytes
+(epstopdf)             Output file: <images/cellular_GQR_10-eps-converted-to.pd
+f>
+(epstopdf)                    date: 2015-05-30 16:01:13
+(epstopdf)                    size: 10972 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/cellular_GQR_10-eps
+-converted-to.pdf images/cellular_GQR_10.eps>
+(epstopdf)             \includegraphics on input line 411.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/cellular_GQR_10-eps-converted-to.pdf, id=210, 562.1pt x 421.575pt>
+File: images/cellular_GQR_10-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/cellular_GQR_10-eps-converted-to.pdf>
+Package pdftex.def Info: images/cellular_GQR_10-eps-converted-to.pdf used on in
+put line 411.
+(pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
+Package epstopdf Info: Source file: <images/cellular_both_6.eps>
+(epstopdf)                    date: 2015-05-30 15:44:04
+(epstopdf)                    size: 156356 bytes
+(epstopdf)             Output file: <images/cellular_both_6-eps-converted-to.pd
+f>
+(epstopdf)                    date: 2015-05-30 16:01:14
+(epstopdf)                    size: 17890 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/cellular_both_6-eps
+-converted-to.pdf images/cellular_both_6.eps>
+(epstopdf)             \includegraphics on input line 418.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/cellular_both_6-eps-converted-to.pdf, id=211, 562.1pt x 421.575pt>
+File: images/cellular_both_6-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/cellular_both_6-eps-converted-to.pdf>
+Package pdftex.def Info: images/cellular_both_6-eps-converted-to.pdf used on in
+put line 418.
+(pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
+Package epstopdf Info: Source file: <images/cellular_both_10.eps>
+(epstopdf)                    date: 2015-05-30 15:43:50
+(epstopdf)                    size: 156472 bytes
+(epstopdf)             Output file: <images/cellular_both_10-eps-converted-to.p
+df>
+(epstopdf)                    date: 2015-05-30 16:01:15
+(epstopdf)                    size: 17963 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/cellular_both_10-ep
+s-converted-to.pdf images/cellular_both_10.eps>
+(epstopdf)             \includegraphics on input line 419.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/cellular_both_10-eps-converted-to.pdf, id=212, 562.1pt x 421.575pt>
+File: images/cellular_both_10-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/cellular_both_10-eps-converted-to.pdf>
+Package pdftex.def Info: images/cellular_both_10-eps-converted-to.pdf used on i
+nput line 419.
+(pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
+ [11 <./images/hexa.pdf> <./images/cellular_GQR_6-eps-converted-to.pdf> <./imag
+es/cellular_GQR_10-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <images/GeRaF_1.eps>
 (epstopdf)                    date: 2015-05-30 10:03:39
 (epstopdf)                    size: 22273 bytes
@@ -831,14 +956,15 @@ Package epstopdf Info: Source file: <images/GeRaF_1.eps>
 (epstopdf)                    size: 7328 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/GeRaF_1-eps-convert
 ed-to.pdf images/GeRaF_1.eps>
-(epstopdf)             \includegraphics on input line 388.
+(epstopdf)             \includegraphics on input line 435.
 Package epstopdf Info: Output file is already uptodate.
-<images/GeRaF_1-eps-converted-to.pdf, id=179, 562.1pt x 421.575pt>
+
+<images/GeRaF_1-eps-converted-to.pdf, id=257, 562.1pt x 421.575pt>
 File: images/GeRaF_1-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/GeRaF_1-eps-converted-to.pdf>
 Package pdftex.def Info: images/GeRaF_1-eps-converted-to.pdf used on input line
- 388.
+ 435.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/GeRaF_2.eps>
 (epstopdf)                    date: 2015-05-30 10:03:53
@@ -848,15 +974,15 @@ Package epstopdf Info: Source file: <images/GeRaF_2.eps>
 (epstopdf)                    size: 7566 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/GeRaF_2-eps-convert
 ed-to.pdf images/GeRaF_2.eps>
-(epstopdf)             \includegraphics on input line 389.
+(epstopdf)             \includegraphics on input line 436.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/GeRaF_2-eps-converted-to.pdf, id=180, 562.1pt x 421.575pt>
+<images/GeRaF_2-eps-converted-to.pdf, id=258, 562.1pt x 421.575pt>
 File: images/GeRaF_2-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/GeRaF_2-eps-converted-to.pdf>
 Package pdftex.def Info: images/GeRaF_2-eps-converted-to.pdf used on input line
- 389.
+ 436.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/GeRaF_3.eps>
 (epstopdf)                    date: 2015-05-30 10:04:14
@@ -866,22 +992,23 @@ Package epstopdf Info: Source file: <images/GeRaF_3.eps>
 (epstopdf)                    size: 7687 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/GeRaF_3-eps-convert
 ed-to.pdf images/GeRaF_3.eps>
-(epstopdf)             \includegraphics on input line 390.
+(epstopdf)             \includegraphics on input line 437.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/GeRaF_3-eps-converted-to.pdf, id=181, 562.1pt x 421.575pt>
+<images/GeRaF_3-eps-converted-to.pdf, id=259, 562.1pt x 421.575pt>
 File: images/GeRaF_3-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/GeRaF_3-eps-converted-to.pdf>
 Package pdftex.def Info: images/GeRaF_3-eps-converted-to.pdf used on input line
- 390.
+ 437.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10] [11 <./images/GeRaF_1-eps-converted-to.pdf> <./images/GeRaF_2-eps-converte
-d-to.pdf> <./images/GeRaF_3-eps-converted-to.pdf>]
+[12 <./images/cellular_both_6-eps-converted-to.pdf> <./images/cellular_both_10-
+eps-converted-to.pdf>] [13 <./images/GeRaF_1-eps-converted-to.pdf> <./images/Ge
+RaF_2-eps-converted-to.pdf> <./images/GeRaF_3-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <images/GeRaF_8.eps>
 (epstopdf)                    date: 2015-05-30 10:31:53
 (epstopdf)                    size: 23920 bytes
@@ -890,15 +1017,15 @@ Package epstopdf Info: Source file: <images/GeRaF_8.eps>
 (epstopdf)                    size: 8733 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/GeRaF_8-eps-convert
 ed-to.pdf images/GeRaF_8.eps>
-(epstopdf)             \includegraphics on input line 442.
+(epstopdf)             \includegraphics on input line 489.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/GeRaF_8-eps-converted-to.pdf, id=214, 562.1pt x 421.575pt>
+<images/GeRaF_8-eps-converted-to.pdf, id=317, 562.1pt x 421.575pt>
 File: images/GeRaF_8-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/GeRaF_8-eps-converted-to.pdf>
 Package pdftex.def Info: images/GeRaF_8-eps-converted-to.pdf used on input line
- 442.
+ 489.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/GeRaF_9.eps>
 (epstopdf)                    date: 2015-05-30 10:31:34
@@ -908,15 +1035,15 @@ Package epstopdf Info: Source file: <images/GeRaF_9.eps>
 (epstopdf)                    size: 8994 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/GeRaF_9-eps-convert
 ed-to.pdf images/GeRaF_9.eps>
-(epstopdf)             \includegraphics on input line 443.
+(epstopdf)             \includegraphics on input line 490.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/GeRaF_9-eps-converted-to.pdf, id=215, 562.1pt x 421.575pt>
+<images/GeRaF_9-eps-converted-to.pdf, id=318, 562.1pt x 421.575pt>
 File: images/GeRaF_9-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/GeRaF_9-eps-converted-to.pdf>
 Package pdftex.def Info: images/GeRaF_9-eps-converted-to.pdf used on input line
- 443.
+ 490.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/GeRaF_10.eps>
 (epstopdf)                    date: 2015-05-30 10:31:08
@@ -926,15 +1053,15 @@ Package epstopdf Info: Source file: <images/GeRaF_10.eps>
 (epstopdf)                    size: 9122 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/GeRaF_10-eps-conver
 ted-to.pdf images/GeRaF_10.eps>
-(epstopdf)             \includegraphics on input line 444.
+(epstopdf)             \includegraphics on input line 491.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/GeRaF_10-eps-converted-to.pdf, id=216, 562.1pt x 421.575pt>
+<images/GeRaF_10-eps-converted-to.pdf, id=319, 562.1pt x 421.575pt>
 File: images/GeRaF_10-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/GeRaF_10-eps-converted-to.pdf>
 Package pdftex.def Info: images/GeRaF_10-eps-converted-to.pdf used on input lin
-e 444.
+e 491.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/GeRaF_detail.eps>
 (epstopdf)                    date: 2015-05-30 10:32:25
@@ -944,24 +1071,24 @@ Package epstopdf Info: Source file: <images/GeRaF_detail.eps>
 (epstopdf)                    size: 7694 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/GeRaF_detail-eps-co
 nverted-to.pdf images/GeRaF_detail.eps>
-(epstopdf)             \includegraphics on input line 451.
+(epstopdf)             \includegraphics on input line 498.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/GeRaF_detail-eps-converted-to.pdf, id=217, 562.1pt x 421.575pt>
+<images/GeRaF_detail-eps-converted-to.pdf, id=320, 562.1pt x 421.575pt>
 File: images/GeRaF_detail-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/GeRaF_detail-eps-converted-to.pdf>
 Package pdftex.def Info: images/GeRaF_detail-eps-converted-to.pdf used on input
- line 451.
+ line 498.
 (pdftex.def)             Requested size: 209.29514pt x 156.97093pt.
- [12 <./images/GeRaF_8-eps-converted-to.pdf> <./images/GeRaF_9-eps-converted-to
-.pdf> <./images/GeRaF_10-eps-converted-to.pdf>] [13 <./images/GeRaF_detail-eps-
+ [14 <./images/GeRaF_8-eps-converted-to.pdf> <./images/GeRaF_9-eps-converted-to
+.pdf> <./images/GeRaF_10-eps-converted-to.pdf>] [15 <./images/GeRaF_detail-eps-
 converted-to.pdf>] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 7271 strings out of 493488
- 104629 string characters out of 3141326
- 193606 words of memory out of 3000000
- 10387 multiletter control sequences out of 15000+200000
+ 7311 strings out of 493488
+ 106049 string characters out of 3141326
+ 192655 words of memory out of 3000000
+ 10420 multiletter control sequences out of 15000+200000
  16134 words of font info for 51 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,12n,40p,969b,282s stack positions out of 5000i,500n,10000p,400000b,50000s
@@ -986,10 +1113,10 @@ cm/cmsy5.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm
 .pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1200.p
 fb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb
 >
-Output written on report.pdf (13 pages, 556790 bytes).
+Output written on report.pdf (15 pages, 762332 bytes).
 PDF statistics:
- 319 PDF objects out of 1000 (max. 8388607)
- 219 compressed objects within 3 object streams
+ 421 PDF objects out of 1000 (max. 8388607)
+ 284 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 106 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 141 words of extra memory for PDF output out of 10000 (max. 10000000)
 

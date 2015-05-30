@@ -11,7 +11,7 @@ eta = 4; % free space
 n = 6; % max number of possible interferers in a reuse-3 scheme
 N_factor = [1, 3, 4, 7];
 % angle of an interfering cell (note that they are symmetric)
-R1_vec = [R0, 2, R0 + sqrt(3), sqrt(13)];
+R1_vec = [R0, 2, 2 + sqrt(3)/2, sqrt(13)];
 R2_vec = R1_vec + 2;
 b_vec = [6, 10];
 alpha = linspace(0.00001, 1, 50); % activity of the users in interfering cells
@@ -67,13 +67,15 @@ for reuse_index = 1:length(N_factor)
     
 end
 
-
+%% Plot
 
 for b_index = 1:length(b_vec)
     figure, hold on
     title(strcat('b= ', num2str(b_vec(b_index)), ' dB'))
     for reuse_index = 1:length(N_factor)
-        plot(alpha, 1 - p_succ_alphaGQR(:, b_index, reuse_index), 'DisplayName', strcat('N = ', num2str(N_factor(reuse_index))))
+        plot(alpha, 1 - p_succ_alphaGQR(:, b_index, reuse_index), 'DisplayName', strcat('GQR, N = ', num2str(N_factor(reuse_index))))
+        hold on
+        errorbar(alpha, p_out_alpha(:, b_index, reuse_index), ci_out_alpha(:, b_index, reuse_index),'DisplayName', strcat('N = ', num2str(N_factor(reuse_index))));
         hold on
         legend('-DynamicLegend')
         hold on
