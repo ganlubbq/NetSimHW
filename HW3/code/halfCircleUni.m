@@ -1,5 +1,5 @@
 function [ point ] = halfCircleUni( n )
-% Generates n uniform points in half a circle
+% Generates n uniform points in half a circle with rejection sampling
 point = zeros(n, 2);
 for i = 1:n
     xy = 2*rand(1, 2)-1;

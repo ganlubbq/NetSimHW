@@ -25,7 +25,7 @@ for t = 1:sim_len
     if (probabilityOfArrival < 1 - 2*p_arr)
         % do nothing
     elseif (probabilityOfArrival >= 1 - 2*p_arr && probabilityOfArrival < 1-p_arr)
-        if (nUsers - 1 < size)
+        if (nUsers - 1 < size) % nUsers - 1 is the number of users in the queue
             nUsers = nUsers + 1;
             nArrivals = nArrivals + 1;
         else
@@ -45,7 +45,6 @@ for t = 1:sim_len
             nArrivals = nArrivals + 2;
         end
     end
-    %users_in_system(t) = nUsers;
 end
 
 end

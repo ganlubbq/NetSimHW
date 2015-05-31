@@ -1,6 +1,5 @@
 function [ X ] = poisson_cdfinv( lambda )
 % Generates a Poisson random variable of mean lambda with CDF inversion
-
 pr = exp(-lambda);
 U = rand();
 F = pr;

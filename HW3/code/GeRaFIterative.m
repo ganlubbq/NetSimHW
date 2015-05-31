@@ -4,7 +4,7 @@ load('GQR.mat')
 gl = gaussleg60;
 nu = 100; % number of intervals per unit step
 parpool(4);
-%% Lower bound
+%% Upper bound
 
 D_vec = [5, 10, 20];
 M_max = 30;
@@ -48,7 +48,7 @@ parfor pos = 1:length(D_vec)
     end
 end
 
-%% Upper bound
+%% Lower bound
 
 hops_lb = zeros(length(D_vec), M_max);
 parfor pos = 1:length(D_vec)

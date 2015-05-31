@@ -35,11 +35,9 @@ end
 m_hops = mean(hops, 1);
 stddev_hops = std(hops, 1);
 
-GeRaFIterative;
+GeRaFIterative; % comment if the theoretical bounds are not required
 
 %% Plot
-
-%load('GeRaFMontecarloWS.mat')
 
 for i = 1:length(D_vec)
     figure,

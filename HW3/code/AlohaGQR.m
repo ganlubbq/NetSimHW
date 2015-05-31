@@ -6,7 +6,7 @@ gl = gaussleg60;
 sigma_dB = 8; % std dev of lognormal shadowing in dB
 sigma = sigma_dB * 0.1 * log(10);
 eta = 4; % indoor?
-max_user = 50;
+max_user = 30;
 cn_gauss = zeros(max_user, 2);
 i = 1;
 for b = 10.^([6, 10]./10)
@@ -37,7 +37,7 @@ for b = 10.^([6, 10]./10)
 end
 
 %% Plot 
-load('completeAlohaMatrix6  8.mat')
+load('completeAlohaMatrix6.mat')
 
 cnmean6 = cnmean(1, :);
 Smean6 = Smean(1, :);
@@ -71,4 +71,4 @@ end
 figure, plot(G, throughput_6, G, throughput_10), hold on, plot(G, Smean6, G, Smean10), 
 legend('b = 6, GQR', 'b = 10, GQR', 'b = 6', 'b = 10'),
 xlabel('G'), ylabel('S'), grid on,
-xlim([0, 31])
+xlim([0, 21])

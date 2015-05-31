@@ -24,7 +24,6 @@ for k = 1:length(p_vec)
     m_delay_iter = zeros(1, iterations);
     free_server_iter = zeros(1, iterations);
     parfor i = 1:iterations
-        % disp(i);
         [nUsers, delay] = SlottedQueueFunc2arr(sim_len, p_arr, 'fixed', service_time);
         free_server_iter(i) = length(find(nUsers == 0))/sim_len;
         m_delay_iter(i) = mean(delay);
@@ -40,7 +39,6 @@ save('queueA', 'rho', 'm_delay', 'std_delay');
 
 figure, errorbar(rho, m_delay, std_delay), grid on, title('Delay vs \rho'), xlabel('\rho'), ylabel('Delay')
 xlim([0.08, 0.91])
-
 %% Exercise 1aii
 
 p_vec = [1/4, 1/3, 1/2];
@@ -52,8 +50,6 @@ for k = 1:length(p_vec)
     [nUsers, delay] = SlottedQueueFunc2arr(sim_len, p_arr, 'fixed', service_time);
     figure, plot(nUsers), grid on, title(strcat('Realization of the queue, a = ', num2str(p_arr))), xlabel('n'), ylabel('Queue size')
 end
-
-
 %% Exercise 1bi
 p_arr = 0.5; % probability of arrivals
 b_vec = 0.5:0.05:1;
@@ -76,12 +72,9 @@ for k = 1:length(b_vec)
     std_delay_geo(k) = std(m_delay_iter);
     free_server_perc_geo(k) = mean(free_server_iter);
 end
-
 rho_b = p_arr./b_vec;
 save('queueB', 'rho_b', 'm_delay_geo', 'std_delay_geo');
 
-
-rho_b = p_arr./b_vec;
 figure, errorbar(rho_b(2:end), m_delay_geo(2:end), std_delay_geo(2:end)), grid on, title('Delay vs \rho'), xlabel('\rho'), ylabel('Delay')
 xlim([0.48, 0.92])
 %

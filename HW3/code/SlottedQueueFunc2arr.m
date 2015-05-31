@@ -86,7 +86,6 @@ for t = 1:sim_len
     
     nUsers_time(t) = nUsers;
 end
-
 % resize delay array
 delay_array = delay_array(1:nDepartures);
 end

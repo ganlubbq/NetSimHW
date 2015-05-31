@@ -20,7 +20,7 @@ for t = 1:sim_len
     end
     % Arrivals
     if (rand() < p_arr)
-        if(nUsers - 1 > size)
+        if(nUsers - 1 > size) % nUsers - 1 is the number of users in the queue
             % drop the packet
             droppedUsers = droppedUsers + 1;
             nArrivals = nArrivals + 1;

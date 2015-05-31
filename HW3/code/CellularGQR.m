@@ -8,9 +8,8 @@ R0 = 0.91;
 sigma_dB = 8; %std dev of lognormal shadowing in dB
 sigma_sh = sigma_dB * 0.1 * log(10);
 eta = 4; % free space
-n = 6; % max number of possible interferers in a reuse-3 scheme
+n = 6; % max number of possible interferers 
 N_factor = [1, 3, 4, 7];
-% angle of an interfering cell (note that they are symmetric)
 R1_vec = [R0, 2, 2 + sqrt(3)/2, sqrt(13)];
 R2_vec = R1_vec + 2;
 b_vec = [6, 10];

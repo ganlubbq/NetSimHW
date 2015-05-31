@@ -11,10 +11,10 @@ parpool(8);
 %% Fixed service time queue
 a = 0.25;
 arr_rate = 3*a;
-sim_len = 300/(target*arr_rate);
+sim_len = 100/(target*arr_rate);
 
 service_time = 1; % slot
-size_vec = 13:15; % 16
+size_vec = 13:15; % 14
 p_drop_fixed = zeros(length(size_vec), n_sim);
 drop_events = zeros(length(size_vec), n_sim);
 arrival_events = zeros(length(size_vec), n_sim);
@@ -25,8 +25,7 @@ for sindex = 1:length(size_vec)
         [droppedUsers, nArrivals] = SlottedQueueFunc2arrFixed(sim_len, a, 1, size);
         drop_events(sindex, i) = droppedUsers;
         arrival_events(sindex, i) = nArrivals;
-        p_drop_fixed(sindex, i) = droppedUsers/nArrivals;
-        
+        p_drop_fixed(sindex, i) = droppedUsers/nArrivals; 
     end
 end
 
@@ -41,7 +40,6 @@ b = 2/3;
 p_arr = 0.5;
 arr_rate = 1/p_arr;
 sim_len = 100/(target*arr_rate);
-% try with 13 or 14
 size_vec = 12:14;
 p_drop_geo = zeros(length(size_vec), n_sim);
 

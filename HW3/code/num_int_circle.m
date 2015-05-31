@@ -14,5 +14,6 @@ for i = 1:length(gl)
    acos_den = 2*a*D;
    area = area + 2*c*w*a*acos(acos_num/acos_den);
 end
+
 end
 

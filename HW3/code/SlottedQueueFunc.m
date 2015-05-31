@@ -1,5 +1,5 @@
 function [nUsers_time, delay_array] = SlottedQueueFunc(sim_len, p_arr, servopt, serv_param)
-%% DT Slotted Queue (1 server, FIFO)
+%% DT Slotted Queue (1 server, FIFO) bernoulli arrivals
 
 % Useful counters
 nUsers = 0;

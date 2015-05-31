@@ -5,7 +5,6 @@ close all
 clc
 rng default
 
-
 % Data
 numsim = 100000;
 sigma_dB = 8; %std dev of lognormal shadowing in dB

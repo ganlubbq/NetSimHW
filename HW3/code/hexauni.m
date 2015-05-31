@@ -1,6 +1,6 @@
 function [point] = hexauni(num)
-%% Generation of uniform samples in an hexagon of ray 1 with rejection sampling
-
+% Generation of uniform samples in an hexagon of ray 1 with rejection
+% sampling
 point =  zeros(num, 2);
 for n = 1:num
     % draw x, y uniform resp in [-sqrt(3)/2, sqrt(3)/2], [-1/2, 1]
@@ -14,3 +14,5 @@ for n = 1:num
     
     point(n, :) = [x, y];
 end
+end
+
