@@ -1,7 +1,10 @@
 close all;
 clc;
-%clear;
-Ptx_max =    100; % maximum power = 100 Watt
+clear;
+
+load('E0lut015.txt');
+load('E0lut04.txt');
+load('E0lut219.txt');
 Ar =    1.1 * 10^(-6); % 1.1 mm^2
 At =    10 * 10^(-6); % 10 mm^2
 Beta =  0; % 0 rad, perfect allignment
@@ -14,7 +17,6 @@ Id =    1 * 10^(-9); % dark current = 1 nA
 Il =    1 * 10^(-6); % equal to the short circuit current, 1uA
 R =     1.43 * 10^9; % shunt resistance
 BW =    100*10^3; % bandwidth 100 KHz
-c=      0.15; % attenuation [1/m], the other cases:  0.4 1/m 2.19 1/m
 SNR = 10^(20/10); % 20dB
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
