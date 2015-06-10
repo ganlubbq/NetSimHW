@@ -2,7 +2,7 @@
 clear
 clc
 number_of_events = 10^6;
-numsim = 50;
+numsim = 10;
 % For convenience, use poisson arrivals and departures
 rho_vec = 0.1:0.1:1;
 for k = 1:length(rho_vec)
@@ -106,6 +106,7 @@ for k = 1:length(rho_vec)
     end
 end
 
+save('demm1', 'avg_total_dl', 'rho_est')
 % figure, plot(rho_vec, avg_total_dl), grid on, title('Case b'), xlabel('\rho'),
 % ylabel('mean total delay in time units')
 % 
