@@ -101,10 +101,27 @@ In this second exercise the goal was to extract a look-up table from a log file 
 	\label{fig:e0zm}
 \end{figure}
 
-Some evaluation on the propagation are then carried out with a MATLAB script that uses the provided parameters for receiver and transmitter. The propagation model used the one proposed in~\cite{optmodel} and assumes that there is a successful transmission if the SNR is over a certain threshold. In particular from the irradiance and the parameters $S$ (sensitivity) and $A_r$ (area of the receiver) of the considered modem it is possible to compute the power of ambient light noise, which is $N_A = (S E_0 A_r)^2$ the SNR is defined as
+Some evaluation on the propagation are then carried out with a MATLAB script that uses the provided parameters for receiver and transmitter. The propagation model used the one proposed in~\cite{optmodel} and assumes that there is a successful transmission if the SNR is over a certain threshold. In particular from the irradiance and the parameters $S$ (sensitivity) and $A_r$ (area of the receiver) of the considered modem it is possible to compute the power of ambient light noise, which is $N_A = (S E_0 A_r)^2$. Let the received power $P$ be
 \begin{equation}
-	
+	P = \frac{2 P_{tx} A_r \cos(\beta)}{\pi d^2 (1-\cos(\theta)) + 2 A_t}e^{-cd}
+	\label{eq:p_opt}
 \end{equation}
+then the SNR is
+\begin{equation}
+	\Gamma  = \frac{(SP)^2}{2q(I_D + I_L)BW + \frac{4KTBW}{R} + N_A}
+	\label{eq:snr_opt}
+\end{equation}
+In the following, if the SNR is above the threshold of 20 dB then there is a successful transmission. In particular, by setting the threshold and a distance $d = 10$ m, by inverting~\eqref{eq:snr_opt} in order to get $P$ and~\eqref{eq:p_opt} in order to compute $P_{tx}$ it is possible to know which is the minimum transmission power that can be used to reach a distance $d$. In Figure~\ref{fig:ptx}[a] there is the plot of the minimum $P_{tx}$ against the irradiance $E_0$, while in Figure~\ref{fig:ptx}[b] the x axis is the depth $z$ considered.
+
+\begin{figure}[h!]
+	\centering
+	\subfigure[$P_{tx}$ to reach $d = 10$ m as a function of $E_0$]{\includegraphics[width = 0.45\textwidth]{ptx_e0}}
+	\subfigure[$P_{tx}$ to reach $d = 10$ m as a function of $z$]{\includegraphics[width = 0.45\textwidth]{ptx_z}}
+	\caption{Transmitted power $P_{tx}$ required to transmit at a distance of $d = 10$ meters}
+	\label{fig:ptx}
+\end{figure}
+
+Finally, the transmit power is set to $P_{tx, max} = 100$ W, 
 
 
 

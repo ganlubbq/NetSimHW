@@ -8,11 +8,11 @@ numsim = 10;
 rho_vec = [0.01, 0.1:0.05:0.9, 0.99];
 for k = 1:length(rho_vec)
     for r = 1:numsim
-        [ avg_total_dl(r, k), rho_est(r, k), i(r, k), renewal_instant(r, k) ] = MM1queue_func( rho_vec(k), number_of_events, number_of_desired_renewals );
+        [ avg_total_dl(r, k), rho_est(r, k), i(r, k), renewal_instant(r, k) ] = MG1queue_func( rho_vec(k), number_of_events, number_of_desired_renewals );
     end
 end
 
-save('demm1', 'rho_vec', 'avg_total_dl', 'rho_est')
+save('demg1', 'rho_vec', 'avg_total_dl', 'rho_est')
 % figure, plot(rho_vec, avg_total_dl), grid on, title('Case b'), xlabel('\rho'),
 % ylabel('mean total delay in time units')
 %
