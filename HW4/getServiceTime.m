@@ -24,7 +24,7 @@ switch service_mode
         slot_size = varargin{1};
         b = varargin{2};
         pr = rand();
-        if pr <= b
+        if pr < b
             serviceTime = slot_size;
         else
             serviceTime = 2*slot_size;

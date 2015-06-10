@@ -1,8 +1,8 @@
 % DE queue simulator
 clear
 clc
-number_of_events = 10^5;
-number_of_desired_renewals = 10^4;
+number_of_events = 10^6;
+number_of_desired_renewals = 10^5;
 numsim = 10;
 % For convenience, use poisson arrivals and departures
 rho_vec = [0.01, 0.1:0.05:0.9, 0.99];
