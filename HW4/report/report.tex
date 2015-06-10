@@ -92,7 +92,20 @@ basicstyle=\footnotesize\ttfamily
 \maketitle
 
 \section*{Exercise 2 - Read logs and analyze data}
-In this second exercise the goal was to extract a look-up table from a log file of a simulator and use it to compute some measurements on useful quantities in underwater optical communications. In particular, 
+In this second exercise the goal was to extract a look-up table from a log file of a simulator and use it to compute some measurements on useful quantities in underwater optical communications. In particular, the log files are obtained from the simulations of the ambient light irradiance $E_0$ with the simulator HYDROLIGHT. From the 3 different dump files (each for a different value of $c \in [0.15, 0.4, 2.19]$ with $c$ the attenuation coefficient) I recovered the values of $E_0$ and the corresponding depth $z$ in meters using a \texttt{perl} script. It uses a regular expression to identify the right rows of the log and selects the columns with the desired values. In Figure~\ref{fig:e0zm} $E_0$ is plotted as a function of the depth $z$.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 0.7\textwidth]{e0_z}
+	\caption{Irradiance $E_0$ vs. $z$}
+	\label{fig:e0zm}
+\end{figure}
+
+Some evaluation on the propagation are then carried out with a MATLAB script that uses the provided parameters for receiver and transmitter. The propagation model used the one proposed in~\cite{optmodel} and assumes that there is a successful transmission if the SNR is over a certain threshold. In particular from the irradiance and the parameters $S$ (sensitivity) and $A_r$ (area of the receiver) of the considered modem it is possible to compute the power of ambient light noise, which is $N_A = (S E_0 A_r)^2$ the SNR is defined as
+\begin{equation}
+	
+\end{equation}
+
 
 
 \begin{thebibliography}{10}
@@ -100,7 +113,8 @@ In this second exercise the goal was to extract a look-up table from a log file 
 \bibitem{leb}
 Y. Le Boudec, Performance Evaluation of Computer and Communications Systems, EPFL, 2015
 
-
+\bibitem{optmodel}
+D. Anguita et al., “Optical wireless underwater communication for AUV: Preliminary simulation and experimental results,” in Proc. IEEE/OES Oceans, Santander, Spain, Jun. 2011
 
 \end{thebibliography}
 

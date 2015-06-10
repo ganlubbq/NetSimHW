@@ -133,9 +133,9 @@ end
 
 
 figure, plot(E0_vec_015, d_vec_015, E0_vec_04, d_vec_04, E0_vec_219, d_vec_219)
-grid on, legend('c = 0.15', 'c = 0.4', 'c = 2.19'), ylabel('d_{max}'),
+grid on, legend('c = 0.15', 'c = 0.4', 'c = 2.19'), ylabel('d_{max} [m]'),
 xlabel('E_0')
 
 figure, plot(z_vec_015, d_vec_015, z_vec_04, d_vec_04, z_vec_219, d_vec_219)
-grid on, legend('c = 0.15', 'c = 0.4', 'c = 2.19'), ylabel('d_{max}'),
-xlabel('z')
+grid on, legend('c = 0.15', 'c = 0.4', 'c = 2.19'), ylabel('d_{max} [m]'),
+xlabel('z [m]')
