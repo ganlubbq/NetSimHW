@@ -1,9 +1,9 @@
-function [ avg_total_dl, rho_est, i, renewal_instant ] = MM1queue_func( rho, number_of_events, number_of_desired_renewals )
-% Function that simulates a DE queue. 
-dep_time = 1;
-interarr_time = dep_time/rho;
-%dep_time = rho*interarr_time;
-
+function [ avg_total_dl, rho_est, i, renewal_instant ] = geogeo1queue_func( rho, number_of_events, number_of_desired_renewals )
+% Function that simulates a DE queue.
+slot_len = 1; % in seconds
+lambda_arr = 0.5*slot_len;
+lambda_dep = lambda_arr/rho*slot_len;
+    
 % INIT
 % Useful counters
 server_status = 0;
@@ -28,7 +28,7 @@ integral_queue_occupancy = 0;
 integral_server_status = 0;
 
 % Initialize the first arrival
-inter_arr = getInterarrivalTime('exp', 1/interarr_time);
+inter_arr = getInterarrivalTime('geo', slot_len, lambda_arr);
 next_arr = inter_arr;
 next_dep = inter_arr+1; % as like as infinite if a comparison has to be done
 % at the first event, then departure will be scheduled immediately
@@ -38,7 +38,7 @@ while (i  <= number_of_events && renewal_instant <= number_of_desired_renewals)
     %  check if I have a departure or an arrival
     if next_arr <= next_dep %arrival
         clock = next_arr;
-        next_arr = clock + getInterarrivalTime('exp', 1/interarr_time);
+        next_arr = clock + getInterarrivalTime('geo', slot_len, lambda_arr);
         % start measuring delay
         times_of_arrival(first_pos_free) = clock; % push
         first_pos_free = first_pos_free + 1; % push
@@ -52,7 +52,7 @@ while (i  <= number_of_events && renewal_instant <= number_of_desired_renewals)
         
         if server_status == 0    % I can serve the user immediately
             % schedule departure
-            next_dep = clock + getServiceTime('exp', 1/dep_time);
+            next_dep = clock + getServiceTime('geo', slot_len, lambda_dep);
             server_status = 1;
             renewal_instant = renewal_instant + 1;
         else % place the new user in the queue
@@ -65,7 +65,7 @@ while (i  <= number_of_events && renewal_instant <= number_of_desired_renewals)
     else % departure
         clock = next_dep;
         if number_in_queue >= 1 % if there is someone waiting schedule next_departure
-            next_dep = clock + getServiceTime('exp', 1/dep_time);
+            next_dep = clock + getServiceTime('geo', slot_len, lambda_dep);
             number_in_queue = number_in_queue - 1;
             server_status = 1; % it doesn't change
         else % if the queue is empty, don't do anything

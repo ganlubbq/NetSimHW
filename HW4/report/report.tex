@@ -91,6 +91,9 @@ basicstyle=\footnotesize\ttfamily
 
 \maketitle
 
+\section*{Exercise 1 - A discrete event queue simulator in MATLAB}
+
+
 \section*{Exercise 2 - Read logs and analyze data}
 In this second exercise the goal was to extract a look-up table from a log file of a simulator and use it to compute some measurements on useful quantities in underwater optical communications. In particular, the log files are obtained from the simulations of the ambient light irradiance $E_0$ with the simulator HYDROLIGHT. From the 3 different dump files (each for a different value of $c \in [0.15, 0.4, 2.19]$ with $c$ the attenuation coefficient) I recovered the values of $E_0$ and the corresponding depth $z$ in meters using a \texttt{perl} script. It uses a regular expression to identify the right rows of the log and selects the columns with the desired values. In Figure~\ref{fig:e0zm} $E_0$ is plotted as a function of the depth $z$.
 
@@ -121,8 +124,17 @@ In the following, if the SNR is above the threshold of 20 dB then there is a suc
 	\label{fig:ptx}
 \end{figure}
 
-Finally, the transmit power is set to $P_{tx, max} = 100$ W, 
+Finally, the transmit power is set to $P_{tx, max} = 100$ W and the maximum distance at which is possible to transmit is evaluated. Note that~\eqref{eq:p_opt} is not invertible with respect to the distance $d$, therefore the received power $P$ given by~\eqref{eq:p_opt} is precomputed for $d \in [0, 50]$ m and stored in a vector \texttt{P\_d}. Then, given a certain $E_0$, from~\eqref{eq:snr_opt} the minimum received power to guarantee an SNR of 20 dB is computed and the closest $P$ in \texttt{P\_d} is found. The corresponding value of $d$ is chosen as the maximum distance $d_{max}$ at which it is possible to transmit with $P_{tx, max} = 100$ W and that $E_0$ - or the corresponding $z$.
 
+The results are in Figure~\ref{fig:dmax}.
+
+\begin{figure}[h!]
+	\centering
+	\subfigure[$d_{max}$ as a function of $E_0$, for $P_{tx, max} = 100$]{\includegraphics[width= 0.45\textwidth]{dmax_e0}}
+	\subfigure[$d_{max}$ as a function of $z$, for $P_{tx, max} = 100$]{\includegraphics[width= 0.45\textwidth]{dmax_z}}
+	\caption{Maximum distance $d_{max}$ with a transmit power of $P_{tx, max} = 100$}
+	\label{fig:dmax}
+\end{figure}
 
 
 \begin{thebibliography}{10}
@@ -131,7 +143,7 @@ Finally, the transmit power is set to $P_{tx, max} = 100$ W,
 Y. Le Boudec, Performance Evaluation of Computer and Communications Systems, EPFL, 2015
 
 \bibitem{optmodel}
-D. Anguita et al., “Optical wireless underwater communication for AUV: Preliminary simulation and experimental results,” in Proc. IEEE/OES Oceans, Santander, Spain, Jun. 2011
+D. Anguita et al., Optical wireless underwater communication for AUV: Preliminary simulation and experimental results, in Proc. IEEE/OES Oceans, Santander, Spain, Jun. 2011
 
 \end{thebibliography}
 
