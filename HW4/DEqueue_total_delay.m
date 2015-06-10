@@ -2,15 +2,13 @@
 clear
 clc
 number_of_events = 10^6;
-numsim = 10;
+numsim = 20;
 % For convenience, use poisson arrivals and departures
 rho_vec = 0.1:0.1:1;
 for k = 1:length(rho_vec)
-    %lambda_arr = rho_vec(k)/1.5; % in seconds
-    %b = 0.5;
-    %slot_len = 1; % in seconds
-    lambda_dep = 1;
-    lambda_arr = rho_vec(k)*lambda_dep;
+    
+    lambda_arr = 1;
+    lambda_dep = rho_vec(k)*lambda_arr;
     for r = 1:numsim
         % Useful counters
         server_status_vec = zeros(number_of_events, 1); % 0 idle or 1 busy
@@ -34,7 +32,7 @@ for k = 1:length(rho_vec)
         integral_server_status = 0;
         
         % Initialize the first arrival
-        inter_arr = poisson_cdfinv(lambda_arr);
+        inter_arr = getInterarrivalTime('exp', 1/lambda_arr);
         next_arr = inter_arr;
         next_dep = inter_arr+1; % as like as infinite if a comparison has to be done
         % at the first event, then departure will be scheduled immediately
@@ -44,7 +42,10 @@ for k = 1:length(rho_vec)
             %  check if I have a departure or an arrival
             if next_arr <= next_dep %arrival
                 clock = next_arr;
-                next_arr = clock + getInterarrivalTime('exp', lambda_arr);
+                next_arr = clock + getInterarrivalTime('exp', 1/lambda_arr);
+                % start measuring delay
+                times_of_arrival(first_pos_free) = clock; % push
+                first_pos_free = first_pos_free + 1; % push
                 
                 % check if there was someone in the queue before putting someone new,
                 % if positive update the queue_occ metric
@@ -55,7 +56,7 @@ for k = 1:length(rho_vec)
                 
                 if server_status == 0    % I can serve the user immediately
                     % schedule departure
-                    next_dep = clock + getServiceTime('exp', lambda_dep);
+                    next_dep = clock + getServiceTime('exp', 1/lambda_dep);
                     the_departed_user_was_queued = false;
                     server_status = 1;
                 else % place the new user in the queue
@@ -65,12 +66,10 @@ for k = 1:length(rho_vec)
                     integral_server_status = integral_server_status + clock - time_of_last_event;
                 end
                 
-                times_of_arrival(first_pos_free) = clock; % push
-                first_pos_free = first_pos_free + 1; % push
             else % departure
                 clock = next_dep;
                 if number_in_queue >= 1 % if there is someone waiting schedule next_departure
-                    next_dep = clock + getServiceTime('exp', lambda_dep);
+                    next_dep = clock + getServiceTime('exp', 1/lambda_dep);
                     the_departed_user_was_queued = true;
                     number_in_queue = number_in_queue - 1;
                     server_status = 1; % it doesn't change
@@ -86,10 +85,11 @@ for k = 1:length(rho_vec)
                 % compute total delay
                 user_total_delay = clock - arr_time;
                 total_delay = total_delay + user_total_delay;
+                number_delayed = number_delayed + 1; %% Number of departed users
+                
                 % in case of departures always update this metrics, because the
                 % server was serving someone
                 integral_server_status = integral_server_status + clock - time_of_last_event;
-                number_delayed = number_delayed + 1; %% Number of departed users
             end
             % sample
             time_of_last_event = clock;
@@ -98,7 +98,7 @@ for k = 1:length(rho_vec)
             number_in_queue_vec(i) = number_in_queue;
         end
         
-        figure, plot(clock_vec, number_in_queue_vec)
+        % figure, plot(clock_vec, number_in_queue_vec)
         
         % Process stats
         avg_total_dl(k, r) = total_delay/number_delayed;
@@ -109,5 +109,5 @@ end
 save('demm1', 'avg_total_dl', 'rho_est')
 % figure, plot(rho_vec, avg_total_dl), grid on, title('Case b'), xlabel('\rho'),
 % ylabel('mean total delay in time units')
-% 
+%
 % figure, plot(rho_vec, rho_est)

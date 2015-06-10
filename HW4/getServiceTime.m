@@ -14,8 +14,8 @@ switch service_mode
             disp('Error in creating the interarrival time, for the exp')
             return;
         end
-        lambda_arr = varargin{1};
-        serviceTime = - log(rand())/lambda_arr;
+        lambda_dep = varargin{1};
+        serviceTime = - log(rand())/lambda_dep;
     case 'bernoulli12'
         if (length(varargin) < 2)
             disp('Error in creating the interarrival time, for the bernoulli12')
