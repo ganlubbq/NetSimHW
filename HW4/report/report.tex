@@ -92,7 +92,7 @@ basicstyle=\footnotesize\ttfamily
 \maketitle
 
 \section*{Exercise 1 - A discrete event queue simulator in MATLAB}
-
+The discrete event queue simulator is based on the simulator proposed by Law in~\cite{law}. It is a simplified version of a more general DE simulator since it has to handle just one server and the events may be only arrivals or departures. In particular 
 
 \section*{Exercise 2 - Read logs and analyze data}
 In this second exercise the goal was to extract a look-up table from a log file of a simulator and use it to compute some measurements on useful quantities in underwater optical communications. In particular, the log files are obtained from the simulations of the ambient light irradiance $E_0$ with the simulator HYDROLIGHT. From the 3 different dump files (each for a different value of $c \in [0.15, 0.4, 2.19]$ with $c$ the attenuation coefficient) I recovered the values of $E_0$ and the corresponding depth $z$ in meters using a \texttt{perl} script. It uses a regular expression to identify the right rows of the log and selects the columns with the desired values. In Figure~\ref{fig:e0zm} $E_0$ is plotted as a function of the depth $z$.
@@ -138,6 +138,9 @@ The results are in Figure~\ref{fig:dmax}.
 
 
 \begin{thebibliography}{10}
+
+\bibitem{law}
+A.M. Law, Simulation Modeling and Analysis, 4th ed., McGraw Hill, 2006
 
 \bibitem{leb}
 Y. Le Boudec, Performance Evaluation of Computer and Communications Systems, EPFL, 2015

@@ -2,10 +2,10 @@
 
 load('degg1.mat')
 
-mean_dl_gg = mean(delay_gg, 2);
-mean_rho_gg = mean(rho_est_gg, 2);
-ci_dl_gg = 1.96*std(delay_gg, 0, 2)/sqrt(size(delay_gg, 2));
-ci_rho_gg = 1.96*std(rho_est_gg, 0, 2)/sqrt(size(delay_gg, 2));
+% mean_dl_gg = mean(delay_gg, 2);
+% mean_rho_gg = mean(rho_est_gg, 2);
+% ci_dl_gg = 1.96*std(delay_gg, 0, 2)/sqrt(size(delay_gg, 2));
+% ci_rho_gg = 1.96*std(rho_est_gg, 0, 2)/sqrt(size(delay_gg, 2));
 
 load('../HW3/code/queueB.mat') % to make it as in the previous homework
 
@@ -20,10 +20,10 @@ xlim([0.48, 0.92])
 clear
 load('demg1.mat')
 
-mean_dl = mean(delay_mg, 2);
-mean_rho = mean(rho_est_mg, 2);
-ci_dl = 1.96*std(delay_mg, 0, 2)/sqrt(size(delay_mg, 2));
-ci_rho = 1.96*std(rho_est_mg, 0, 2)/sqrt(size(delay_mg, 2));
+% mean_dl = mean(delay_mg, 2);
+% mean_rho = mean(rho_est_mg, 2);
+% ci_dl = 1.96*std(delay_mg, 0, 2)/sqrt(size(delay_mg, 2));
+% ci_rho = 1.96*std(rho_est_mg, 0, 2)/sqrt(size(delay_mg, 2));
 
 % Compute theoretical results
 m_y = 1.5;
@@ -47,10 +47,10 @@ ylabel('Estimated \rho')
 clear
 load('demm1.mat')
 
-mean_dl = mean(delay_mm, 2);
-mean_rho = mean(rho_est_mm, 2);
-ci_dl = 1.96*std(delay_mm, 0, 2)/sqrt(size(delay_mm, 2));
-ci_rho = 1.96*std(rho_est_mm, 0, 2)/sqrt(size(delay_mm, 2));
+% mean_dl = mean(delay_mm, 2);
+% mean_rho = mean(rho_est_mm, 2);
+% ci_dl = 1.96*std(delay_mm, 0, 2)/sqrt(size(delay_mm, 2));
+% ci_rho = 1.96*std(rho_est_mm, 0, 2)/sqrt(size(delay_mm, 2));
 
 % Compute theoretical results. Let \lambda = 1, then rho = 1/mu, m_s =
 % 1/(mu(1 - lambda/mu) = 1/(1-rho)
