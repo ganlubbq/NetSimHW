@@ -4,9 +4,9 @@ clear
 clc
 
 %% Ex. 1, case a
-number_of_events = 10^4;
-number_of_desired_renewals = 10^3;
-max_numsim = 200;
+number_of_events = 10^5;
+number_of_desired_renewals = 10^4;
+max_numsim = 500;
 load('../HW3/code/queueB.mat') % to make it as in the previous homework
 rho_vec_gg = rho_b; %[0.01, 0.1:0.05:0.9, 0.99];
 mean_dl_gg = zeros(length(rho_vec_gg), 1);
