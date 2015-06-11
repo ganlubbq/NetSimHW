@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.4.16)  10 JUN 2015 18:14
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2013.4.16)  11 JUN 2015 12:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -515,11 +515,20 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 92.
 (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 95.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 97.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 97.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 97.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
+) [1
+
+{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 Package epstopdf Info: Source file: <images/e0_z.eps>
 (epstopdf)                    date: 2015-06-10 14:31:16
 (epstopdf)                    size: 22939 bytes
@@ -528,20 +537,16 @@ Package epstopdf Info: Source file: <images/e0_z.eps>
 (epstopdf)                    size: 7834 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/e0_z-eps-converted-
 to.pdf images/e0_z.eps>
-(epstopdf)             \includegraphics on input line 99.
+(epstopdf)             \includegraphics on input line 123.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/e0_z-eps-converted-to.pdf, id=1, 562.1pt x 421.575pt>
+<images/e0_z-eps-converted-to.pdf, id=14, 562.1pt x 421.575pt>
 File: images/e0_z-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/e0_z-eps-converted-to.pdf>
-Package pdftex.def Info: images/e0_z-eps-converted-to.pdf used on input line 99
-.
+Package pdftex.def Info: images/e0_z-eps-converted-to.pdf used on input line 12
+3.
 (pdftex.def)             Requested size: 366.27048pt x 274.70236pt.
- [1
-
-{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
-s/e0_z-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <images/ptx_e0.eps>
 (epstopdf)                    date: 2015-06-10 14:31:16
 (epstopdf)                    size: 21682 bytes
@@ -550,15 +555,15 @@ Package epstopdf Info: Source file: <images/ptx_e0.eps>
 (epstopdf)                    size: 7278 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/ptx_e0-eps-converte
 d-to.pdf images/ptx_e0.eps>
-(epstopdf)             \includegraphics on input line 118.
+(epstopdf)             \includegraphics on input line 142.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/ptx_e0-eps-converted-to.pdf, id=23, 562.1pt x 421.575pt>
+<images/ptx_e0-eps-converted-to.pdf, id=15, 562.1pt x 421.575pt>
 File: images/ptx_e0-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/ptx_e0-eps-converted-to.pdf>
 Package pdftex.def Info: images/ptx_e0-eps-converted-to.pdf used on input line 
-118.
+142.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/ptx_z.eps>
 (epstopdf)                    date: 2015-06-10 14:31:16
@@ -568,19 +573,19 @@ Package epstopdf Info: Source file: <images/ptx_z.eps>
 (epstopdf)                    size: 7431 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/ptx_z-eps-converted
 -to.pdf images/ptx_z.eps>
-(epstopdf)             \includegraphics on input line 119.
+(epstopdf)             \includegraphics on input line 143.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/ptx_z-eps-converted-to.pdf, id=24, 562.1pt x 421.575pt>
+<images/ptx_z-eps-converted-to.pdf, id=16, 562.1pt x 421.575pt>
 File: images/ptx_z-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/ptx_z-eps-converted-to.pdf>
 Package pdftex.def Info: images/ptx_z-eps-converted-to.pdf used on input line 1
-19.
+43.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 
 
-LaTeX Warning: Reference `fig:dmax' on page 2 undefined on input line 126.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package epstopdf Info: Source file: <images/dmax_e0.eps>
 (epstopdf)                    date: 2015-06-10 14:31:16
@@ -590,14 +595,14 @@ Package epstopdf Info: Source file: <images/dmax_e0.eps>
 (epstopdf)                    size: 7359 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/dmax_e0-eps-convert
 ed-to.pdf images/dmax_e0.eps>
-(epstopdf)             \includegraphics on input line 130.
+(epstopdf)             \includegraphics on input line 154.
 Package epstopdf Info: Output file is already uptodate.
-<images/dmax_e0-eps-converted-to.pdf, id=25, 562.1pt x 421.575pt>
+<images/dmax_e0-eps-converted-to.pdf, id=17, 562.1pt x 421.575pt>
 File: images/dmax_e0-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/dmax_e0-eps-converted-to.pdf>
 Package pdftex.def Info: images/dmax_e0-eps-converted-to.pdf used on input line
- 130.
+ 154.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
 Package epstopdf Info: Source file: <images/dmax_z.eps>
 (epstopdf)                    date: 2015-06-10 14:31:16
@@ -607,53 +612,53 @@ Package epstopdf Info: Source file: <images/dmax_z.eps>
 (epstopdf)                    size: 7250 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/dmax_z-eps-converte
 d-to.pdf images/dmax_z.eps>
-(epstopdf)             \includegraphics on input line 131.
+(epstopdf)             \includegraphics on input line 155.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/dmax_z-eps-converted-to.pdf, id=26, 562.1pt x 421.575pt>
+<images/dmax_z-eps-converted-to.pdf, id=18, 562.1pt x 421.575pt>
 File: images/dmax_z-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/dmax_z-eps-converted-to.pdf>
 Package pdftex.def Info: images/dmax_z-eps-converted-to.pdf used on input line 
-131.
+155.
 (pdftex.def)             Requested size: 235.45901pt x 176.5907pt.
- [2 <./images/ptx_e0-eps-converted-to.pdf> <./images/ptx_z-eps-converted-to.pdf
-> <./images/dmax_e0-eps-converted-to.pdf> <./images/dmax_z-eps-converted-to.pdf
->] (./report.aux)
 
-LaTeX Warning: There were undefined references.
 
- ) 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[2 <./images/e0_z-eps-converted-to.pdf>] [3 <./images/ptx_e0-eps-converted-to.p
+df> <./images/ptx_z-eps-converted-to.pdf> <./images/dmax_e0-eps-converted-to.pd
+f> <./images/dmax_z-eps-converted-to.pdf>] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 7162 strings out of 493488
- 101577 string characters out of 3141326
- 186466 words of memory out of 3000000
- 10297 multiletter control sequences out of 15000+200000
- 15675 words of font info for 48 fonts, out of 3000000 for 9000
+ 7183 strings out of 493488
+ 101926 string characters out of 3141326
+ 189477 words of memory out of 3000000
+ 10316 multiletter control sequences out of 15000+200000
+ 14899 words of font info for 47 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,7n,40p,884b,282s stack positions out of 5000i,500n,10000p,400000b,50000s
-{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></u
-sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
-/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
-ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/
-texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/tex
-live/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texliv
-e/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
-/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2
-012/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/201
-2/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2012/
-texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2012/te
-xmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2012/texm
-f-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2012/texmf-
-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2012/texmf-di
-st/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on report.pdf (2 pages, 224879 bytes).
+ 38i,7n,40p,776b,282s stack positions out of 5000i,500n,10000p,400000b,50000s
+{/usr/local/texlive/
+2012/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/texlive/20
+12/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/201
+2/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2012/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2012/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2012/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2012/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2012/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2012/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2012/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2012/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2012/texmf-dist/fonts/t
+ype1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2012/texmf-dist/fonts/typ
+e1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1
+/public/cm-super/sfrm1000.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/p
+ublic/cm-super/sfrm1200.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/pub
+lic/cm-super/sfrm1728.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/publi
+c/cm-super/sftt1000.pfb>
+Output written on report.pdf (3 pages, 230280 bytes).
 PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
- 78 compressed objects within 1 object stream
+ 109 PDF objects out of 1000 (max. 8388607)
+ 77 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
