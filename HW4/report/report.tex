@@ -110,8 +110,15 @@ If the event is an arrival, the simulator extracts the next interarrival time $t
 
 If the event is a departure, the simulators performs the following operations. At first it checks if there is someone left in the queue. If not, it sets the next departure time as at the beginning at \texttt{next\_arr} + 1, instead if a user is ready enters in service it computes a random service time. Since a user has just left, the head of the queue \texttt{times\_of\_arrival} is read and popped out. The delay for that user is computed as the difference between current clock value and its arrival time, and added to a cumulative metric $D_t$. The number of departed users $u_d$ is increased by one. 
 
-The interarrival and service times are generated with 2 dedicated functions, that can be easily extend in order to support any kind of slotted or continuous intervent time.
+The interarrival and service times are generated with 2 dedicated functions, that can be easily extended in order to support any kind of slotted or continuous interevent time. As for now, they can handle 
+\begin{itemize}
+\item Poisson arrivals/departures, with exponential interevent times 
+\item Arrivals/departures with probability $b$ in each slot, i.e. interevent times are geometric of mean $1/b$
+\item Interevent times of 1 or 2 slot with probability 0.5 each
+\end{itemize}
+The slot length can be specified.
 
+I simulated three different scenarios, an M/M/1 queue, a M/G/1 queue with service time of length 1 or 2 slots with probability 0.5 and finally a queue with geometric arrivals and departures. The simulations are called from an external script that for each $\rho$ dynamically adjusts the number of simulations needed to reach a required confidence level on the estimation of the delay. In particular at least 2 iterations are required in order to compute a sample variance. 
 
 
 

@@ -26,11 +26,11 @@ for k = 1:length(rho_vec_gg)
             geogeo1queue_func( rho_vec_gg(k), number_of_events, number_of_desired_renewals );
         % compute ci on the go in order to stop the simulation before than
         % needed
-        if r > 1
+        if r > 10
             m_run = mean(delay_gg(1:r));
             std_run = std(delay_gg(1:r));
             ci_run = 1.96*std_run/sqrt(r);
-            max_displ = m_run/30;
+            max_displ = m_run/100;
             if (max_displ >= ci_run)
                 target_ci_reached = true;
                 fprintf('Target reached for rho = %d \n', rho_vec_gg(k));
@@ -68,7 +68,7 @@ for k = 1:length(rho_vec_mg)
             MG1queue_func( rho_vec_mg(k), number_of_events, number_of_desired_renewals );
         % compute ci on the go in order to stop the simulation before than
         % needed
-        if r > 1
+        if r > 10
             m_run = mean(delay_mg(1:r));
             std_run = std(delay_mg(1:r));
             ci_run = 1.96*std_run/sqrt(r);
@@ -126,7 +126,7 @@ for k = 1:length(rho_vec_mm)
             MM1queue_func( rho_vec_mm(k), number_of_events, number_of_desired_renewals );
         % compute ci on the go in order to stop the simulation before than
         % needed
-        if r > 1
+        if r > 10
             m_run = mean(delay_mm(1:r));
             std_run = std(delay_mm(1:r));
             ci_run = 1.96*std_run/sqrt(r);
