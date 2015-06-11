@@ -4,9 +4,9 @@ clear
 clc
 
 %% Ex. 1, case a
-number_of_events = 10^6;
-number_of_desired_renewals = 10^5;
-max_numsim = 20;
+number_of_events = 10^4;
+number_of_desired_renewals = 10^3;
+max_numsim = 200;
 load('../HW3/code/queueB.mat') % to make it as in the previous homework
 rho_vec_gg = rho_b; %[0.01, 0.1:0.05:0.9, 0.99];
 mean_dl_gg = zeros(length(rho_vec_gg), 1);
@@ -47,12 +47,9 @@ for k = 1:length(rho_vec_gg)
     
 end
 
-save('degg1', 'mean_dl_gg', 'ci_dl_gg', 'mean_rho_gg', 'ci_rho_gg', 'rho_vec_gg')
+save('degg1_short', 'mean_dl_gg', 'ci_dl_gg', 'mean_rho_gg', 'ci_rho_gg', 'rho_vec_gg')
 %% Ex. 1, case b
 
-number_of_events = 10^6;
-number_of_desired_renewals = 10^5;
-max_numsim = 20;
 rho_vec_mg = [0.01, 0.1:0.05:0.9, 0.99];
 mean_dl_mg = zeros(length(rho_vec_mg), 1);
 ci_dl_mg = zeros(length(rho_vec_mg), 1);
@@ -92,7 +89,7 @@ for k = 1:length(rho_vec_mg)
     
 end
 
-save('demg1', 'mean_dl_mg', 'ci_dl_mg', 'mean_rho_mg', 'ci_rho_mg', 'rho_vec_mg')
+save('demg1_short', 'mean_dl_mg', 'ci_dl_mg', 'mean_rho_mg', 'ci_rho_mg', 'rho_vec_mg')
 
 % number_of_events = 10^5;
 % number_of_desired_renewals = 10^4;
@@ -111,9 +108,6 @@ save('demg1', 'mean_dl_mg', 'ci_dl_mg', 'mean_rho_mg', 'ci_rho_mg', 'rho_vec_mg'
 
 %% Ex. 1, case MM1
 
-number_of_events = 10^6;
-number_of_desired_renewals = 10^5;
-max_numsim = 20;
 rho_vec_mm = [0.01, 0.1:0.05:0.9, 0.99];
 mean_dl_mm = zeros(length(rho_vec_mm), 1);
 ci_dl_mm = zeros(length(rho_vec_mm), 1);
@@ -153,7 +147,7 @@ for k = 1:length(rho_vec_mm)
     
 end
 
-save('demm1', 'mean_dl_mm', 'ci_dl_mm', 'mean_rho_mm', 'ci_rho_mm', 'rho_vec_mm')
+save('demm1_short', 'mean_dl_mm', 'ci_dl_mm', 'mean_rho_mm', 'ci_rho_mm', 'rho_vec_mm')
 
 % number_of_events = 10^5;
 % number_of_desired_renewals = 10^4;

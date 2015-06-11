@@ -92,7 +92,25 @@ basicstyle=\footnotesize\ttfamily
 \maketitle
 
 \section*{Exercise 1 - A discrete event queue simulator in MATLAB}
-The discrete event queue simulator is based on the simulator proposed by Law in~\cite{law}. It is a simplified version of a more general DE simulator since it has to handle just one server and the events may be only arrivals or departures. In particular 
+The discrete event queue simulator is based on the simulator proposed by Law in~\cite{law}. It is a simplified version of a more general DE simulator since it has to handle just one server and the events may be only arrivals or departures. The objective is to measure the delay that users suffers when entering in the system for different utilization factors $\rho$ and for different interarrival/service times. The simulator is designed to be as more general as possible, given that the code is written in MATLAB. In particular the simulator uses the following counters:
+\begin{itemize}
+\item \texttt{clock} the current system time
+\item \texttt{next\_arr} the time of the next arrival. It is updated whenever there is an arrival, by extracting a random interarrival time according to the specifics of the queue
+\item \texttt{next\_dep} the time of the next departure. It is updated by extracting a random service time if an user arrives and finds the queue empty or if a user departs and there is at least one other user waiting in the queue. Instead, when the system is empty the \texttt{next\_dep} has no meaning and it is set to \texttt{next\_arr} + 1.
+\item \texttt{time\_of\_last\_event} is the time at which the previous event happened
+\item \texttt{server\_status} set to 0 if the server is free, 1 if it is busy
+\item \texttt{number\_in\_queue} number of users in the queue (= number of users in the system - 1)
+\item \texttt{times\_of\_arrival} a FIFO queue that collects the time of arrival of each user
+\item \texttt{number\_of\_events} and \texttt{renewal\_instants} are 2 counters that could set the stopping time of the simulation. Generic simulations stop when the number of events (either arrivals or departures) has reached a given maximum. Instead, if the queue has memoryless arrivals (Poisson or Bernoulli iid), the simulator counts a renewal instant when an arrival finds the queue empty, and the simulation stops when this counter reaches a given threshold, which is lower than the maximum number of events. Indeed a renewal interval is completely representative of the statistics of the queue and since for small utilization factors $\rho$ they are short, then it is sufficient a smaller number of events than the maximum allowed. 
+
+There's an initial phase of initialization, with the extraction of the first interarrival time (and the first departure time set to the previous plus 1), and the counters all to 0. Then at each step the simulator checks whether the next event is an arrival or a departure by comparing \texttt{next\_arr} with \texttt{next\_dep}. This explains why when the system is empty \texttt{next\_dep} is set to \texttt{next\_arr} + 1: the next event will be surely an arrival. 
+
+If the event is an arrival, the simulator extracts the next interarrival time $t_a$ and stores \texttt{clock} + $t_a$ in \texttt{next\_arr}. It checks if the queue is empty, in this case it schedules immediately a departure for the user just arrived. If not, the user is backlogged in the queue. In both cases the arrival time is stored in \texttt{times\_of\_arrival}.
+
+If the event is a departure, the simulators performs the following operations. At first it checks if there is someone left in the queue. 
+
+
+
 
 \section*{Exercise 2 - Read logs and analyze data}
 In this second exercise the goal was to extract a look-up table from a log file of a simulator and use it to compute some measurements on useful quantities in underwater optical communications. In particular, the log files are obtained from the simulations of the ambient light irradiance $E_0$ with the simulator HYDROLIGHT. From the 3 different dump files (each for a different value of $c \in [0.15, 0.4, 2.19]$ with $c$ the attenuation coefficient) I recovered the values of $E_0$ and the corresponding depth $z$ in meters using a \texttt{perl} script. It uses a regular expression to identify the right rows of the log and selects the columns with the desired values. In Figure~\ref{fig:e0zm} $E_0$ is plotted as a function of the depth $z$.

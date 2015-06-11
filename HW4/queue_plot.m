@@ -34,13 +34,13 @@ for i = 1:length(rho_vec_mg)
     theo_dl(i) = m_y/2 + (m_y + lambda_y*s_y_2)/(2*(1-lambda_y*m_y));
 end
 
-figure, errorbar(rho_vec_mg(1:end-1), mean_dl(1:end-1), ci_dl(1:end-1)), hold on,
+figure, errorbar(rho_vec_mg(1:end-1), mean_dl_mg(1:end-1), ci_dl_mg(1:end-1)), hold on,
 plot(rho_vec_mg(1:end-1), theo_dl(1:end-1))
 grid on, title('Case b'), xlabel('\rho'),
 ylabel('mean total delay in time units'),
 legend('Simulated results', 'Theoretical results for MG1')
 
-figure, errorbar(rho_vec_mg, mean_rho, ci_rho), grid on, title('Case b'), xlabel('\rho'),
+figure, errorbar(rho_vec_mg, mean_rho_mg, ci_rho_mg), grid on, title('Case b'), xlabel('\rho'),
 ylabel('Estimated \rho')
 
 %% Ex. 1, case MM1
@@ -56,13 +56,13 @@ load('demm1.mat')
 % 1/(mu(1 - lambda/mu) = 1/(1-rho)
 theo_dl_mm1 = 1./(1-rho_vec_mm);
 
-figure, errorbar(rho_vec_mm(1:end-1), mean_dl(1:end-1), ci_dl(1:end-1)), hold on,
+figure, errorbar(rho_vec_mm(1:end-1), mean_dl_mm(1:end-1), ci_dl_mm(1:end-1)), hold on,
 plot(rho_vec_mm(1:end-1), theo_dl_mm1(1:end-1))
 grid on, title('Case b'), xlabel('\rho'),
 ylabel('mean total delay in time units'),
 legend('Simulated results', 'Theoretical results for MM1')
 
-figure, errorbar(rho_vec_mm, mean_rho, ci_rho), grid on, title('Case b'), xlabel('\rho'),
+figure, errorbar(rho_vec_mm, mean_rho_mm, ci_rho_mm), grid on, title('Case b'), xlabel('\rho'),
 ylabel('Estimated \rho')
 
 
