@@ -72,6 +72,14 @@ while (i  <= number_of_events && renewal_instant <= number_of_desired_renewals)
             next_dep = next_arr + 1; % as at the beginning
             server_status = 0; % the server is free
         end
+        
+        % check if there was someone in the queue before putting someone new,
+        % if positive update the queue_occ metric
+        if number_in_queue >= 1
+            integral_queue_occupancy = integral_queue_occupancy + ...
+                number_in_queue * (clock - time_of_last_event);
+        end
+        
         % extract the user in service from the queue
         arr_time = times_of_arrival(1); % front
         % pop

@@ -1,6 +1,6 @@
 %% Ex. 1, case a
 
-load('degg1.mat')
+load('degg1_short.mat')
 
 % mean_dl_gg = mean(delay_gg, 2);
 % mean_rho_gg = mean(rho_est_gg, 2);
@@ -9,16 +9,32 @@ load('degg1.mat')
 
 load('../HW3/code/queueB.mat') % to make it as in the previous homework
 
+for i = 1:length(rho_vec_gg)
+    slot_len = 1; % in seconds
+    lambda_arr = 0.5*slot_len;
+    b = lambda_arr/rho_vec_gg(i)*slot_len;
+    m_s(i) = 1./(2*b-1);
+end
+
 figure, errorbar(rho_vec_gg(2:end), mean_dl_gg(2:end), ci_dl_gg(2:end)), hold on,
-errorbar(rho_vec_gg(2:end), m_delay_geo(2:end), std_delay_geo(2:end))
-grid on, title('Case a'), xlabel('\rho'),
-ylabel('mean total delay in time units'),
-legend('Simulated results', 'Results from slotted queue simulation of previous HW')
+errorbar(rho_vec_gg(2:end), m_delay_geo(2:end), std_delay_geo(2:end)), hold on,
+plot(rho_vec_gg(2:end), m_s(2:end))
+grid on, title('geo/geo/1'), xlabel('\rho'),
+ylabel('mean delay'),
+legend('DE simulation results', 'DT simulation results', 'Theoretical results')
 xlim([0.48, 0.92])
+
+figure, errorbar(rho_vec_gg, mean_rho_gg, ci_rho_gg), grid on, title('geo/geo/1'), xlabel('\rho'),
+ylabel('Estimated \rho')
+xlim([0.48, 0.92])
+ylim([0.48, 0.92])
+
+return
+
 
 %% Ex. 1, case b
 clear
-load('demg1.mat')
+load('demg1_short.mat')
 
 % mean_dl = mean(delay_mg, 2);
 % mean_rho = mean(rho_est_mg, 2);
@@ -36,16 +52,16 @@ end
 
 figure, errorbar(rho_vec_mg(1:end-1), mean_dl_mg(1:end-1), ci_dl_mg(1:end-1)), hold on,
 plot(rho_vec_mg(1:end-1), theo_dl(1:end-1))
-grid on, title('Case b'), xlabel('\rho'),
-ylabel('mean total delay in time units'),
-legend('Simulated results', 'Theoretical results for MG1')
+grid on, title('M/G/1'), xlabel('\rho'),
+ylabel('mean delay'),
+legend('Simulated results', 'Theoretical results')
 
-figure, errorbar(rho_vec_mg, mean_rho_mg, ci_rho_mg), grid on, title('Case b'), xlabel('\rho'),
+figure, errorbar(rho_vec_mg, mean_rho_mg, ci_rho_mg), grid on, title('M/G/1'), xlabel('\rho'),
 ylabel('Estimated \rho')
 
 %% Ex. 1, case MM1
 clear
-load('demm1.mat')
+load('demm1_short.mat')
 
 % mean_dl = mean(delay_mm, 2);
 % mean_rho = mean(rho_est_mm, 2);
@@ -58,11 +74,11 @@ theo_dl_mm1 = 1./(1-rho_vec_mm);
 
 figure, errorbar(rho_vec_mm(1:end-1), mean_dl_mm(1:end-1), ci_dl_mm(1:end-1)), hold on,
 plot(rho_vec_mm(1:end-1), theo_dl_mm1(1:end-1))
-grid on, title('Case b'), xlabel('\rho'),
-ylabel('mean total delay in time units'),
-legend('Simulated results', 'Theoretical results for MM1')
+grid on, title('M/M/1'), xlabel('\rho'),
+ylabel('mean delay'),
+legend('Simulated results', 'Theoretical results')
 
-figure, errorbar(rho_vec_mm, mean_rho_mm, ci_rho_mm), grid on, title('Case b'), xlabel('\rho'),
+figure, errorbar(rho_vec_mm, mean_rho_mm, ci_rho_mm), grid on, title('M/M/1'), xlabel('\rho'),
 ylabel('Estimated \rho')
 
 

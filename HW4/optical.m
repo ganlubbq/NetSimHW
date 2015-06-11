@@ -62,6 +62,12 @@ Na219 = (S*E0lut219(:, 2)*Ar).^2;
 P_219 = sqrt(SNR*(2*q*(Id+Il)*BW + 4*K*T*BW/R + Na219))/S;
 Ptx_219 = P_219.*(pi * d^2*(1-cos(Theta)) + 2*At)*exp(c*d)/(2*Ar*1);
 
+figure, semilogx(E0lut015(:, 2), 10*log10(Ptx_015)), hold on,
+semilogx(E0lut04(:, 2), 10*log10(Ptx_04)), hold on,
+semilogx(E0lut219(:, 2), 10*log10(Ptx_219)),
+legend('c = 0.15', 'c = 0.4', 'c = 2.19')
+xlabel('E_0'), ylabel('Ptx [dB]'), grid on
+
 figure, plot(E0lut015(:, 2), 10*log10(Ptx_015)), hold on,
 plot(E0lut04(:, 2), 10*log10(Ptx_04)), hold on,
 plot(E0lut219(:, 2), 10*log10(Ptx_219)),
@@ -133,6 +139,12 @@ end
 
 
 figure, plot(E0_vec_015, d_vec_015, E0_vec_04, d_vec_04, E0_vec_219, d_vec_219)
+grid on, legend('c = 0.15', 'c = 0.4', 'c = 2.19'), ylabel('d_{max} [m]'),
+xlabel('E_0')
+
+figure, semilogx(E0_vec_015, d_vec_015), hold on,
+semilogx(E0_vec_04, d_vec_04), hold on,
+semilogx(E0_vec_219, d_vec_219)
 grid on, legend('c = 0.15', 'c = 0.4', 'c = 2.19'), ylabel('d_{max} [m]'),
 xlabel('E_0')
 
