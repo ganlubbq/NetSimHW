@@ -109,7 +109,7 @@ The simulation begins with an initial phase of initialization, with the extracti
 
 If the event is an arrival, the simulator extracts the next interarrival time $t_a$ and stores \texttt{clock} + $t_a$ in \texttt{next\_arr}. It checks if the queue is empty, in this case it schedules immediately a departure for the user just arrived. If not, the user is backlogged in the queue and \texttt{number\_in\_queue} increases by 1. In both cases the arrival time (the current clock value) is stored in \texttt{times\_of\_arrival}.
 
-If the event is a departure, the simulators performs the following operations. At first it checks if there is someone left in the queue. If not, it sets the next departure time as at the beginning at \texttt{next\_arr} + 1, instead if a user is ready enters in service it computes a random service time. Since a user has just left, the head of the queue \texttt{times\_of\_arrival} is read and popped out, \texttt{number\_in\_queue} is decreased of one unit. The delay for the departed user is computed as the difference between the current clock value and its arrival time, and added to a cumulative metric $D_t$. The number of departed users $u_d$ is increased by one. 
+If the event is a departure, the simulator performs the following operations. At first it checks if there is someone left in the queue. If not, it sets the next departure time as at the beginning at \texttt{next\_arr} + 1, instead if a user is ready to enter in service it computes a random service time and \texttt{number\_in\_queue} is decreased of one unit. Since a user has just left, the head of the queue \texttt{times\_of\_arrival} is read and popped out. The delay for the departed user is computed as the difference between the current clock value and its arrival time, and added to a cumulative metric $D_t$. The number of departed users $u_d$ is increased by one. 
 
 
 The interarrival and service times are generated with 2 dedicated functions, that can be easily extended in order to support any kind of slotted or continuous interevent time. As for now, they can handle 
@@ -271,7 +271,7 @@ Finally, by considering the system arrival rate as $\lambda_a = b_a = 0.5$ and u
 \end{equation}
 
 
-The results of the simulations and the theoretical curve for the delay are in Figure~\ref{fig:gg1_dl}, while the estimated utilization factor is in Figure~\ref{fig:gg1_rho}. In Figure~\ref{fig:gg_real} there are 3 realizations of the g/g/1 queue for different $b_s \in [1/3, 1/2, 2/3]$ and $10^4$ slots.
+The results of the simulations and the theoretical curve for the delay are in Figure~\ref{fig:gg1_dl}, while the estimated utilization factor is in Figure~\ref{fig:gg1_rho}. In Figure~\ref{fig:gg1_real} there are 3 realizations of the g/g/1 queue for different $b_s \in [1/3, 1/2, 2/3]$ and $10^4$ slots.
 
 \begin{figure}[h!]
 	\centering
@@ -336,7 +336,7 @@ In the following, if the SNR is above the threshold of 20 dB then there is a suc
 	\label{fig:ptx_2}
 \end{figure}
 
-Finally, the transmit power is set to $P_{tx, max} = 100$ W and the maximum distance at which is possible to transmit is evaluated. Note that~\eqref{eq:p_opt} is not invertible with respect to the distance $d$, therefore the received power $P$ given by~\eqref{eq:p_opt} is precomputed for $d \in [0, 50]$ m and stored in a vector \texttt{P\_d}. Then, given a certain $E_0$, from~\eqref{eq:snr_opt} the minimum received power to guarantee an SNR of 20 dB is computed and the closest $P$ in \texttt{P\_d} is found. The corresponding value of $d$ is chosen as the maximum distance $d_{max}$ at which it is possible to transmit with $P_{tx, max} = 100$ W and that $E_0$ - or the corresponding $z$.
+Finally, the transmit power is set to $P_{tx, max} = 100$ W and the maximum distance at which is possible to transmit is evaluated. Note that~\eqref{eq:p_opt} is not invertible with respect to the distance $d$, therefore the received power $P$ given by~\eqref{eq:p_opt} is precomputed for $d \in [0, 50]$ m and stored in a vector \texttt{P\_d}. Then, given a certain $E_0$, from~\eqref{eq:snr_opt} the minimum received power that guarantees an SNR of 20 dB is computed and the closest $P$ in \texttt{P\_d} is found. The corresponding value of $d$ is chosen as the maximum distance $d_{max}$ at which it is possible to transmit with $P_{tx, max} = 100$ W and that $E_0$ - or the corresponding $z$.
 
 The results are in Figures~\ref{fig:dmax} and~\ref{fig:dmax_2}. Figure~\ref{fig:dmax}[b] is the same as Figure~\ref{fig:dmax}[a] but with a logarithmic x axis, and it shows a behavior which is consistent with Figure~\ref{fig:ptx}[b].
 
