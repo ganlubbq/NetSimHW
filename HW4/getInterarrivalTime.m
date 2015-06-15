@@ -9,10 +9,6 @@ switch inter_mode
         slot_size = varargin{1};
         b = varargin{2};
         interArrTime = slot_size * (1 + floor(log(rand())/log(1-b))); % geometric RV
-        if(imag(interArrTime)> 0)
-            disp('Imaginary inter_ar time')
-            return
-        end
     case 'exp'
         
         if (isempty(varargin))

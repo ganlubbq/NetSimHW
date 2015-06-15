@@ -91,20 +91,6 @@ end
 
 save('demg1_short', 'mean_dl_mg', 'ci_dl_mg', 'mean_rho_mg', 'ci_rho_mg', 'rho_vec_mg')
 
-% number_of_events = 10^5;
-% number_of_desired_renewals = 10^4;
-% max_numsim = 20;
-% rho_vec_mg = [0.01, 0.1:0.05:0.9, 0.99];
-% delay_mg = zeros(length(rho_vec_mg), max_numsim);
-% rho_est_mg = zeros(length(rho_vec_mg), max_numsim);
-% for k = 1:length(rho_vec_mg)
-%     for r = 1:max_numsim
-%         [ delay_mg(k, r), rho_est_mg(k, r), ~] = ...
-%             MG1queue_func( rho_vec_mg(k), number_of_events, number_of_desired_renewals );
-%     end
-% end
-% 
-% save('demg1', 'rho_vec_mg', 'delay_mg', 'rho_est_mg')
 
 %% Ex. 1, case MM1
 
@@ -148,22 +134,3 @@ for k = 1:length(rho_vec_mm)
 end
 
 save('demm1_short', 'mean_dl_mm', 'ci_dl_mm', 'mean_rho_mm', 'ci_rho_mm', 'rho_vec_mm')
-
-% number_of_events = 10^5;
-% number_of_desired_renewals = 10^4;
-% max_numsim = 20;
-% rho_vec_mm = [0.01, 0.1:0.05:0.9, 0.99];
-% delay_mm = zeros(length(rho_vec_mm), max_numsim);
-% rho_est_mm = zeros(length(rho_vec_mm), max_numsim);
-% for k = 1:length(rho_vec_mm)
-%     for r = 1:max_numsim
-%         [ delay_mm(k, r), rho_est_mm(k, r), ~] = ...
-%             MM1queue_func( rho_vec_mm(k), number_of_events, number_of_desired_renewals );
-%     end
-% end
-% 
-% save('demm1', 'rho_vec_mm', 'delay_mm', 'rho_est_mm')
-
-
-
-

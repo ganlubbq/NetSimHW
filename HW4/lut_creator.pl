@@ -7,6 +7,7 @@ open (LUT, ">E0lut04.txt") or die "$! error trying to overwrite";
 $, = ',';
 $first_line = false;
 for $line(<LOGFILE>) {
+	# this is actually useless, it could turn useful if different sections are described by the same RE
 	if($line =~ /^\s*Irradiances\s+\W/) {
 		$first_line = true;
 	}

@@ -9,13 +9,6 @@ switch service_mode
         slot_size = varargin{1};
         b = varargin{2};
         serviceTime = slot_size * (1 + floor(log(rand())/log(1-b))); % geometric RV
-        if(imag(serviceTime)> 0)
-            disp('Imaginary inter_serv time')
-            return;
-        end
-        if(real(serviceTime) <0)
-           disp('Negative wtf??') 
-        end
     case 'exp'
         if (isempty(varargin))
             disp('Error in creating the interarrival time, for the exp')
